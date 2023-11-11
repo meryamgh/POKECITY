@@ -1,16 +1,38 @@
 ## Objectifs du système à modéliser
 
-On propose de modéliser un système de réservation (master) de tickets pouvant supporter plusieurs vendeurs (vendor). Le système master gère les salles, les concerts, les différents artistes se produisant dans les concerts et la réservation des tickets alors que les vendeurs assurent la vente de billets. Chaque vendeur a un quota pour un concert donné, qui peut évoluer avec le temps.
-En cas d'annulation de concert, le système de réservation informe les vendors qui doivent contacter les clients (customers). Le master propose des services de validation de l'authenticité des tickets à l'entrée des concerts.
+On propose de modéliser un système de gestion (master) du pokecity pouvant supporter plusieurs pokemons (pokemon) et dresseurs (dresseur). Le système master gère le pokestore, la pokebank, le pokeschool, la mairie, l'infirmerie (avec plusieurs ambulances), les différents dresseurs se combattant entre eux, l'inscription des pokemons dans le pokeschool, acheter / revendre / échanger un pokemon dans le pokestore, la gestion des pokescores dans la pokebank, l'enregistrement des inscriptions au pokeschool se fait à la mairie avec le nombre de pokémons pour chaque dresseur.
 
-Lors de la réservation de ticket, on a 2 phases:
-- le booking (réservation des places)
-- le ticketing (émission de billets sécurisés avec clé.)
+Chaque dresseur possède un pokémon avec 20 pokescores au départ, les pokemons et les pokescores peuvent évoluer en gagnant les combats.
+Le pokescore diminue avec les achats et perte d'un combat. Le nombre de pokemons peut augmenter avec l'achat d'autres pokemons dans le pokestore.
+La mairie recense les dresseurs ainsi que leurs pokemons respectifs, ainsi que le score associé et leur inscription ou non au pokeschool.
 
-Le vendor va demander au master via une API rest les concerts pour lesquels il possède un quota. Seuls ces concerts seront proposés à la vente au client.
-Le client spécifie ensuite le nombre de places assises et le nombre de places debout qu'il souhaite acheter. Le vendor interroge le master sur la disponibilité. Celui-ci va lui renvoyer des tickets transitionnels valables 10 minutes en cas de disponibilité de places.
-Le vendeur va ensuite renseigner les informations du client et les transmettre au master pour l'émission finale des tickets avec clé sécurisée qui sera transmise au client pour qu'il puisse entrer dans la salle.
-En cas d'annulation du concert, le master prévient les vendors (avec les informations des tickets à annuler et les emails des clients) le vendeur doit envoyer un email au client pour chaque ticket annulé.
+### Communications entre systèmes
+
+La mairie reçoit une notification lorsque :
+ - un dresseur inscrit son pokemon dans le pokeschool (message du pokeschool)
+ - un dresseur achète / revent / échange un pokemon (toutes les actions liées au pokestore : message du pokestore)
+ - un dresseur n'a plus assez de pokescore pour acquérir un pokemon et que son/ses pokemons ont 0 score (éliminer ce dresseur du jeu : message du pokestore)
+
+L'infirmerie reçoit une notification à chaque fin de combat : 
+- le pokemon qui a perdu (message du système de combat)
+
+Le pokestore reçoit une notification lorsque :
+- le dresseur du pokemon perdant n'a pas assez de pokescore pour le soigner mais assez de pokescore pour acheter un pokemon (message de l'infirmerie)
+
+La pokebank reçoit une notification lorsque :
+- le dresseur soigne son pokemon (message de l'infirmerie) : diminution du pokescore
+- le dresseur effectue une opération au pokestore (achat : diminution, revente : augmentation) (message du pokestore)
+- le dresseur inscrit son pokemon au pokeschool (message du pokeschool : diminution du pokescore)
+- à chaque fin de combat lorsque le gagnant gagne un certain nombre de pokescore (message du système de combat)
+
+Option : ambulances (durant le combat pour augmenter le score de celui qui l'appelle), gestion d'un pokecimetière
+
+### Descriptions des systèmes
+
+Détail : Système de combat : 
+Acteurs : Deux dresseurs avec un pokemon chacun
+Fonctionnalités : Attaques
+Chaque combat est associé à une somme à gagner (pokescore fixé)
 
 ## Interfaces
 
