@@ -34,6 +34,8 @@ Acteurs : Deux dresseurs avec un pokemon chacun
 Fonctionnalités : Attaques
 Chaque combat est associé à une somme à gagner (pokescore fixé)
 
+![POKECITY](https://github.com/meryamgh/POKECITY/assets/113670988/fe44d815-a9b2-4b57-b880-b765f2aff621)
+
 ## Interfaces
 
 ```
