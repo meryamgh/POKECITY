@@ -36,19 +36,32 @@ Chaque combat est associé à une somme à gagner (pokescore fixé)
 
 ![POKECITY](https://github.com/meryamgh/POKECITY/assets/113670988/fe44d815-a9b2-4b57-b880-b765f2aff621)
 
-### Exigences (début)
+### Exigences
 
-Un dresseur doit avoir un pokémon (un parmi les nuls = 50 pokescores) et un pokescore = 50 au début du jeu.
-Les combats doivent se faire seulement à un contre un (dresseur et pokémon).
-Un pokémon ne peut pas participer à un combat s’il est au pokeschool (participe à une session)
-Une session = 2 combats du dresseur
-Pokestore : 3 catégories : pokémon 50, 70 et 100.
-Pokeschool : 3 sessions : 
-- si pokémon entre 50 et 70 : +10, pokescore de mon pokémon + 5
-- si pokémon entre 70 et 100 : +15, pokescore de mon pokémon + 10
-- si pokémon +100 : +30, pokescore de mon pokémon + 25
-La fin d’un combat : perdant = 0 pokescore et gagnant : pokéscore de départ + prime (va au dresseur)
-Prime des combats : Moyenne entre pokescore des 2 pokémons
+- Un dresseur doit avoir un pokémon (un parmi les nuls = 50 pokescores) et un pokescore = 50 au début du jeu.
+- Les combats doivent se faire seulement à un contre un (dresseur et pokémon).
+- Un pokémon ne peut pas participer à un combat s’il est au pokeschool (participe à une session)
+- Une session = 2 combats du dresseur
+- Pokestore : 3 catégories : pokémon 50, 70 et 100.
+- Pokeschool : 3 sessions : 
+  si pokémon entre 50 et 70 : +10, pokescore de mon pokémon + 5
+  si pokémon entre 70 et 100 : +15, pokescore de mon pokémon + 10
+  si pokémon +100 : +30, pokescore de mon pokémon + 25
+- La fin d’un combat : perdant = 0 pokescore et gagnant : pokéscore de départ + prime (va au dresseur)
+- Prime des combats : Moyenne entre pokescore des 2 pokémons
+- Si le dresseur a un seul pokémon il ne peut pas l’inscrire à la pokeschool
+- Si le pokémon est à la pokeschool et que son dresseur est éliminé du jeu, le pokémon est ajouté au pokestore.
+- La seule manière de gagner du pokescore pour un pokémon est d’aller à la pokeschool.
+- Le pokémon perdant passe obligatoirement par l’infirmerie 
+- L’infirmerie consulte le pokescore du dresseur à partir de la pokeBank 
+- Si le dresseur a un pokescore suffisant pour soigner son pokémon, le pokémon est soigné et revient à son score de départ 
+- Si le dresseur ne peut pas soigner son pokémon, son pokémon  est déclaré KO à la mairie et la mairie le remet au pokeStore. 
+- Si le dresseur ne peut pas soigner son pokemon  et que c’est son dernier pokémon  mais qu’il a un pokescore suffisant pour acheter un autre pokemon, il doit en acheter un et n’est pas éliminé du jeu 
+- Si le dresseur ne peut pas soigner son pokemon  et que c’est son dernier pokémon  et  qu’il n’a pas  un pokescore suffisant pour acheter un autre pokemon, la mairie reçoit une notification et elimine le dresseur du jeu 
+- Au pokestore il est possible d’acheter des pokémons. 
+- La mairie peut rajouter des pokémons au pokestore
+- La pokeBank a le pokescore du dresseur qui joue 
+- Lorsque que la mairie élimine le joueur, elle l’efface de sa liste et le notifie 
 
 ## Interfaces
 
