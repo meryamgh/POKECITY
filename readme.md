@@ -25,8 +25,6 @@ La pokebank reçoit une notification lorsque :
 - le dresseur inscrit son pokemon au pokeschool (message du pokeschool : diminution du pokescore)
 - à chaque fin de combat lorsque le gagnant gagne un certain nombre de pokescore (message du système de combat)
 
-Options : ambulances (durant le combat pour augmenter le score de celui qui l'appelle), gestion d'un pokecimetière, lorsque un pokemon meurt et que dresseur en possède d'autre mais n'a pas assez d'argent pour soigner son pokemon qui va mourrir alors est obliger de passer par le pokestore pour en vendre un autre et récupérer de l'argent).
-
 ### Descriptions des systèmes
 
 Détail : Système de combat : 
