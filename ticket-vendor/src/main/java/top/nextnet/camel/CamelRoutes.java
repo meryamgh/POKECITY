@@ -61,7 +61,7 @@ public class CamelRoutes extends RouteBuilder {
 
         from("direct:cli")//
                 .marshal().json()//, "onBookedResponseReceived"
-                .to("sjms2:" + jmsPrefix + "booking?exchangePattern=InOut")//
+                .to("sjms2:" + jmsPrefix + "booking?exchangePattern=InOut&requestTimeout=20000")//
                 .choice()
                 .when(header("success").isEqualTo(false))
                 .setBody(simple("not enough quota for this vendor"))
@@ -73,7 +73,7 @@ public class CamelRoutes extends RouteBuilder {
                 .bean(ticketingService, "fillTicketsWithCustomerInformations")
                 .split(body())
                 .marshal().json(ETicket.class)
-                .to("sjms2:" + jmsPrefix + "ticket?exchangePattern=InOut")
+                .to("sjms2:" + jmsPrefix + "ticket?exchangePattern=InOut&requestTimeout=20000")
                 .choice()
                 .when(header("success").isEqualTo(false))
                 .bean(eCommerce, "showErrorMessage").stop()

@@ -15,6 +15,7 @@
         <module>poke-combats</module>
         <module>poke-store</module>
         <module>poke-commons</module>
+        <module>ticket-vendor</module>
     </modules>
     <build>
         <plugins>
