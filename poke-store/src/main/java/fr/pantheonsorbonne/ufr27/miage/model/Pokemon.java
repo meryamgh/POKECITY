@@ -13,11 +13,8 @@ public class Pokemon {
     @Column(name = "type", nullable = false, length = 45)
     private String type;
 
-    @Column(name = "pokeScore", nullable = false, length = 45)
-    private Integer pokeScore;
-
-    @Column(name = "isAdopted", nullable = false, length = 45)
-    private Boolean isAdopted;
+    @Column(name = "prix", nullable = false, length = 45)
+    private Integer prix;
 
     public Integer getIdPokemon() {
         return idPokemon;
@@ -35,21 +32,11 @@ public class Pokemon {
         this.type = type;
     }
 
-    public Integer getPokeScore() {
-        return pokeScore;
+    public Integer getPrix() {
+        return prix;
     }
 
-    public void setPokeScore(Integer pokeScore) {
-        this.pokeScore = pokeScore;
+    public void setPrix(Integer prix) {
+        this.prix = prix;
     }
-
-    public Boolean getAdopted() {
-        return isAdopted;
-    }
-
-    public void setAdopted(Boolean adopted) {
-        isAdopted = adopted;
-    }
-
-
 }

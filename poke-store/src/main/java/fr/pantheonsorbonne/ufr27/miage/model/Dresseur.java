@@ -15,12 +15,6 @@ public class Dresseur {
     @Column(name = "name", nullable = false, length = 45)
     private String name;
 
-    @Column(name = "bannedStatus", nullable = false, length = 45)
-    private boolean bannedStatus;
-
-    @Column(name = "pokedex", nullable = false, length = 45)
-    @OneToMany
-    private List<Pokemon> pokedex;
 
     public Integer getIdDresseur() {
         return idDresseur;
@@ -38,19 +32,4 @@ public class Dresseur {
         this.name = name;
     }
 
-    public boolean isBannedStatus() {
-        return bannedStatus;
-    }
-
-    public void setBannedStatus(boolean bannedStatus) {
-        this.bannedStatus = bannedStatus;
-    }
-
-    public List<Pokemon> getPokedex() {
-        return pokedex;
-    }
-
-    public void setPokedex(List<Pokemon> pokedex) {
-        this.pokedex = pokedex;
-    }
 }
