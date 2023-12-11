@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.sql.Time;
 
 @Entity
-public class treatmentSession {
+public class TreatmentSession {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

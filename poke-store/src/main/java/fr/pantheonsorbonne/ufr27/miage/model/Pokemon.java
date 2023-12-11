@@ -51,4 +51,5 @@ public class Pokemon {
         isAdopted = adopted;
     }
 
+
 }

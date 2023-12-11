@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-public class receiptPokemon {
+public class ReceiptPokemon {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,10 +17,14 @@ public class receiptPokemon {
     @Column(name = "datePurchase", nullable = false, length = 45)
     private Date datePurchase;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Dresseur dresseur;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idDresseur")
+    private Dresseur dresseur;
+
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idPokemon")
     private Pokemon pokemon;
 
     public Integer getIdReceipt() {

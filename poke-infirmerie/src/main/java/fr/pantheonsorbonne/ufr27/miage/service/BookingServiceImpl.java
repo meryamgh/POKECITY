@@ -3,10 +3,6 @@ package fr.pantheonsorbonne.ufr27.miage.service;
 
 import fr.pantheonsorbonne.ufr27.miage.dto.Booking;
 import fr.pantheonsorbonne.ufr27.miage.exception.UnsuficientQuotaForVenueException;
-import fr.pantheonsorbonne.ufr27.miage.model.Ticket;
-import fr.pantheonsorbonne.ufr27.miage.model.Vendor;
-import fr.pantheonsorbonne.ufr27.miage.model.Venue;
-import fr.pantheonsorbonne.ufr27.miage.model.VenueQuota;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
