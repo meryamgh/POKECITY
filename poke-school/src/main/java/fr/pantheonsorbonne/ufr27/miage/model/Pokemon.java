@@ -13,6 +13,9 @@ public class Pokemon {
     @Column(name = "pokeScore", nullable = false, length = 45)
     private Integer pokeScore;
 
+    @Column(name = "name", nullable = false, length = 45)
+    private String name;
+
     public Integer getIdPokemon() {
         return idPokemon;
     }

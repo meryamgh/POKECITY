@@ -19,6 +19,9 @@ public class Pokemon {
     @Column(name = "isAdopted", nullable = false, length = 45)
     private Boolean isAdopted;
 
+    @Column(name = "name", nullable = false, length = 45)
+    private String name;
+
     public Integer getIdPokemon() {
         return idPokemon;
     }
