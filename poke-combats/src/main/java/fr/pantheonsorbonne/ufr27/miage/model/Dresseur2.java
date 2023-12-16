@@ -2,6 +2,7 @@ package fr.pantheonsorbonne.ufr27.miage.model;
 
 import jakarta.persistence.*;
 
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -20,7 +21,7 @@ public class Dresseur {
 
     @Column(name = "pokedex", nullable = false, length = 45)
     @OneToMany
-    private List<Pokemon> pokedex;
+    private Collection<Pokemon> pokedex;
 
     public Integer getIdDresseur() {
         return idDresseur;
@@ -46,11 +47,11 @@ public class Dresseur {
         this.bannedStatus = bannedStatus;
     }
 
-    public List<Pokemon> getPokedex() {
+    public Collection<Pokemon> getPokedex() {
         return pokedex;
     }
 
-    public void setPokedex(List<Pokemon> pokedex) {
+    public void setPokedex(Collection<Pokemon> pokedex) {
         this.pokedex = pokedex;
     }
 }
