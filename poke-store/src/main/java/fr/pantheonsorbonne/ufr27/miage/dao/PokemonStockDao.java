@@ -9,4 +9,6 @@ public interface PokemonStockDao {
     Collection<Pokemon> getStock();
 
     Collection<Pokemon> getStockPokemonByPrice(int price);
+
+    Pokemon getPokemonById(int idPokemon);
 }

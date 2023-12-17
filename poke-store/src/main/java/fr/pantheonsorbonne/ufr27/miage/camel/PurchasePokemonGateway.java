@@ -1,5 +1,6 @@
 package fr.pantheonsorbonne.ufr27.miage.camel;
 
+import fr.pantheonsorbonne.ufr27.miage.dto.TicketDresseurAchat;
 import fr.pantheonsorbonne.ufr27.miage.model.ReceiptPokemon;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
@@ -12,20 +13,25 @@ import java.io.IOException;
 @ApplicationScoped
 public class PurchasePokemonGateway {
 
-    @ConfigProperty(name = "fr.pantheonsorbonne.ufr27.miage.jmsPrefix")
-    String jmsPrefix;
-
     @Inject
     CamelContext camelContext;
 
 
 
-    public void buyPokemon(int pricePurchase) {
+    public void checkBankCardDresseur(TicketDresseurAchat ticketAchat) {
         try (ProducerTemplate producerTemplate = camelContext.createProducerTemplate()) {
-            producerTemplate.sendBody("direct:buyPokemon",pricePurchase);
+            producerTemplate.sendBody("direct:buyPokemon",ticketAchat);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void getPokemon(){
+        System.out.println("ASSEZ D4ARGNET");
+    }
+
+    public void notEnoughTogetPokemon(){
+        System.out.println("PAS ASSEZ D4ARGNET");
     }
 }

@@ -36,10 +36,11 @@ public class StoreRessource {
     @Path("purchase")
     @POST
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response isTicketValid() {
-        buyPokemonService.buyPokemon(new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(1, "ghulamo", 100,false));
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public Response buyPokemon(String request) {
+        System.out.println("request "+request);
+        buyPokemonService.buyPokemon(2, 1);
         return Response.status(422, "invalid verification code").build();
-
     }
 
 }

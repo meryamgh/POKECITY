@@ -5,5 +5,5 @@ import fr.pantheonsorbonne.ufr27.miage.model.ReceiptPokemon;
 
 public interface PurchasePokemonService {
 
-    void buyPokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon);
+    void buyPokemon(int idPokemon, int idDresseur);
 }
