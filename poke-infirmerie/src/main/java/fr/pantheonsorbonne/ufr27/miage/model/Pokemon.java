@@ -16,6 +16,25 @@ public class Pokemon {
     @Column(name = "name", nullable = false, length = 45)
     private String name;
 
+    @Column(name = "prix", nullable = false, length = 45)
+    private Integer prix;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getPrix() {
+        return prix;
+    }
+
+    public void setPrix(Integer prix) {
+        this.prix = prix;
+    }
+
     public Integer getIdPokemon() {
         return idPokemon;
     }
