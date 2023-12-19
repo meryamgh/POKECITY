@@ -1,5 +1,6 @@
 package fr.pantheonsorbonne.ufr27.miage.ressource;
 
+import fr.pantheonsorbonne.ufr27.miage.dto.Pokemon;
 import fr.pantheonsorbonne.ufr27.miage.services.SoinService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -12,12 +13,12 @@ public class InfirmerieRessource {
     @Inject
     protected SoinService service;
 
-    @Path("{pokemon}")
+    @Path("{idPokemon}")
     @POST
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response haveEnoughMoney() {
+    public Response haveEnoughMoney(@PathParam("idPokemon") Pokemon idPokemon) {
 
-        if(service.enoughMoney()) {
+        if(service.enoughMoney(pokemon)) {
             service.soignerPokemon();
             return Response.ok().build();
         }else {

@@ -5,8 +5,10 @@ import fr.pantheonsorbonne.ufr27.miage.dao.PokemonDao;
 import fr.pantheonsorbonne.ufr27.miage.dao.TreatmentDAO;
 import fr.pantheonsorbonne.ufr27.miage.model.Dresseur;
 import fr.pantheonsorbonne.ufr27.miage.dto.Pokemon;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
+@ApplicationScoped
 public class SoinServiceImpl implements SoinService{
 
     @Inject
@@ -20,8 +22,8 @@ public class SoinServiceImpl implements SoinService{
 
     @Override
     public boolean enoughMoney(Pokemon pokemon) {
-        if(treatmentDAO.getPriceTreatment() > )
         pokemonGateway.checkBankAccount(pokemon.pokeScore());
+        return false;
     }
 
     @Override
