@@ -11,5 +11,9 @@ public class CamelRoutes extends RouteBuilder {
                 .to("sjms2:M1.bank")
         ;
 
+        from("direct:redirectToMairie")
+                .log("on redirige vers la mairie le pokemon qui ne peut pas etre soigné : ${body} ")
+                .to("sjms2:M1.mairie") ;
+
     }
 }

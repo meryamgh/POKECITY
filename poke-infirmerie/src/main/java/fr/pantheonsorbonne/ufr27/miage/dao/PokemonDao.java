@@ -7,4 +7,6 @@ public interface PokemonDao {
     public int getPokeScorePokemon();
 
     public int getPrixPokemon();
+
+    public Pokemon getPokemonById(int idPokemon);
 }

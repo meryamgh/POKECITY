@@ -21,4 +21,12 @@ public class PokemonDaoImpl implements PokemonDao{
         return em.createQuery("SELECT prix FROM Pokemon pokemon", Integer.class).getSingleResult();
     }
 
+    @Override
+    public Pokemon getPokemonById(int idPokemon) {
+        return em.createQuery("SELECT pokemon FROM Pokemon pokemon WHERE pokemon.idPokemon = :id", Pokemon.class)
+                .setParameter("id", idPokemon)
+                .getSingleResult();
+    }
+
+
 }

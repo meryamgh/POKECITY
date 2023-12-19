@@ -16,13 +16,13 @@ public class InfirmerieRessource {
     @Path("{idPokemon}")
     @POST
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response haveEnoughMoney(@PathParam("idPokemon") Pokemon idPokemon) {
+    public Response haveEnoughMoney(@PathParam("idPokemon") int idPokemon) {
 
-        if(service.enoughMoney(pokemon)) {
+        if(service.enoughMoney(idPokemon)) {
             service.soignerPokemon();
             return Response.ok().build();
         }else {
-            service.redirectToMairie();
+            service.redirectToMairie(idPokemon);
             return Response.status(422, "dresseur doesn't have enought money").build();
         }
 }
