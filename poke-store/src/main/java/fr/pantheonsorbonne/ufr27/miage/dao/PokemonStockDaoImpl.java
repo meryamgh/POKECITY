@@ -5,13 +5,14 @@ import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
 import java.util.Collection;
 
 @ApplicationScoped
 public class PokemonStockDaoImpl implements PokemonStockDao{
 
-    @Inject
+    @PersistenceContext(name = "mysql")
     EntityManager em;
 
     @Override

@@ -1,6 +1,6 @@
 REPLACE INTO `Pokemon` (`idPokemon`, `name`, `type`, `prix`)
 VALUES
-    (1, 'ghulamo', 'feu', 100),
+    (1, 'ghulamo', 'feu', 200),
     (2, 'nabilo', 'plante', 80),
     (3, 'lilio', 'eau', 90),
     (4, 'naloufio', 'eau', 95),

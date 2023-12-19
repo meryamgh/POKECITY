@@ -4,5 +4,5 @@ import fr.pantheonsorbonne.ufr27.miage.dto.TicketDresseurAchat;
 
 public interface BankService {
 
-    TicketDresseurAchat checkBalance(TicketDresseurAchat ticket);
+    boolean checkBalance(int amount,int idDresseur);
 }

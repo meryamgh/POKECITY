@@ -5,7 +5,7 @@ REPLACE INTO `Dresseur` (`bannedStatus`, `idDresseur`, `name`) VALUES
 
 REPLACE INTO `Pokemon` (`idPokemon`, `isAdopted`, `pokeScore`, `name`, `type`)
 VALUES
-    (1, false ,100, 'ghulamo', 'feu'),
+    (1, false ,200, 'ghulamo', 'feu'),
     (2, false, 80 ,'nabilo', 'plante'),
     (3, false, 90, 'lilio', 'eau'),
     (4, false, 95,'naloufio', 'eau'),
