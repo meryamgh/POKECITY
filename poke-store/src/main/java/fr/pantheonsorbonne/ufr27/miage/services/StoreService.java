@@ -8,5 +8,6 @@ public interface StoreService {
 
     Collection<Pokemon> getAllPokemon();
 
+    void buyPokemon(int idPokemon);
     Collection<Pokemon> getPokemonByPrice(int price);
 }

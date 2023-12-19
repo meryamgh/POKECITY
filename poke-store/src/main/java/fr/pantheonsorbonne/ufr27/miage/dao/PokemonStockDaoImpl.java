@@ -5,13 +5,14 @@ import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
 import java.util.Collection;
 
 @ApplicationScoped
 public class PokemonStockDaoImpl implements PokemonStockDao{
 
-    @Inject
+    @PersistenceContext(name = "mysql")
     EntityManager em;
 
     @Override
@@ -24,6 +25,12 @@ public class PokemonStockDaoImpl implements PokemonStockDao{
         return em.createQuery("SELECT poke FROM Pokemon poke WHERE poke.prix <= :price", Pokemon.class)
                 .setParameter("price", price)
                 .getResultList();
+    }
+
+    @Override
+    public Pokemon getPokemonById(int idPokemon) {
+        return em.createQuery("SELECT poke FROM Pokemon poke WHERE poke.idPokemon = :id", Pokemon.class)
+                .setParameter("id", idPokemon).getSingleResult();
     }
 
 

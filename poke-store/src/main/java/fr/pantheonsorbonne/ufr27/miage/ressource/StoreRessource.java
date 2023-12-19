@@ -1,7 +1,6 @@
 package fr.pantheonsorbonne.ufr27.miage.ressource;
 
 import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
-import fr.pantheonsorbonne.ufr27.miage.services.PurchasePokemonService;
 import fr.pantheonsorbonne.ufr27.miage.services.StoreService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -16,8 +15,6 @@ public class StoreRessource {
     @Inject
     protected StoreService service;
 
-    @Inject
-    protected PurchasePokemonService buyPokemonService;
 
     @Path("pokemon")
     @GET
@@ -33,13 +30,13 @@ public class StoreRessource {
         return service.getPokemonByPrice(price);
     }
 
-    @Path("purchase")
+    @Path("purchase/{idPokemon}")
     @POST
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response isTicketValid() {
-        buyPokemonService.buyPokemon(new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(1, "ghulamo", 100,false));
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public Response buyPokemon(@PathParam("idPokemon") int pokemon){
+        service.buyPokemon(pokemon);
         return Response.status(422, "invalid verification code").build();
-
     }
 
 }

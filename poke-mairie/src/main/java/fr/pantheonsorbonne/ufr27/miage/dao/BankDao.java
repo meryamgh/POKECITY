@@ -1,0 +1,11 @@
+package fr.pantheonsorbonne.ufr27.miage.dao;
+
+import fr.pantheonsorbonne.ufr27.miage.model.BankAccount;
+
+public interface BankDao {
+
+    BankAccount getBankAccountDresseur(int idDresseur);
+
+    boolean debitBank(int amount, int idDresseur);
+
+}
