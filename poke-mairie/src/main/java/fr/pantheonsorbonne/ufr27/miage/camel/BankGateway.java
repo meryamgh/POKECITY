@@ -1,7 +1,10 @@
 package fr.pantheonsorbonne.ufr27.miage.camel;
 
 import fr.pantheonsorbonne.ufr27.miage.dto.TicketDresseurAchat;
+import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
 import fr.pantheonsorbonne.ufr27.miage.services.BankService;
+import fr.pantheonsorbonne.ufr27.miage.services.DresseurService;
+import fr.pantheonsorbonne.ufr27.miage.services.PokemonService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -27,10 +30,18 @@ public class BankGateway {
     @ConfigProperty(name = "fr.pantheonsorbonne.ufr27.miage.jmsPrefix")
     String jmsPrefix;
 
+    @Inject
+    DresseurService dresseurService;
 
-    public boolean checkBalance(int amount, int idDresseur){
+    @Inject
+    PokemonService pokemonService;
+
+
+    public void checkBalance(int idPokemon, int idDresseur,int price){
         System.out.println("ticet dans gatewat ");
-        return bankService.checkBalance(amount,idDresseur);
+        if(bankService.checkBalance(price,idDresseur)){
+            this.dresseurService.affectPokemonToDresseur(idPokemon,idDresseur);
+        }
     }
 
 

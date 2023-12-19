@@ -10,4 +10,8 @@ public interface StoreService {
 
     void buyPokemon(int idPokemon);
     Collection<Pokemon> getPokemonByPrice(int price);
+
+    void deletePokemon(int idPokemon);
+
+    void createReceiptPokemon(int idPokemon, int idDresseur);
 }

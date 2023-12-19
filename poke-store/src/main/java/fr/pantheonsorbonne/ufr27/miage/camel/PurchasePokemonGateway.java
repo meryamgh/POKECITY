@@ -21,16 +21,17 @@ public class PurchasePokemonGateway {
     @ConfigProperty(name = "fr.pantheonsorbonne.ufr27.miage.jmsPrefix")
     String jmsPrefix;
 
-    public void checkBankCardDresseur(int price) {
+    public void checkBankCardDresseur(int pokemonToBuy,int price) {
         try (ProducerTemplate producerTemplate = camelContext.createProducerTemplate()) {
-            producerTemplate.sendBody("sjms2:queue:" + jmsPrefix +"bankRoute",price);
+            producerTemplate.sendBodyAndHeader("sjms2:queue:" + jmsPrefix +"bankRoute",pokemonToBuy
+            ,"price",price);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void getPokemon(int idDresseur){
-
+    public void getPokemon(int idPokemon,int idDresseur){
+        this.storeService.deletePokemon(idPokemon);
 
 
     }

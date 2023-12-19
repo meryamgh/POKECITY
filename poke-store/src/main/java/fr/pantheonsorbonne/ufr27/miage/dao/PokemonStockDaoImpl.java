@@ -6,6 +6,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 
 import java.util.Collection;
 
@@ -16,11 +17,13 @@ public class PokemonStockDaoImpl implements PokemonStockDao{
     EntityManager em;
 
     @Override
+    @Transactional
     public Collection<Pokemon> getStock() {
         return em.createQuery("SELECT poke FROM Pokemon poke", Pokemon.class).getResultList();
     }
 
     @Override
+    @Transactional
     public Collection<Pokemon> getStockPokemonByPrice(int price) {
         return em.createQuery("SELECT poke FROM Pokemon poke WHERE poke.prix <= :price", Pokemon.class)
                 .setParameter("price", price)
@@ -28,9 +31,19 @@ public class PokemonStockDaoImpl implements PokemonStockDao{
     }
 
     @Override
+    @Transactional
     public Pokemon getPokemonById(int idPokemon) {
         return em.createQuery("SELECT poke FROM Pokemon poke WHERE poke.idPokemon = :id", Pokemon.class)
                 .setParameter("id", idPokemon).getSingleResult();
+    }
+
+    @Override
+    @Transactional
+    public void deletePokemon(int idPokemon) {
+        Pokemon pokemonToDelete = getPokemonById(idPokemon);
+        if (pokemonToDelete != null) {
+            em.remove(pokemonToDelete);
+        }
     }
 
 
