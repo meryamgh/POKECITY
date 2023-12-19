@@ -13,10 +13,11 @@ public class SoignerPokemonGateway {
 
     @Inject
     CamelContext camelContext;
-
+    @ConfigProperty(name = "fr.pantheonsorbonne.ufr27.miage.jmsPrefix")
+    String jmsPrefix;
     public void checkBankAccount(int pokeScoreDresseur) {
         try (ProducerTemplate producerTemplate = camelContext.createProducerTemplate()) {
-            producerTemplate.sendBody("direct:checkBankAccount", pokeScoreDresseur);
+            producerTemplate.sendBody("sjms2:queue:" + jmsPrefix +"bankRoute", pokeScoreDresseur);
 
         } catch (IOException e) {
             throw new RuntimeException(e);

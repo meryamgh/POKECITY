@@ -29,7 +29,7 @@ public class BankGateway {
 
 
     public boolean checkBalance(int amount, int idDresseur){
-        System.out.println("ticet dans gatewat ");
+        System.out.println("ticket dans gateway ");
         return bankService.checkBalance(amount,idDresseur);
     }
 

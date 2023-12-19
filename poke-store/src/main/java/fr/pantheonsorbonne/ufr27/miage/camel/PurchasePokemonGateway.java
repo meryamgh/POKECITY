@@ -31,8 +31,6 @@ public class PurchasePokemonGateway {
 
     public void getPokemon(int idDresseur){
 
-
-
     }
 
     public void notEnoughTogetPokemon(){

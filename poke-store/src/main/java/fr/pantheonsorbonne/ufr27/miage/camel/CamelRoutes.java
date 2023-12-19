@@ -28,9 +28,6 @@ public class CamelRoutes extends RouteBuilder {
                 .otherwise()
                 .bean(pokemonGateway, "notEnoughTogetPokemon")
                 .log("le body : ${body}")
-
         ;
-
-
     }
 }
