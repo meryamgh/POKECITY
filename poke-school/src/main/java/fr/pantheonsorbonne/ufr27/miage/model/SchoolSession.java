@@ -1,5 +1,6 @@
 package fr.pantheonsorbonne.ufr27.miage.model;
 
+import com.sun.tools.xjc.model.CDefaultValue;
 import jakarta.persistence.*;
 
 import java.sql.Time;
@@ -12,17 +13,16 @@ public class SchoolSession {
     @Column(name = "idSchoolSession", nullable = false)
     private Integer idSchoolSession;
 
-    @Column(name = "timeSchoolSession", nullable = false, length = 45)
-    private Time timeSchoolSession;
+    @Column(name = "timeSchoolSession", nullable = false, length = 45, columnDefinition = "INT DEFAULT 6")
+    private Integer timeSchoolSession;
+
 
     @Column(name = "priceSchoolSession", nullable = false, length = 45)
     private Integer priceSchoolSession;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Dresseur dresseur;
+    @Column(name = "pokescoreGain", nullable = false, length = 45)
+    private Integer pokescoreGain;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Pokemon pokemon;
 
     public Integer getIdSchoolSession() {
         return idSchoolSession;
@@ -32,11 +32,11 @@ public class SchoolSession {
         this.idSchoolSession = idSchoolSession;
     }
 
-    public Time getTimeSchoolSession() {
+    public Integer getTimeSchoolSession() {
         return timeSchoolSession;
     }
 
-    public void setTimeSchoolSession(Time timeSchoolSession) {
+    public void setTimeSchoolSession(Integer timeSchoolSession) {
         this.timeSchoolSession = timeSchoolSession;
     }
 
@@ -48,19 +48,11 @@ public class SchoolSession {
         this.priceSchoolSession = priceSchoolSession;
     }
 
-    public Dresseur getDresseur() {
-        return dresseur;
+    public Integer getPokescoreGain() {
+        return pokescoreGain;
     }
 
-    public void setDresseur(Dresseur dresseur) {
-        this.dresseur = dresseur;
-    }
-
-    public Pokemon getPokemon() {
-        return pokemon;
-    }
-
-    public void setPokemon(Pokemon pokemon) {
-        this.pokemon = pokemon;
+    public void setPokescoreGain(Integer pokescoreGain) {
+        this.pokescoreGain = pokescoreGain;
     }
 }

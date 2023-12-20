@@ -1,5 +1,6 @@
 package fr.pantheonsorbonne.ufr27.miage.model;
 
+
 import jakarta.persistence.*;
 
 import java.util.List;
