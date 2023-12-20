@@ -1,7 +1,7 @@
 package fr.pantheonsorbonne.ufr27.miage.camel;
 
+import fr.pantheonsorbonne.ufr27.miage.dto.Pokemon;
 import fr.pantheonsorbonne.ufr27.miage.dto.TicketDresseurAchat;
-import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
 import fr.pantheonsorbonne.ufr27.miage.services.BankService;
 import fr.pantheonsorbonne.ufr27.miage.services.DresseurService;
 import fr.pantheonsorbonne.ufr27.miage.services.PokemonService;
@@ -37,10 +37,10 @@ public class BankGateway {
     PokemonService pokemonService;
 
 
-    public void checkBalance(int idPokemon, int idDresseur,int price){
-        System.out.println("ticet dans gatewat ");
-        if(bankService.checkBalance(price,idDresseur)){
-            this.dresseurService.affectPokemonToDresseur(idPokemon,idDresseur);
+    public void checkBalance(Pokemon pokemon, int idDresseur){
+        System.out.println("ticet dans gatewat "+pokemon);
+        if(bankService.checkBalance(pokemon.pokeScore(), idDresseur)){
+            this.dresseurService.affectPokemonToDresseur(pokemon.idPokemon(), idDresseur);
         }
     }
 

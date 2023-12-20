@@ -1,5 +1,6 @@
 package fr.pantheonsorbonne.ufr27.miage.ressource;
 
+import fr.pantheonsorbonne.ufr27.miage.exception.PokemonNotFoundException;
 import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
 import fr.pantheonsorbonne.ufr27.miage.services.StoreService;
 import jakarta.inject.Inject;
@@ -34,9 +35,17 @@ public class StoreRessource {
     @POST
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response buyPokemon(@PathParam("idPokemon") int pokemon){
-        service.buyPokemon(pokemon);
-        return Response.status(422, "invalid verification code").build();
+    public Response buyPokemon(@PathParam("idPokemon") int pokemon) throws PokemonNotFoundException {
+        try {
+            service.buyPokemon(pokemon);
+        } catch (PokemonNotFoundException e){
+            String errorMessage = "Le Pokémon avec l'ID " + pokemon + " n'existe pas dans le PokéStore.";
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(errorMessage)
+                    .type(MediaType.TEXT_PLAIN)
+                    .build();
+        }
+        return Response.status(Response.Status.OK).build();
     }
 
 }
