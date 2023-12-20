@@ -1,5 +1,12 @@
 package fr.pantheonsorbonne.ufr27.miage.service;
 
+
+import fr.pantheonsorbonne.ufr27.miage.dao.SchoolSessionDao;
+import fr.pantheonsorbonne.ufr27.miage.dao.SchoolSessionDaoImpl;
+import fr.pantheonsorbonne.ufr27.miage.model.SchoolSession;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+
 import fr.pantheonsorbonne.ufr27.miage.camel.SchoolGateway;
 import fr.pantheonsorbonne.ufr27.miage.dao.PokemonDao;
 import fr.pantheonsorbonne.ufr27.miage.dao.SchoolSessionDao;
@@ -18,6 +25,11 @@ public class SchoolSessionServiceImpl implements SchoolSessionService {
 
     @Inject
     SchoolSessionDao schoolSessionDao;
+
+
+    @Override
+    public Collection<SchoolSession> getAllSessions() {
+        return schoolSessionDao.getSchoolSessions(); }
 
     @Inject
     SchoolTicketDao schoolTicketDao;

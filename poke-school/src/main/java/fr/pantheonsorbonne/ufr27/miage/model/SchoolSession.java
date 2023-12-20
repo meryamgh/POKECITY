@@ -55,4 +55,5 @@ public class SchoolSession {
     public void setPokescoreGain(Integer pokescoreGain) {
         this.pokescoreGain = pokescoreGain;
     }
+
 }

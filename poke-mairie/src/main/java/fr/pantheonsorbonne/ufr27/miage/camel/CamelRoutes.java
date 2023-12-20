@@ -14,9 +14,6 @@ public class CamelRoutes extends RouteBuilder {
     @Inject
     BankGateway bank;
 
-
-
-
     @ConfigProperty(name = "fr.pantheonsorbonne.ufr27.miage.jmsPrefix")
     String jmsPrefix;
 
@@ -32,5 +29,14 @@ public class CamelRoutes extends RouteBuilder {
                 .log("Le body MAIRIE BANK CHECKED ${body} le header ${headers.idDresseur}")
                // .to("sjms2:queue:" + jmsPrefix +"buyPokemonRoute")
         ;
+
+        from("direct:checkBankAccount")
+                .log("Le body est arriver a la mairie pour le check bank ${body}")
+                .setHeader("idDresseur", constant(idDresseur))
+                .bean(bank, "checkBalance(${body}, ${headers.idDresseur})")
+                .log("Le body MAIRIE BANK CHECKED ${body} le header ${headers.idDresseur}")
+                .to("sjms2:queue:" + jmsPrefix +"buyPokemonRoute")
+        ;
+
     }
 }
