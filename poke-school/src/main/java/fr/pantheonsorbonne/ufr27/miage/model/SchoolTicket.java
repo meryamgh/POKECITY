@@ -10,28 +10,29 @@ public class SchoolTicket {
     @Column(name = "idSchoolTicket", nullable = false)
     private Integer idSchoolTicket;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Dresseur dresseur;
+    @Column(name = "pokemon_idPokemon", nullable = false)
+    private int pokemonId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Pokemon pokemon;
+    @Column(name = "schoolSession_idSchoolSession", nullable = false)
+    private int schoolSessionId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private SchoolSession schoolSession;
-
-    public Dresseur getDresseur() {
-        return dresseur;
+    public Integer getIdSchoolTicket() {
+        return idSchoolTicket;
     }
 
-    public void setDresseur(Dresseur dresseur) {
-        this.dresseur = dresseur;
+    public int getSchoolSession_id() {
+        return schoolSessionId;
     }
 
-    public Pokemon getPokemon() {
-        return pokemon;
+    public void setSchoolSession_id(int schoolSession) {
+        this.schoolSessionId = schoolSession;
     }
 
-    public void setPokemon(Pokemon pokemon) {
-        this.pokemon = pokemon;
+    public int getPokemon_id() {
+        return pokemonId;
+    }
+
+    public void setPokemon_id(int pokemon) {
+        this.pokemonId = pokemon;
     }
 }

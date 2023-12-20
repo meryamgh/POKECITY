@@ -48,4 +48,11 @@ public class SchoolSession {
         this.priceSchoolSession = priceSchoolSession;
     }
 
+    public Integer getPokescoreGain() {
+        return pokescoreGain;
+    }
+
+    public void setPokescoreGain(Integer pokescoreGain) {
+        this.pokescoreGain = pokescoreGain;
+    }
 }
