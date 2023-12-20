@@ -1,5 +1,7 @@
 package fr.pantheonsorbonne.ufr27.miage.camel;
 
+import fr.pantheonsorbonne.ufr27.miage.dto.Pokemon;
+import fr.pantheonsorbonne.ufr27.miage.exception.PokemonNotFoundException;
 import fr.pantheonsorbonne.ufr27.miage.services.StoreService;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
@@ -22,15 +24,15 @@ public class PurchasePokemonGateway {
     String jmsPrefix;
 
     public void checkBankCardDresseur(int pokemonToBuy,int price) {
+        System.out.println("le id poke"+pokemonToBuy+" le price "+price);
         try (ProducerTemplate producerTemplate = camelContext.createProducerTemplate()) {
-            producerTemplate.sendBodyAndHeader("sjms2:queue:" + jmsPrefix +"bankRoute",pokemonToBuy
-            ,"price",price);
+            producerTemplate.sendBody("sjms2:queue:" + jmsPrefix +"bankRoute",new Pokemon(pokemonToBuy,price));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void getPokemon(int idPokemon,int idDresseur){
+    public void getPokemon(int idPokemon,int idDresseur) throws PokemonNotFoundException {
         this.storeService.deletePokemon(idPokemon);
 
 

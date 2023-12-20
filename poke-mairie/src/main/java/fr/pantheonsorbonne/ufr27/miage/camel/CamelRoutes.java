@@ -28,7 +28,7 @@ public class CamelRoutes extends RouteBuilder {
         from("sjms2:queue:" + jmsPrefix +"bankRoute")
                 .log("Le body est arriver a la mairie pour le check bank ${body}")
                 .setHeader("idDresseur", constant(idDresseur))
-                .bean(bank, "checkBalance(${body}, ${headers.idDresseur}, ${headers.price})")
+                .bean(bank, "checkBalance(${body}, ${headers.idDresseur})")
                 .log("Le body MAIRIE BANK CHECKED ${body} le header ${headers.idDresseur}")
                // .to("sjms2:queue:" + jmsPrefix +"buyPokemonRoute")
         ;
