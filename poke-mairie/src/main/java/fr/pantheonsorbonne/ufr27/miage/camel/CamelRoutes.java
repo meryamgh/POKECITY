@@ -14,9 +14,6 @@ public class CamelRoutes extends RouteBuilder {
     @Inject
     BankGateway bank;
 
-
-
-
     @ConfigProperty(name = "fr.pantheonsorbonne.ufr27.miage.jmsPrefix")
     String jmsPrefix;
 

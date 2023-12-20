@@ -1,7 +1,11 @@
-REPLACE INTO Pokemon (idPokemon, name, pokeScore, prix)
-VALUES
-    (1, 'ghulamo', 84, 100),
-    (2, 'nabilo', 60, 80),
-    (3, 'lilio', 70, 90),
-    (4, 'naloufio', 56, 95),
-    (5, 'paudo', 14, 70);
+REPLACE INTO `Dresseur` (`idDresseur`, `name`) VALUES
+                                                  (1, 'Sacha'),
+                                                  (2, 'Thomas');
+
+
+REPLACE INTO `Dresseur_Pokemon` (`Dresseur_idDresseur`, `pokedex_idPokemon`) VALUES
+    (1, 2);
+
+
+REPLACE INTO `Pokemon` (`dresseur_idDresseur`, `idPokemon`, `pokeScore`, `prix`, `name`) VALUES
+    (1, 2, 0, 54, 'Pickachu');

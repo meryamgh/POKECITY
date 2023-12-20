@@ -18,7 +18,7 @@ public class InfirmerieRessource {
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response haveEnoughMoney(@PathParam("idPokemon") int idPokemon) {
 
-        if(service.enoughMoney(idPokemon)) {
+        if(service.enoughMoney(idPokemon, service.getPriceTreatment(idPokemon))) {
             service.soignerPokemon();
             return Response.ok().build();
         }else {

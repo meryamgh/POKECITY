@@ -1,5 +1,6 @@
 package fr.pantheonsorbonne.ufr27.miage.camel;
 
+import fr.pantheonsorbonne.ufr27.miage.dto.TreatmentSession;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.apache.camel.CamelContext;
@@ -15,9 +16,10 @@ public class SoignerPokemonGateway {
     CamelContext camelContext;
     @ConfigProperty(name = "fr.pantheonsorbonne.ufr27.miage.jmsPrefix")
     String jmsPrefix;
-    public void checkBankAccount(int idDresseur, int priceTreatment) {
+
+    public void checkBankAccount(TreatmentSession treatmentSession) {
         try (ProducerTemplate producerTemplate = camelContext.createProducerTemplate()) {
-            producerTemplate.sendBody("direct:checkBankAccount", priceTreatment);
+            producerTemplate.sendBody("direct:checkBankAccount", treatmentSession);
 
         } catch (IOException e) {
             throw new RuntimeException(e);

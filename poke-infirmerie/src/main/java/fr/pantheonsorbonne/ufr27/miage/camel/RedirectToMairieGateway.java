@@ -21,4 +21,6 @@ public class RedirectToMairieGateway {
             throw new RuntimeException(e);
         }
     }
+
+
 }

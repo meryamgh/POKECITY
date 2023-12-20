@@ -11,4 +11,6 @@ public interface SoinService {
 
     public void redirectToMairie(int idPokemon);
 
+    public int getPriceTreatment(int idPokemon);
+
 }

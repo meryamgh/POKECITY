@@ -10,8 +10,4 @@ public class TreatmentDAOImpl implements TreatmentDAO {
     @Inject
     EntityManager em;
 
-    @Override
-    public int getPriceTreatment() {
-        return em.createQuery("SELECT priceTreatment FROM TreatmentSession treatment", Integer.class).getSingleResult();
-    }
 }

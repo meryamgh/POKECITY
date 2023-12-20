@@ -18,11 +18,8 @@ public class CamelRoutes extends RouteBuilder {
     @Override
     public void configure() throws Exception {
 
-
-
         from("sjms2:queue:" + jmsPrefix +"pokemonSalled")
                 .bean(pokemonGateway,"getPokemon(${body}, ${headers.idDresseur})");
-
 
     }
 }
