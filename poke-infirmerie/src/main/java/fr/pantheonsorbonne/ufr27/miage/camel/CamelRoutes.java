@@ -7,6 +7,7 @@ public class CamelRoutes extends RouteBuilder {
     public void configure() throws Exception {
 
         from("direct:checkBankAccount")
+                .setHeader("idDresseur")
                 .log("le body : ${body}")
                 .to("sjms2:M1.bank")
         ;

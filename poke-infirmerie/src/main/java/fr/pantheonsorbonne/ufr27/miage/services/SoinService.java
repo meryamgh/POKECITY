@@ -5,7 +5,7 @@ import fr.pantheonsorbonne.ufr27.miage.model.Dresseur;
 
 public interface SoinService {
 
-    public boolean enoughMoney(int idPokemon);
+    public boolean enoughMoney(int idDresseur, int priceTreatment);
 
     public void soignerPokemon();
 

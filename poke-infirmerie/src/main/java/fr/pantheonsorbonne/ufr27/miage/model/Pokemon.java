@@ -2,6 +2,8 @@ package fr.pantheonsorbonne.ufr27.miage.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Pokemon {
 
@@ -18,6 +20,9 @@ public class Pokemon {
 
     @Column(name = "prix", nullable = false, length = 45)
     private Integer prix;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Dresseur dresseur;
 
     public String getName() {
         return name;

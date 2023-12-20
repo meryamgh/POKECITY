@@ -16,7 +16,6 @@ public class Dresseur {
     @Column(name = "name", nullable = false, length = 45)
     private String name;
 
-
     @Column(name = "pokedex", nullable = false, length = 45)
     @OneToMany
     private List<Pokemon> pokedex;

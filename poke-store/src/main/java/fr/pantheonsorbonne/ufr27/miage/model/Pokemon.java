@@ -16,8 +16,6 @@ public class Pokemon {
     @Column(name = "type", nullable = false, length = 45)
     private String type;
 
-
-
     @Column(name = "prix", nullable = false, length = 45)
     private Integer prix;
 
