@@ -1,6 +1,7 @@
 package fr.pantheonsorbonne.ufr27.miage.camel;
 
 
+import fr.pantheonsorbonne.ufr27.miage.services.DresseurService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.apache.camel.builder.RouteBuilder;
@@ -14,6 +15,8 @@ public class CamelRoutes extends RouteBuilder {
     BankGateway bank;
 
 
+
+
     @ConfigProperty(name = "fr.pantheonsorbonne.ufr27.miage.jmsPrefix")
     String jmsPrefix;
 
@@ -25,9 +28,9 @@ public class CamelRoutes extends RouteBuilder {
         from("sjms2:queue:" + jmsPrefix +"bankRoute")
                 .log("Le body est arriver a la mairie pour le check bank ${body}")
                 .setHeader("idDresseur", constant(idDresseur))
-                .bean(bank, "checkBalance(${body}, ${headers.idDresseur})")
+                .bean(bank, "checkBalance(${body}, ${headers.idDresseur}, ${headers.price})")
                 .log("Le body MAIRIE BANK CHECKED ${body} le header ${headers.idDresseur}")
-                .to("sjms2:queue:" + jmsPrefix +"buyPokemonRoute")
+               // .to("sjms2:queue:" + jmsPrefix +"buyPokemonRoute")
         ;
 
         from("direct:checkBankAccount")

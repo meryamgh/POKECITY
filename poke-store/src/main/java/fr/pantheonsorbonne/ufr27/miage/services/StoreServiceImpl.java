@@ -25,6 +25,16 @@ public class StoreServiceImpl implements StoreService{
         return stockDao.getStockPokemonByPrice(price);
     }
 
+    @Override
+    public void deletePokemon(int idPokemon) {
+        this.stockDao.deletePokemon(idPokemon);
+    }
+
+    @Override
+    public void createReceiptPokemon(int idPokemon, int idDresseur) {
+
+    }
+
     @Inject
     PurchasePokemonGateway pokemonGateway;
 
@@ -33,7 +43,7 @@ public class StoreServiceImpl implements StoreService{
     @Override
     public void buyPokemon(int idPokemon) {
         Pokemon pokemonToBuy = this.stockDao.getPokemonById(idPokemon);
-        pokemonGateway.checkBankCardDresseur(pokemonToBuy.getPrix());
+        pokemonGateway.checkBankCardDresseur(pokemonToBuy.getIdPokemon(),pokemonToBuy.getPrix());
         System.out.println("icicic ");
     }
 

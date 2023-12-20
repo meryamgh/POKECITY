@@ -20,14 +20,9 @@ public class CamelRoutes extends RouteBuilder {
 
 
 
-        from("sjms2:queue:" + jmsPrefix +"buyPokemonRoute")
-                .choice()
-                .when(body().isEqualTo(true))
-                .bean(pokemonGateway,"getPokemon(${headers.idDresseur})")
-                .to("sjms2:queue:" + jmsPrefix +"buyPokemonRoute")
-                .otherwise()
-                .bean(pokemonGateway, "notEnoughTogetPokemon")
-                .log("le body : ${body}")
-        ;
+        from("sjms2:queue:" + jmsPrefix +"pokemonSalled")
+                .bean(pokemonGateway,"getPokemon(${body}, ${headers.idDresseur})");
+
+
     }
 }
