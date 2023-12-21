@@ -38,5 +38,7 @@ public class CamelRoutes extends RouteBuilder {
                 .to("sjms2:queue:" + jmsPrefix +"buyPokemonRoute")
         ;
 
+        from("sjms2:queue:M1.Mairie").log("${body}");
+
     }
 }

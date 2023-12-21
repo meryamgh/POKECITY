@@ -35,4 +35,3 @@ public class SchoolTicketDaoImpl implements SchoolTicketDao{
         return em.createQuery("SELECT ticket FROM SchoolTicket ticket", SchoolTicket.class).getResultList();
     }
 }
-
