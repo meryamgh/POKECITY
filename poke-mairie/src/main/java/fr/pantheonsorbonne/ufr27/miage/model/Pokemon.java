@@ -8,13 +8,13 @@ public class Pokemon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idPokemon", nullable = false)
-    private Integer idPokemon;
+    private int idPokemon;
 
     @Column(name = "type", nullable = false, length = 45)
     private String type;
 
     @Column(name = "pokeScore", nullable = false, length = 45)
-    private Integer pokeScore;
+    private int pokeScore;
 
     @Column(name = "isAdopted", nullable = false, length = 45)
     private Boolean isAdopted;
@@ -22,11 +22,11 @@ public class Pokemon {
     @Column(name = "name", nullable = false, length = 45)
     private String name;
 
-    public Integer getIdPokemon() {
+    public int getIdPokemon() {
         return idPokemon;
     }
 
-    public void setIdPokemon(Integer idPokemon) {
+    public void setIdPokemon(int idPokemon) {
         this.idPokemon = idPokemon;
     }
 
@@ -38,11 +38,11 @@ public class Pokemon {
         this.type = type;
     }
 
-    public Integer getPokeScore() {
+    public int getPokeScore() {
         return pokeScore;
     }
 
-    public void setPokeScore(Integer pokeScore) {
+    public void setPokeScore(int pokeScore) {
         this.pokeScore = pokeScore;
     }
 
@@ -54,4 +54,11 @@ public class Pokemon {
         isAdopted = adopted;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

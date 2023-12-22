@@ -3,8 +3,10 @@ package fr.pantheonsorbonne.ufr27.miage.services;
 import fr.pantheonsorbonne.ufr27.miage.camel.PurchasePokemonGateway;
 import fr.pantheonsorbonne.ufr27.miage.dao.PokemonStockDao;
 import fr.pantheonsorbonne.ufr27.miage.dao.PokemonStockDaoImpl;
+import fr.pantheonsorbonne.ufr27.miage.dao.ReceiptPokemonDao;
 import fr.pantheonsorbonne.ufr27.miage.exception.PokemonNotFoundException;
 import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
+import fr.pantheonsorbonne.ufr27.miage.model.ReceiptPokemon;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
@@ -15,6 +17,9 @@ public class StoreServiceImpl implements StoreService{
 
     @Inject
     PokemonStockDao stockDao;
+
+    @Inject
+    ReceiptPokemonDao receiptPokemonDao;
 
     @Override
     public Collection<Pokemon> getAllPokemon() {
@@ -32,8 +37,19 @@ public class StoreServiceImpl implements StoreService{
     }
 
     @Override
-    public void createReceiptPokemon(int idPokemon, int idDresseur) {
+    public void createReceiptPokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon idPokemon, int idDresseur) {
+        this.receiptPokemonDao.insertReceiptTicket(idPokemon,idDresseur);
+    }
 
+    @Override
+    public void pokemonSalled(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon, int idDresseur) throws PokemonNotFoundException{
+        this.deletePokemon(pokemon.idPokemon());
+        this.createReceiptPokemon(pokemon,idDresseur);
+    }
+
+    @Override
+    public Collection<ReceiptPokemon> getAllReceipts() {
+        return this.receiptPokemonDao.getAllReceiptsOfStore();
     }
 
     @Inject

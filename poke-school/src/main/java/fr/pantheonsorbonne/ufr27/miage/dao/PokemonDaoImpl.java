@@ -19,9 +19,9 @@ public class PokemonDaoImpl implements PokemonDao{
     }
 
     @Override
-    public Integer getPokemonScoreById(int idPokemon) {
+    public int getPokemonScoreById(int idPokemon) {
         try {
-            Integer score = (Integer) em.createQuery("SELECT p.pokeScore FROM Pokemon p WHERE p.id = :idPokemon")
+            int score = (int) em.createQuery("SELECT p.pokeScore FROM Pokemon p WHERE p.id = :idPokemon")
                     .setParameter("idPokemon", idPokemon)
                     .getSingleResult();
 

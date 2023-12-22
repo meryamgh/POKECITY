@@ -11,13 +11,13 @@ public class TreatmentSession {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idTreatment", nullable = false)
-    private Integer idTreatment;
+    private int idTreatment;
 
     @Column(name = "timeTreatment", nullable = false, length = 45)
     private Time timeTreatment;
 
     @Column(name = "priceTreatment", nullable = false, length = 45)
-    private Integer priceTreatment;
+    private int priceTreatment;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Dresseur dresseur;
@@ -25,11 +25,11 @@ public class TreatmentSession {
     @ManyToOne(cascade = CascadeType.ALL)
     private Pokemon pokemon;
 
-    public Integer getIdTreatment() {
+    public int getIdTreatment() {
         return idTreatment;
     }
 
-    public void setIdTreatment(Integer idTreatment) {
+    public void setIdTreatment(int idTreatment) {
         this.idTreatment = idTreatment;
     }
 
@@ -41,11 +41,11 @@ public class TreatmentSession {
         this.timeTreatment = timeTreatment;
     }
 
-    public Integer getPriceTreatment() {
+    public int getPriceTreatment() {
         return priceTreatment;
     }
 
-    public void setPriceTreatment(Integer priceTreatment) {
+    public void setPriceTreatment(int priceTreatment) {
         this.priceTreatment = priceTreatment;
     }
 

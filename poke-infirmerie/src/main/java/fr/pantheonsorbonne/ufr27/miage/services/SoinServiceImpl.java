@@ -54,7 +54,7 @@ public class SoinServiceImpl implements SoinService{
     @Override
     public int getPriceTreatment(int idPokemon) {
         int intialPrice = pokemonDao.getPokemonById(idPokemon).getPrix();
-        return intialPrice - 10;
+        return intialPrice / 2;
     }
 
 }

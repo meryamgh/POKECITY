@@ -10,7 +10,7 @@ public class Dresseur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idDresseur", nullable = false)
-    private Integer idDresseur;
+    private int idDresseur;
 
     @Column(name = "name", nullable = false, length = 45)
     private String name;
@@ -22,11 +22,11 @@ public class Dresseur {
     @OneToMany
     private List<Pokemon> pokedex;
 
-    public Integer getIdDresseur() {
+    public int getIdDresseur() {
         return idDresseur;
     }
 
-    public void setIdDresseur(Integer idDresseur) {
+    public void setIdDresseur(int idDresseur) {
         this.idDresseur = idDresseur;
     }
 

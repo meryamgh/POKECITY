@@ -13,7 +13,7 @@ public class DresseurDaoImpl implements DresseurDao{
 
     @Override
     public int getIdDresseurByIdPokemon(int idPokemon) {
-        return em.createQuery("SELECT dresseur.idDresseur FROM Pokemon pokemon WHERE pokemon.idPokemon = :id", Integer.class)
+        return em.createQuery("SELECT dresseur.idDresseur FROM Pokemon pokemon WHERE pokemon.idPokemon = :id", int.class)
                 .setParameter("id", idPokemon)
                 .getSingleResult();
     }

@@ -8,27 +8,27 @@ public class BankAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idBankAccount", nullable = false)
-    private Integer idBankAccount;
+    private int idBankAccount;
 
     @Column(name = "balance", nullable = false, length = 45)
-    private Integer balance;
+    private int balance;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Dresseur dresseur;
 
-    public Integer getIdBankAccount() {
+    public int getIdBankAccount() {
         return idBankAccount;
     }
 
-    public void setIdBankAccount(Integer idBankAccount) {
+    public void setIdBankAccount(int idBankAccount) {
         this.idBankAccount = idBankAccount;
     }
 
-    public Integer getBalance() {
+    public int getBalance() {
         return balance;
     }
 
-    public void setBalance(Integer balance) {
+    public void setBalance(int balance) {
         this.balance = balance;
     }
 

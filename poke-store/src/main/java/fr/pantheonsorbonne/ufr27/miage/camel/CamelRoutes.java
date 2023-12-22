@@ -21,5 +21,9 @@ public class CamelRoutes extends RouteBuilder {
         from("sjms2:queue:" + jmsPrefix +"pokemonSalled")
                 .bean(pokemonGateway,"getPokemon(${body}, ${headers.idDresseur})");
 
+        from("sjms2:queue:"+jmsPrefix+"pokeStore")
+                .bean(pokemonGateway,"getPokemon(${body}, ${headers.idDresseur})");
+
+
     }
 }

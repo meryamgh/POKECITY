@@ -13,12 +13,12 @@ public class PokemonDaoImpl implements PokemonDao{
 
     @Override
     public int getPokeScorePokemon() {
-        return em.createQuery("SELECT pokeScore FROM Pokemon pokemon", Integer.class).getSingleResult();
+        return em.createQuery("SELECT pokeScore FROM Pokemon pokemon", int.class).getSingleResult();
     }
 
     @Override
     public int getPrixPokemon() {
-        return em.createQuery("SELECT prix FROM Pokemon pokemon", Integer.class).getSingleResult();
+        return em.createQuery("SELECT prix FROM Pokemon pokemon", int.class).getSingleResult();
     }
 
     @Override

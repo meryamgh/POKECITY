@@ -23,10 +23,10 @@ public class SchoolSessionDaoImpl implements SchoolSessionDao{
     }
 
     @Override
-    public Integer getSchoolSessionGainById(int id) {
+    public int getSchoolSessionGainById(int id) {
         return em.createQuery(
                         "SELECT s.pokescoreGain FROM SchoolSession s WHERE s.idSchoolSession = :id",
-                        Integer.class
+                        int.class
                 )
                 .setParameter("id", id)
                 .getSingleResult();

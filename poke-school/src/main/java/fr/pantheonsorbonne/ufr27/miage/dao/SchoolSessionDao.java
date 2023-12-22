@@ -8,5 +8,5 @@ public interface SchoolSessionDao {
 
     Collection<SchoolSession> getSchoolSessions();
     SchoolSession getSchoolSessionById(int idSchoolSession);
-    Integer getSchoolSessionGainById(int idSchoolSession);
+    int getSchoolSessionGainById(int idSchoolSession);
 }

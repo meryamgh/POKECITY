@@ -2,6 +2,7 @@ package fr.pantheonsorbonne.ufr27.miage.ressource;
 
 import fr.pantheonsorbonne.ufr27.miage.exception.PokemonNotFoundException;
 import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
+import fr.pantheonsorbonne.ufr27.miage.model.ReceiptPokemon;
 import fr.pantheonsorbonne.ufr27.miage.services.StoreService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -46,6 +47,13 @@ public class StoreRessource {
                     .build();
         }
         return Response.status(Response.Status.OK).build();
+    }
+
+    @Path("receipts")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public Collection<ReceiptPokemon> getAllReceiptPokemon(){
+        return this.service.getAllReceipts();
     }
 
 }
