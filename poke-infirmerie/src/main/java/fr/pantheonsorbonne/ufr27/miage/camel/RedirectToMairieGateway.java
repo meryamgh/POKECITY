@@ -12,7 +12,7 @@ public class RedirectToMairieGateway {
     @Inject
     CamelContext camelContext;
 
-    public void redirectToMairie(Pokemon pokemon) {
+    public void redirectToMairie(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon) {
         try (ProducerTemplate producerTemplate = camelContext.createProducerTemplate()) {
             producerTemplate.sendBody("direct:redirectToMairie", pokemon);
 

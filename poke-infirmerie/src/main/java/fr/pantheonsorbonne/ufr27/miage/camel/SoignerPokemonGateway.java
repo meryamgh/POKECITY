@@ -31,6 +31,4 @@ public class SoignerPokemonGateway {
             throw new RuntimeException(e);
         }
     }
-
-    public void
 }

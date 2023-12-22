@@ -26,8 +26,11 @@ public class CamelRoutes extends RouteBuilder {
                 .log("on redirige vers la mairie le pokemon qui ne peut pas etre soigné : ${body}")
                 .to("sjms2:M1.mairie");
 
-
         from("sjms2:queue:" + jmsPrefix + "pokemonSaled")
-                .bean(soinService, "soignerPokemon(${body.pokemonToCure})");
+                .choice()
+                .when(simple("${headers.responseHaveEnoughMoney}"))
+                .bean(soinService, "soignerPokemon(${body.pokemonToCure})")
+                .otherwise()
+                .bean(soinService, "redirectToMairie(${body.pokemonToCure})");
     }
 }

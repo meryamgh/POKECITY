@@ -29,7 +29,7 @@ public class SoinServiceImpl implements SoinService{
     RedirectToMairieGateway redirectToMairieGateway;
 
     @Override
-    public void enoughMoney(int idPokemon, int priceTreatment) {
+    public void checkEnoughMoney(int idPokemon, int priceTreatment) {
         pokemonGateway.checkBankAccount(idPokemon,priceTreatment);
     }
 
@@ -40,14 +40,13 @@ public class SoinServiceImpl implements SoinService{
     }
 
     @Override
-    public void redirectToMairie(int idPokemon) {
-        Pokemon pokemon = pokemonDao.getPokemonById(idPokemon);
+    public void redirectToMairie(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon) {
         redirectToMairieGateway.redirectToMairie(pokemon);
     }
 
     @Override
-    public int getPriceTreatment(int idPokemon) {
-        int intialPrice = pokemonDao.getPokemonById(idPokemon).getPrix();
+    public int getPriceTreatment(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon) {
+        int intialPrice = pokemon.prix();
         return intialPrice / 2;
     }
 

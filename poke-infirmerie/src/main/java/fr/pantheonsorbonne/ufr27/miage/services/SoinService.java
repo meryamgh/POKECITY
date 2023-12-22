@@ -2,12 +2,12 @@ package fr.pantheonsorbonne.ufr27.miage.services;
 
 public interface SoinService {
 
-    public void enoughMoney(int idDresseur, int priceTreatment);
+    public void checkEnoughMoney(int idDresseur, int priceTreatment);
 
     public void soignerPokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon);
 
-    public void redirectToMairie(int idPokemon);
+    public void redirectToMairie(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon);
 
-    public int getPriceTreatment(int idPokemon);
+    public int getPriceTreatment(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon);
 
 }
