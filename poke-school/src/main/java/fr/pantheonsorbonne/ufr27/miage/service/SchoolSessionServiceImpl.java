@@ -79,10 +79,12 @@ public class SchoolSessionServiceImpl implements SchoolSessionService {
         return schoolSessionDao.getSchoolSessionById(idRightSession);
     }
 
+
     @Override
     public void sendSessionToMairie(SchoolSession session){
         gateway.sendRightSessionToMairie(session);
     }
+
 
     @Override
     public void getPokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon){

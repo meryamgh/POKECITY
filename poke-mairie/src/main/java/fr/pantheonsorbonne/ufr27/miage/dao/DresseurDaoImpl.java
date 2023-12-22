@@ -40,6 +40,6 @@ public class DresseurDaoImpl implements DresseurDao{
 
     @Override
     public boolean checkRightDresseur(Dresseur dresseur){
-
+    return true;
     }
 }

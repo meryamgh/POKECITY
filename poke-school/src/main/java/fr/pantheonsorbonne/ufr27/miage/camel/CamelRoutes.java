@@ -25,10 +25,12 @@ public class CamelRoutes extends RouteBuilder {
                 .marshal().json()
                 .to("sjms2:queue:M1.SessionToMairie");
 
+        /*
         from("sjms2:queue:M1.PokemonToSchool")
                 .log("Le pokemon est arrivé à l'école : ${body}")
                 .unmarshal().json(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon.class)
                 .bean(gateway, "collectingPokemon(${body})")
         ;
+         */
     }
 }

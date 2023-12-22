@@ -2,21 +2,15 @@ package fr.pantheonsorbonne.ufr27.miage.ressources;
 
 import fr.pantheonsorbonne.ufr27.miage.dao.PokemonDao;
 import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
-import fr.pantheonsorbonne.ufr27.miage.services.SchoolService;
-import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
 
 @Path("/pokemairie")
 public class PokemonRessource {
 
     @Inject
     PokemonDao pokemonDao;
-
-    @Inject
-    SchoolService schoolService;
 
     @Path("/pokemon/{id}")
     @GET
@@ -25,6 +19,7 @@ public class PokemonRessource {
         return this.pokemonDao.getPokemonById(id);
     }
 
+    /*
     @Path("/goToSchool/{idPokemon}")
     @POST
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
@@ -38,4 +33,6 @@ public class PokemonRessource {
         return Response.ok().build();
 
     }
+
+     */
 }

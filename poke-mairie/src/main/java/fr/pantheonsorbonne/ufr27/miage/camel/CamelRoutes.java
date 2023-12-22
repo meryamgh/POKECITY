@@ -51,11 +51,14 @@ public class CamelRoutes extends RouteBuilder {
                 .bean(school, "improvePokemon(${body})")
         ;
 
+        /*
         from("direct:sendPokemonToSchool")
                 .routeId("sendPokemonToSchoolRoute")
                 .log("Sending pokemon to school: ${body}")
                 .marshal().json()
                 .to("sjms2:queue:M1.PokemonToSchool");
         ;
+
+         */
     }
 }
