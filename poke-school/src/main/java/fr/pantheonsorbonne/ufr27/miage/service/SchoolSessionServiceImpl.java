@@ -23,10 +23,9 @@ public class SchoolSessionServiceImpl implements SchoolSessionService {
     SchoolTicketDao schoolTicketDao;
 
     @Inject
-    PokemonDao pokemonDao;
-
-    @Inject
     SchoolGateway gateway;
+
+    Pokemon pokemon;
 
     @Override
     public Collection<SchoolSession> getAllSessions() {
@@ -40,19 +39,24 @@ public class SchoolSessionServiceImpl implements SchoolSessionService {
 
     @Transactional
     @Override
-    public void inscrirePokemon(int idPokemon, int idSession) {
+    public void inscrirePokemon(Pokemon pokemon, SchoolSession session) {
+
+        //on récupère l'id du pokemon
+        int idPokemon = pokemon.getIdPokemon();
+
+        //on récupère l'id de la session
+        int idSession = session.getIdSchoolSession();
 
         //on crée un ticket pour garder l'historique des cours effectués par un pokemon
         schoolTicketDao.createSchoolTicket(idPokemon, idSession);
 
         //on augmente le score du pokemon qui a suivi le cours
-        int gain = schoolSessionDao.getSchoolSessionGainById(idSession);
-        int newScore = pokemonDao.getPokemonScoreById(idPokemon) + gain;
-        pokemonDao.setPokescorebyId(idPokemon, newScore);
+        int gain = session.getPokescoreGain();
+        int newScore = pokemon.getPokeScore() + gain;
+        pokemon.setPokeScore(newScore);
 
         //on renvoie le pokemon improved à la mairie
-        Pokemon improvedPokemon = pokemonDao.getPokemonById(idPokemon);
-        gateway.sendImprovedPokemonToMairie(improvedPokemon);
+        gateway.sendImprovedPokemonToMairie(pokemon);
     }
 
     @Override
@@ -60,5 +64,33 @@ public class SchoolSessionServiceImpl implements SchoolSessionService {
         return true;
     }
 
+    @Override
+    public SchoolSession findRightSession(Pokemon pokemon) {
+        int score = pokemon.getPokeScore();
+        int idRightSession;
+        if (score < 70) {
+            idRightSession = 1;
+        } else if (score < 110) {
+            idRightSession = 2;
+        } else {
+            idRightSession = 3;
+        }
 
+        return schoolSessionDao.getSchoolSessionById(idRightSession);
+    }
+
+    @Override
+    public void sendSessionToMairie(SchoolSession session){
+        gateway.sendRightSessionToMairie(session);
+    }
+
+    @Override
+    public void getPokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon){
+        int id = pokemon.idPokemon();
+        int pokescore = pokemon.pokeScore();
+        Pokemon p = new Pokemon();
+        p.setIdPokemon(id);
+        p.setPokeScore(pokescore);
+        this.pokemon = p;
+    }
 }

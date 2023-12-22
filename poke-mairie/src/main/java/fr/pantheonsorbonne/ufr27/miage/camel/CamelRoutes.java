@@ -14,6 +14,9 @@ public class CamelRoutes extends RouteBuilder {
     @Inject
     BankGateway bank;
 
+    @Inject
+    SchoolGateway school;
+
     @ConfigProperty(name = "fr.pantheonsorbonne.ufr27.miage.jmsPrefix")
     String jmsPrefix;
 
@@ -38,7 +41,21 @@ public class CamelRoutes extends RouteBuilder {
                 .to("sjms2:queue:" + jmsPrefix +"buyPokemonRoute")
         ;
 
-        from("sjms2:queue:M1.Mairie").log("${body}");
+        from("sjms2:queue:M1.SessionToMairie")
+                .log("La session scolaire adaptée est arrivée à la mairie : ${body}")
+        ;
 
+        from("sjms2:queue:M1.Mairie")
+                .log("Le pokemon amélioré est arrivé à la mairie : ${body}")
+                .unmarshal().json(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon.class)
+                .bean(school, "improvePokemon(${body})")
+        ;
+
+        from("direct:sendPokemonToSchool")
+                .routeId("sendPokemonToSchoolRoute")
+                .log("Sending pokemon to school: ${body}")
+                .marshal().json()
+                .to("sjms2:queue:M1.PokemonToSchool");
+        ;
     }
 }

@@ -43,14 +43,18 @@ public class SessionSchoolRessource {
         return this.pokemonDao.getPokemonById(id);
     }
 
-    @Path("/SchoolRegister/{idPokemon}/{idSession}")
+    @Path("/SchoolRegister")
     @POST
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    public Response inscrirePokemon(
-            @PathParam("idPokemon") int idPokemon,
-            @PathParam("idSession") int idSession) {
+    public Response inscrirePokemon() {
+
+        Pokemon pokemon = getPokemonById(1);
+
+        SchoolSession session = sessionService.findRightSession(pokemon);
+        sessionService.sendSessionToMairie(session);
+
         if (this.sessionService.isMoneyEnough()) {
-            this.sessionService.inscrirePokemon(idPokemon, idSession);
+            this.sessionService.inscrirePokemon(pokemon, session);
             return Response.ok().build();
         } else {
             return Response.status(422, "L'inscription n'a pas pu être effectuée.").build();

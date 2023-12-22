@@ -6,4 +6,6 @@ public interface PokemonService {
 
     Pokemon getPokemonById(int idPokemon);
 
+    void updatePokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon);
+
 }

@@ -16,6 +16,8 @@ public class Pokemon {
     @Column(name = "name", nullable = false, length = 45)
     private String name;
 
+    public Pokemon(){}
+
     public Integer getIdPokemon() {
         return idPokemon;
     }
