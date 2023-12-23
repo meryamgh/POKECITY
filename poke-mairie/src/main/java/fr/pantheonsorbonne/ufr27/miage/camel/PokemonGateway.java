@@ -21,7 +21,7 @@ public class PokemonGateway {
 
     public void pokemonSalled(Pokemon pokemonSalled, int idDresseur) {
         try (ProducerTemplate producerTemplate = camelContext.createProducerTemplate()) {
-            fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemonToSend = new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(pokemonSalled.getIdPokemon(), pokemonSalled.getPokeScore());
+            fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemonToSend = new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(pokemonSalled.getIdPokemon(), pokemonSalled.getPokeScore(), pokemonSalled.getPokeScore());
             producerTemplate.sendBodyAndHeader("sjms2:queue:" + jmsPrefix +"pokemonSalled",pokemonToSend
                     ,"idDresseur",idDresseur);
         } catch (IOException e) {

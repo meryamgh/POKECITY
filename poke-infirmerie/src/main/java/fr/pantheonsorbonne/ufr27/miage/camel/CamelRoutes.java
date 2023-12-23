@@ -10,6 +10,12 @@ public class CamelRoutes extends RouteBuilder {
     @Inject
     SoinService soinService;
 
+    @Inject
+    RedirectToMairieGateway redirectToMairieGateway;
+
+    @Inject
+    SoignerPokemonGateway soignerPokemonGateway;
+
     @ConfigProperty(name = "fr.pantheonsorbonne.ufr27.miage.jmsPrefix")
     String jmsPrefix;
 
@@ -17,20 +23,11 @@ public class CamelRoutes extends RouteBuilder {
     @Override
     public void configure() throws Exception {
 
-        from("direct:checkBankAccount")
-                .log("On check le compte en banque du dresseur pour le traitement ${body}")
-                .to("sjms2:M1.bank")
-        ;
-
-        from("direct:redirectToMairie")
-                .log("on redirige vers la mairie le pokemon qui ne peut pas etre soigné : ${body}")
-                .to("sjms2:M1.mairie");
-
-        from("sjms2:queue:" + jmsPrefix + "pokemonSaled")
+        from("sjms2:queue:"+jmsPrefix+"pokeInfirmerie")
                 .choice()
                 .when(simple("${headers.responseHaveEnoughMoney}"))
-                .bean(soinService, "soignerPokemon(${body.pokemonToCure})")
+                .bean(soignerPokemonGateway, "soigner(${body})")
                 .otherwise()
-                .bean(soinService, "redirectToMairie(${body.pokemonToCure})");
+                .bean(redirectToMairieGateway, "redirect(${body})");
     }
 }
