@@ -38,10 +38,10 @@ public class SchoolGateway {
         }
     }
 
-    /*
+
     public void collectingPokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon){
-        service.getPokemon(pokemon);
+        service.collectPokemon(pokemon);
     }
-     */
+
 
 }

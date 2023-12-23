@@ -1,8 +1,5 @@
 package fr.pantheonsorbonne.ufr27.miage.ressources;
 
-
-import fr.pantheonsorbonne.ufr27.miage.dao.PokemonDao;
-import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
 import fr.pantheonsorbonne.ufr27.miage.model.SchoolSession;
 import fr.pantheonsorbonne.ufr27.miage.model.SchoolTicket;
 import fr.pantheonsorbonne.ufr27.miage.service.SchoolSessionService;
@@ -19,9 +16,6 @@ public class SessionSchoolRessource {
     @Inject
     SchoolSessionService sessionService;
 
-    @Inject
-    PokemonDao pokemonDao;
-
     @Path("/SchoolSessions")
     @GET
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
@@ -36,28 +30,24 @@ public class SessionSchoolRessource {
         return this.sessionService.getAllTickets();
     }
 
-    @Path("/pokemon/{id}")
-    @GET
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Pokemon getPokemonById(@PathParam("id") int id) {
-        return this.pokemonDao.getPokemonById(id);
-    }
-
     @Path("/SchoolRegister")
     @POST
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
     public Response inscrirePokemon() {
 
-        Pokemon pokemon = getPokemonById(1);
+        if(sessionService.getPokemon() != null){
+            SchoolSession session = sessionService.findRightSession();
+            sessionService.sendSessionToMairie(session);
 
-        SchoolSession session = sessionService.findRightSession(pokemon);
-        sessionService.sendSessionToMairie(session);
-
-        if (this.sessionService.isMoneyEnough()) {
-            this.sessionService.inscrirePokemon(pokemon, session);
-            return Response.ok().build();
-        } else {
-            return Response.status(422, "L'inscription n'a pas pu être effectuée.").build();
+            if (this.sessionService.isMoneyEnough()) {
+                this.sessionService.inscrirePokemon(session);
+                return Response.ok().build();
+            } else {
+                return Response.status(422, "L'inscription n'a pas pu être effectuée.").build();
+            }
+        }
+        else{
+            return Response.status(422, "Aucun pokemon n'a été envoyé à l'école.").build();
         }
     }
 

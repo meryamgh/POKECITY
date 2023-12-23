@@ -51,7 +51,7 @@ public class CamelRoutes extends RouteBuilder {
                 .bean(school, "improvePokemon(${body})")
         ;
 
-        /*
+
         from("direct:sendPokemonToSchool")
                 .routeId("sendPokemonToSchoolRoute")
                 .log("Sending pokemon to school: ${body}")
@@ -59,6 +59,6 @@ public class CamelRoutes extends RouteBuilder {
                 .to("sjms2:queue:M1.PokemonToSchool");
         ;
 
-         */
+
     }
 }

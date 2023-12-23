@@ -9,9 +9,11 @@ import java.util.Collection;
 public interface SchoolSessionService {
     Collection<SchoolSession> getAllSessions();
     Collection<SchoolTicket> getAllTickets();
-    void inscrirePokemon(Pokemon pokemon, SchoolSession session);
+    void inscrirePokemon(SchoolSession session);
     boolean isMoneyEnough();
-    SchoolSession findRightSession(Pokemon pokemon);
+    SchoolSession findRightSession();
     void sendSessionToMairie(SchoolSession session);
-    void getPokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon);
+    void collectPokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon);
+    Pokemon getPokemon();
+    void resetPokemon();
 }

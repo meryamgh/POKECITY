@@ -21,10 +21,9 @@ public class SchoolGateway {
 
     public void improvePokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon){
         pokeService.updatePokemon(pokemon);
-        System.out.println(pokemon.pokeScore());
     }
 
-    /*
+
     public void sendToSchool(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon){
         try (ProducerTemplate producer = context.createProducerTemplate()) {
             producer.sendBody("direct:sendPokemonToSchool",pokemon);
@@ -32,6 +31,4 @@ public class SchoolGateway {
             e.printStackTrace();
         }
     }
-
-     */
 }
