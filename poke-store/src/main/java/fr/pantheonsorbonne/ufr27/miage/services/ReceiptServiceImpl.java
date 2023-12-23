@@ -2,7 +2,6 @@ package fr.pantheonsorbonne.ufr27.miage.services;
 
 import fr.pantheonsorbonne.ufr27.miage.camel.PurchasePokemonGateway;
 import fr.pantheonsorbonne.ufr27.miage.dao.PokemonStockDao;
-import fr.pantheonsorbonne.ufr27.miage.dao.PokemonStockDaoImpl;
 import fr.pantheonsorbonne.ufr27.miage.dao.ReceiptPokemonDao;
 import fr.pantheonsorbonne.ufr27.miage.exception.PokemonNotFoundException;
 import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
@@ -13,28 +12,16 @@ import jakarta.inject.Inject;
 import java.util.Collection;
 
 @ApplicationScoped
-public class StoreServiceImpl implements StoreService{
-
+public class ReceiptServiceImpl implements ReceiptService{
     @Inject
     PokemonStockDao stockDao;
 
     @Inject
+    InventoryPokemonService inventoryPokemonService;
+
+    @Inject
     ReceiptPokemonDao receiptPokemonDao;
 
-    @Override
-    public Collection<Pokemon> getAllPokemon() {
-        return stockDao.getStock();
-    }
-
-    @Override
-    public Collection<Pokemon> getPokemonByPrice(int price) {
-        return stockDao.getStockPokemonByPrice(price);
-    }
-
-    @Override
-    public void deletePokemon(int idPokemon)  throws PokemonNotFoundException{
-        this.stockDao.deletePokemon(idPokemon);
-    }
 
     @Override
     public void createReceiptPokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon idPokemon, int idDresseur) {
@@ -42,8 +29,8 @@ public class StoreServiceImpl implements StoreService{
     }
 
     @Override
-    public void pokemonSalled(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon, int idDresseur) throws PokemonNotFoundException{
-        this.deletePokemon(pokemon.idPokemon());
+    public void pokemonSalled(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon, int idDresseur) throws PokemonNotFoundException {
+        this.inventoryPokemonService.deletePokemon(pokemon.idPokemon());
         this.createReceiptPokemon(pokemon,idDresseur);
     }
 
@@ -63,5 +50,4 @@ public class StoreServiceImpl implements StoreService{
         pokemonGateway.checkBankCardDresseur(pokemonToBuy.getIdPokemon(),pokemonToBuy.getPrix());
         System.out.println("icicic ");
     }
-
 }

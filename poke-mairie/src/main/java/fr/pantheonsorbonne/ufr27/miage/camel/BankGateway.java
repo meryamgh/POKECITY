@@ -42,11 +42,8 @@ public class BankGateway {
 
     public void checkBalance2(Pokemon pokemon, int idDresseur) {
         System.out.println("ticet dans gatewat "+pokemon);
-        if(bankService.checkBalance(pokemon.pokeScore(), idDresseur)){
-            this.dresseurService.affectPokemonToDresseur(pokemon.idPokemon(), idDresseur);
-        }else{
+        this.dresseurService.affectPokemonToDresseur(pokemon.idPokemon(), idDresseur);
 
-        }
     }
 
 

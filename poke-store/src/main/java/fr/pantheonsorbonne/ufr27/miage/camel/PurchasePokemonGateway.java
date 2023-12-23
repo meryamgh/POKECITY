@@ -3,7 +3,7 @@ package fr.pantheonsorbonne.ufr27.miage.camel;
 
 import fr.pantheonsorbonne.ufr27.miage.dto.Pokemon;
 import fr.pantheonsorbonne.ufr27.miage.exception.PokemonNotFoundException;
-import fr.pantheonsorbonne.ufr27.miage.services.StoreService;
+import fr.pantheonsorbonne.ufr27.miage.services.ReceiptService;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.apache.camel.CamelContext;
@@ -20,7 +20,7 @@ public class PurchasePokemonGateway {
     CamelContext camelContext;
 
     @Inject
-    StoreService storeService;
+    ReceiptService storeService;
 
 
     @ConfigProperty(name = "fr.pantheonsorbonne.ufr27.miage.jmsPrefix")
@@ -29,11 +29,10 @@ public class PurchasePokemonGateway {
     public void checkBankCardDresseur(int pokemonToBuy,int price) {
         System.out.println("le id poke"+pokemonToBuy+" le price "+price);
         Map<String, Object> headers = new HashMap<>();
-
         headers.put("source", "pokeStore");
         headers.put("price", price);
         try (ProducerTemplate producerTemplate = camelContext.createProducerTemplate()) {
-            producerTemplate.sendBodyAndHeaders("sjms2:queue:" + jmsPrefix +"bankRoute",new Pokemon(pokemonToBuy,price),headers);
+            producerTemplate.sendBodyAndHeaders("sjms2:queue:" + jmsPrefix +"bankRoute",new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(pokemonToBuy,price),headers);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
