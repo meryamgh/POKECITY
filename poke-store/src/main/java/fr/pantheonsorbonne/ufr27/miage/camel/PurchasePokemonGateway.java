@@ -33,7 +33,7 @@ public class PurchasePokemonGateway {
         headers.put("source", "pokeStore");
         headers.put("price", price);
         try (ProducerTemplate producerTemplate = camelContext.createProducerTemplate()) {
-            producerTemplate.sendBodyAndHeaders("sjms2:queue:" + jmsPrefix +"bankRoute",new Pokemon(pokemonToBuy,price),headers);
+            producerTemplate.sendBodyAndHeaders("sjms2:queue:" + jmsPrefix +"bankRoute",new Pokemon(pokemonToBuy,price, price),headers);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
