@@ -17,14 +17,14 @@ public class PokemonRessource {
 
     @Path("pokemon")
     @GET
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON})
     public Collection<Pokemon> getAllStoredPokemons() {
         return service.getAllPokemon();
     }
 
     @Path("pokemon/{price}")
     @GET
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON})
     public Collection<Pokemon> getSotredPokemonsByPriceLimit(@PathParam("price") int price) {
         return service.getPokemonByPrice(price);
     }

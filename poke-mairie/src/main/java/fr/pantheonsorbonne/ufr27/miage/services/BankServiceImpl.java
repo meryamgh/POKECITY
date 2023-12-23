@@ -24,4 +24,9 @@ public class BankServiceImpl implements BankService{
         return this.bankDao.debitBank(amount, idDresseur);
 
     }
+
+    @Override
+    public BankAccount getCardBank(int idDresseur){
+        return this.bankDao.getBankAccountDresseur(idDresseur);
+    }
 }
