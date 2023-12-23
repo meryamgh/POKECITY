@@ -19,10 +19,16 @@ public class CamelRoutes extends RouteBuilder {
     public void configure() throws Exception {
 
         from("sjms2:queue:" + jmsPrefix +"pokemonSalled")
+                .log("${body}")
                 .bean(pokemonGateway,"getPokemon(${body}, ${headers.idDresseur})");
 
         from("sjms2:queue:"+jmsPrefix+"pokeStore")
-                .bean(pokemonGateway,"getPokemon(${body}, ${headers.idDresseur})");
+                .bean(pokemonGateway,"getPokemon(${body}, ${headers.idDresseur})")
+                .choice()
+                .when(simple("${headers.responseHaveEnoughMoney}"))
+                .to("sjms2:queue:"+jmsPrefix+"buyPokemon")
+                .otherwise()
+                .bean(pokemonGateway,"notEnoughTogetPokemon");
 
 
     }

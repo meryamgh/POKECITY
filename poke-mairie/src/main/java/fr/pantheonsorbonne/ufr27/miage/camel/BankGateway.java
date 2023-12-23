@@ -40,7 +40,7 @@ public class BankGateway {
     PokemonService pokemonService;
 
 
-    public void checkBalance2(Pokemon pokemon, int idDresseur) {
+    public void affectPokemonToDresseur(Pokemon pokemon, int idDresseur) {
         System.out.println("ticet dans gatewat "+pokemon);
         this.dresseurService.affectPokemonToDresseur(pokemon.idPokemon(), idDresseur);
 
