@@ -14,24 +14,20 @@ public class CamelRoutes extends RouteBuilder {
     @Override
     public void configure() throws Exception {
 
-        from("direct:sendToMairie")
-                .routeId("sendToMairieRoute")
-                .log("Sending improved Pokemon to Mairie: ${body}")
-                .marshal().json()
-                .to("sjms2:queue:M1.Mairie");
 
-        from("direct:sendSchoolSessionToMairie")
-                .routeId("sendSessionToMairieRoute")
-                .log("Sending right school session to Mairie: ${body}")
-                .marshal().json()
-                .to("sjms2:queue:M1.SessionToMairie");
-
-
-        from("sjms2:queue:M1.PokemonToSchool")
+        from("sjms2:queue:M1.PokemonToSchool?exchangePattern=InOut")
                 .log("Le pokemon est arrivé à l'école : ${body}")
                 .unmarshal().json(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon.class)
-                .bean(gateway, "collectingPokemon(${body})")
+                .bean(gateway, "getPriceRightSession(${body})")
+                .marshal().json()
+
         ;
+
+        from("sjms2:queue:M1.BankResponse?exchangePattern=InOut")
+                .unmarshal().json(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon.class)
+                .bean(gateway, "improvePokemon(${body})")
+        ;
+
 
     }
 }

@@ -1,7 +1,5 @@
 package fr.pantheonsorbonne.ufr27.miage.camel;
 
-
-import fr.pantheonsorbonne.ufr27.miage.services.DresseurService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.apache.camel.builder.RouteBuilder;
@@ -15,7 +13,7 @@ public class CamelRoutes extends RouteBuilder {
     BankGateway bank;
 
     @Inject
-    SchoolGateway school;
+    PokemonGateway pokemon;
 
     @ConfigProperty(name = "fr.pantheonsorbonne.ufr27.miage.jmsPrefix")
     String jmsPrefix;
@@ -41,22 +39,22 @@ public class CamelRoutes extends RouteBuilder {
                 .to("sjms2:queue:" + jmsPrefix +"buyPokemonRoute")
         ;
 
-        from("sjms2:queue:M1.SessionToMairie")
-                .log("La session scolaire adaptée est arrivée à la mairie : ${body}")
-        ;
-
-        from("sjms2:queue:M1.Mairie")
-                .log("Le pokemon amélioré est arrivé à la mairie : ${body}")
-                .unmarshal().json(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon.class)
-                .bean(school, "improvePokemon(${body})")
-        ;
-
-
         from("direct:sendPokemonToSchool")
                 .routeId("sendPokemonToSchoolRoute")
                 .log("Sending pokemon to school: ${body}")
                 .marshal().json()
-                .to("sjms2:queue:M1.PokemonToSchool");
+                .to("sjms2:queue:M1.PokemonToSchool?exchangePattern=InOut")
+                .log("body : ${body}, header : ${header.price}")
+                .setHeader("idDresseur", constant(idDresseur))
+                .bean(bank, "checkBalance(${headers.price}, ${headers.idDresseur})")
+                .choice()
+                .when(simple("${headers.responseHaveEnoughMoney}"))
+                .to("sjms2:queue:M1.BankResponse?exchangePattern=InOut")
+                .bean(pokemon, "improvePokemon(${body})")
+                .log("improved pokemon : ${body}")
+                .otherwise()
+                .log("pas assez d'argent")
+
         ;
 
 

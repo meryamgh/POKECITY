@@ -14,11 +14,13 @@ public class PokemonDaoImpl implements PokemonDao{
     EntityManager em;
 
     @Override
+    @Transactional
     public Pokemon getPokemonById(int idPokemon) {
         return em.find(Pokemon.class, idPokemon);
     }
 
     @Override
+    @Transactional
     public Integer getPokemonScoreById(int idPokemon) {
         try {
             Integer score = (Integer) em.createQuery("SELECT p.pokeScore FROM Pokemon p WHERE p.id = :idPokemon")

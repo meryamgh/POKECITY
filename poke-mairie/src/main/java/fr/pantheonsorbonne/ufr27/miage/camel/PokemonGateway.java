@@ -1,6 +1,7 @@
 package fr.pantheonsorbonne.ufr27.miage.camel;
 
 
+import fr.pantheonsorbonne.ufr27.miage.services.PokemonService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.apache.camel.CamelContext;
@@ -15,6 +16,9 @@ public class PokemonGateway {
     @Inject
     CamelContext camelContext;
 
+    @Inject
+    PokemonService pokeService;
+
     @ConfigProperty(name = "fr.pantheonsorbonne.ufr27.miage.jmsPrefix")
     String jmsPrefix;
 
@@ -25,6 +29,10 @@ public class PokemonGateway {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void improvePokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon){
+        pokeService.updatePokemon(pokemon);
     }
 
 }

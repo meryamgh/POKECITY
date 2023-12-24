@@ -8,6 +8,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import org.apache.camel.CamelContext;
+import org.apache.camel.Exchange;
+import org.apache.camel.Header;
 import org.apache.camel.ProducerTemplate;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
@@ -36,11 +38,9 @@ public class BankGateway {
     PokemonService pokemonService;
 
 
-    public void checkBalance(Pokemon pokemon, int idDresseur){
-        System.out.println("ticet dans gatewat "+pokemon);
-        if(bankService.checkBalance(pokemon.pokeScore(), idDresseur)){
-            this.dresseurService.affectPokemonToDresseur(pokemon.idPokemon(), idDresseur);
-        }
+    public void checkBalance(@Header("price") int money, @Header("idDresseur") int idDresseur, Exchange exchange) {
+        boolean haveEnoughMoney = bankService.checkBalance(money, idDresseur);
+        exchange.getIn().setHeader("responseHaveEnoughMoney", haveEnoughMoney);
     }
 
 

@@ -14,4 +14,4 @@ VALUES
 
 REPLACE INTO `BankAccount` (`balance`, `dresseur_idDresseur`, `idBankAccount`) VALUES
                                                                                   (200, 2, 11122334),
-                                                                                  (100, 1, 12345678);
+                                                                                  (10000, 1, 12345678);

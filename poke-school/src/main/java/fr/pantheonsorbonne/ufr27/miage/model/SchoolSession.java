@@ -1,9 +1,6 @@
 package fr.pantheonsorbonne.ufr27.miage.model;
 
-import com.sun.tools.xjc.model.CDefaultValue;
 import jakarta.persistence.*;
-
-import java.sql.Time;
 
 @Entity
 public class SchoolSession {

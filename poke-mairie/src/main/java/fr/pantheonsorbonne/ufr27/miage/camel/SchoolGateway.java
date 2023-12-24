@@ -16,12 +16,7 @@ public class SchoolGateway {
     @Inject
     CamelContext context;
 
-    @Inject
-    PokemonService pokeService;
 
-    public void improvePokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon){
-        pokeService.updatePokemon(pokemon);
-    }
 
 
     public void sendToSchool(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon){
