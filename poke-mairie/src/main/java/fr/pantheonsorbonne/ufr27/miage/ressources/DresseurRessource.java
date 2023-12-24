@@ -18,7 +18,7 @@ public class DresseurRessource {
     @Inject
     DresseurService service;
 
-    @Path("pokemon/{id}")
+    @Path("pokemon/all/{id}")
     @GET
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Collection<Pokemon> getSotredPokemonsByPriceLimit(@PathParam("id") int idDresseur){

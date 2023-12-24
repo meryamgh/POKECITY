@@ -22,15 +22,13 @@ public class PokemonDaoImpl implements PokemonDao{
     @Override
     @Transactional
     public int getPokemonScoreById(int idPokemon) {
-        try {
+
             int score = (int) em.createQuery("SELECT p.pokeScore FROM Pokemon p WHERE p.id = :idPokemon")
                     .setParameter("idPokemon", idPokemon)
                     .getSingleResult();
 
             return score;
-        } catch (NoResultException e) {
-            return null;
-        }
+
     }
 
 

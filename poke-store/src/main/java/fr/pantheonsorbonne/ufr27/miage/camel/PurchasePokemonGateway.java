@@ -38,7 +38,7 @@ public class PurchasePokemonGateway {
         }
     }
 
-    public void getPokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemonSalled,int idDresseur)  {
+    public void getPokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemonSalled,int idDresseur) throws PokemonNotFoundException {
         this.storeService.pokemonSalled(pokemonSalled, idDresseur);
     }
 
