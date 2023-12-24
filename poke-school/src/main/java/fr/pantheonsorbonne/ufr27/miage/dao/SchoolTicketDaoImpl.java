@@ -15,6 +15,7 @@ public class SchoolTicketDaoImpl implements SchoolTicketDao{
     EntityManager em;
 
     @Override
+    @Transactional
     public SchoolTicket getSchoolTicketById(int idSchoolTicket){
         return em.find(SchoolTicket.class, idSchoolTicket);
     }
@@ -31,6 +32,7 @@ public class SchoolTicketDaoImpl implements SchoolTicketDao{
     }
 
     @Override
+    @Transactional
     public Collection<SchoolTicket> getSchoolTickets() {
         return em.createQuery("SELECT ticket FROM SchoolTicket ticket", SchoolTicket.class).getResultList();
     }

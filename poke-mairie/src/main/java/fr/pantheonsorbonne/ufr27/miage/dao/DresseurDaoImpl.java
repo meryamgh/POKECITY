@@ -37,4 +37,9 @@ public class DresseurDaoImpl implements DresseurDao{
                 .setParameter("id", idDresseur)
                 .getResultList();
     }
+
+    @Override
+    public boolean checkRightDresseur(Dresseur dresseur){
+    return true;
+    }
 }

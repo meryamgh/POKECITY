@@ -4,6 +4,7 @@ import fr.pantheonsorbonne.ufr27.miage.model.SchoolSession;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 
 import java.util.Collection;
 
@@ -13,16 +14,19 @@ public class SchoolSessionDaoImpl implements SchoolSessionDao{
     @Inject
     EntityManager em;
     @Override
+    @Transactional
     public Collection<SchoolSession> getSchoolSessions() {
         return em.createQuery("SELECT session FROM SchoolSession session", SchoolSession.class).getResultList();
     }
 
     @Override
+    @Transactional
     public SchoolSession getSchoolSessionById(int id) {
         return em.find(SchoolSession.class, id);
     }
 
     @Override
+    @Transactional
     public int getSchoolSessionGainById(int id) {
         return em.createQuery(
                         "SELECT s.pokescoreGain FROM SchoolSession s WHERE s.idSchoolSession = :id",

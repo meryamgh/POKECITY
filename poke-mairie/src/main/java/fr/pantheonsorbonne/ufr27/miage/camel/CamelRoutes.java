@@ -16,6 +16,7 @@ public class CamelRoutes extends RouteBuilder {
     @Inject
     PokemonGateway pokemonGateway;
 
+
     @ConfigProperty(name = "fr.pantheonsorbonne.ufr27.miage.jmsPrefix")
     String jmsPrefix;
 
@@ -52,6 +53,25 @@ public class CamelRoutes extends RouteBuilder {
                 .unmarshal().json(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon.class)
                 .bean(pokemonGateway, "affectPokemonToDresseur(${body},  ${headers.idDresseur})")
                 .marshal().json();
+
+        from("direct:sendPokemonToSchool")
+                .routeId("sendPokemonToSchoolRoute")
+                .log("Sending pokemon to school: ${body}")
+                .marshal().json()
+                .to("sjms2:queue:M1.PokemonToSchool?exchangePattern=InOut")
+                .log("body : ${body}, header : ${header.price}")
+                .setHeader("idDresseur", constant(idDresseur))
+                .bean(bank, "checkBalance(${headers.price}, ${headers.idDresseur})")
+                .choice()
+                .when(simple("${headers.responseHaveEnoughMoney}"))
+                .to("sjms2:queue:M1.BankResponse?exchangePattern=InOut")
+                .bean(pokemonGateway, "improvePokemon(${body})")
+                .log("improved pokemon : ${body}")
+                .otherwise()
+                .log("pas assez d'argent")
+
+        ;
+
     }
 
 }

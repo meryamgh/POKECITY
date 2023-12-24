@@ -28,4 +28,14 @@ public class PokemonDaoImpl implements PokemonDao{
                 .executeUpdate();
     }
 
+    @Override
+    @Transactional
+    public void setPokescorebyId(int id, int newPokescore) {
+        Pokemon p = (Pokemon) em.createQuery("SELECT p FROM Pokemon p WHERE p.id = :idPokemon")
+                .setParameter("idPokemon", id)
+                .getSingleResult();
+
+        p.setPokeScore(newPokescore);
+    }
+
 }

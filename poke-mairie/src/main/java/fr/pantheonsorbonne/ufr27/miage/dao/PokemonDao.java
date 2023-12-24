@@ -7,4 +7,7 @@ public interface PokemonDao {
     Pokemon getPokemonById(int idPokemon);
 
     void changeStatus(Pokemon idPokemon, int idDresseur, boolean status);
+
+    void setPokescorebyId(int idPokemon, int newPokescore);
+
 }

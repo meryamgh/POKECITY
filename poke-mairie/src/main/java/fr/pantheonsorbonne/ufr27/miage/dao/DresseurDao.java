@@ -13,4 +13,6 @@ public interface DresseurDao {
 
     Collection<Pokemon> getAllPokemons(int idDresseur);
 
+    boolean checkRightDresseur(Dresseur Dresseur);
+
 }

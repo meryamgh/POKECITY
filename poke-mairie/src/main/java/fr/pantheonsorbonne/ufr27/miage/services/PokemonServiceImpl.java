@@ -17,7 +17,13 @@ public class PokemonServiceImpl implements PokemonService{
         return this.pokemonDao.getPokemonById(idPokemon);
     }
 
-
+    @Override
+    public void updatePokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon) {
+        int id = pokemon.idPokemon();
+        pokemonDao.getPokemonById(id);
+        int newScore = pokemon.pokeScore();
+        pokemonDao.setPokescorebyId(id, newScore);
+    }
 
 
 }
