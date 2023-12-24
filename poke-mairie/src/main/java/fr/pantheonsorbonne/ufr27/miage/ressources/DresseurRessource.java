@@ -25,4 +25,12 @@ public class DresseurRessource {
         System.out.println("okok");
         return this.service.getAllDresseurPokemon(idDresseur);
     }
+
+    @Path("bank/{id}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public Collection<Pokemon> getDresseurBankaccount (@PathParam("id") int idDresseur){
+        System.out.println("okok");
+        return this.service.getAllDresseurPokemon(idDresseur);
+    }
 }

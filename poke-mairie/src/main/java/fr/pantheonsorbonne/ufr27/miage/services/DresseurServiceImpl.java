@@ -28,7 +28,7 @@ public class DresseurServiceImpl implements DresseurService{
         Pokemon pokemonToAffect = this.pokemonDao.getPokemonById(idPokemon);
         this.pokemonDao.changeStatus(pokemonToAffect,idDresseur,true);
         this.dresseurDao.addPokemonToPokedex(pokemonToAffect,idDresseur);
-        this.pokemonGateway.pokemonSalled(idPokemon,idDresseur);
+
     }
 
     @Override

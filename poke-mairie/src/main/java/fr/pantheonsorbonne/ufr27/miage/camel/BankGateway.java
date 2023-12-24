@@ -1,6 +1,10 @@
 package fr.pantheonsorbonne.ufr27.miage.camel;
 
 import fr.pantheonsorbonne.ufr27.miage.dto.Pokemon;
+
+import fr.pantheonsorbonne.ufr27.miage.dto.TicketDresseurAchat;
+import fr.pantheonsorbonne.ufr27.miage.exception.NotEnoughMoneyException;
+
 import fr.pantheonsorbonne.ufr27.miage.services.BankService;
 import fr.pantheonsorbonne.ufr27.miage.services.DresseurService;
 import fr.pantheonsorbonne.ufr27.miage.services.PokemonService;
@@ -31,20 +35,13 @@ public class BankGateway {
     @ConfigProperty(name = "fr.pantheonsorbonne.ufr27.miage.jmsPrefix")
     String jmsPrefix;
 
-    @Inject
-    DresseurService dresseurService;
 
-    @Inject
-    PokemonService pokemonService;
 
 
     public void checkBalance(@Header("price") int money, @Header("idDresseur") int idDresseur, Exchange exchange) {
         boolean haveEnoughMoney = bankService.checkBalance(money, idDresseur);
         exchange.getIn().setHeader("responseHaveEnoughMoney", haveEnoughMoney);
     }
-
-
-    
 
 
 }

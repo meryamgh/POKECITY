@@ -10,13 +10,13 @@ public class FightingSession {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idFight", nullable = false)
-    private Integer idFight;
+    private int idFight;
 
     @Column(name = "isWinner", nullable = false, length = 45)
     private boolean isWinner;
 
     @Column(name = "reward", nullable = false, length = 45)
-    private Integer reward;
+    private int reward;
 
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -31,11 +31,11 @@ public class FightingSession {
     @Column(name = "timeFight", nullable = false, length = 45)
     private Time timeFight;
 
-    public Integer getIdFight() {
+    public int getIdFight() {
         return idFight;
     }
 
-    public void setIdFight(Integer idFight) {
+    public void setIdFight(int idFight) {
         this.idFight = idFight;
     }
 
@@ -47,11 +47,11 @@ public class FightingSession {
         isWinner = winner;
     }
 
-    public Integer getReward() {
+    public int getReward() {
         return reward;
     }
 
-    public void setReward(Integer reward) {
+    public void setReward(int reward) {
         this.reward = reward;
     }
 

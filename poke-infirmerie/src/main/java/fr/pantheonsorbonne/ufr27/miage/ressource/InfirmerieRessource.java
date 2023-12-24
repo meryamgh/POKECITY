@@ -23,7 +23,7 @@ public class InfirmerieRessource {
             return Response.ok().build();
         }else {
             service.redirectToMairie(idPokemon);
-            return Response.status(422, "dresseur doesn't have enought money").build();
+            return Response.status(422, "dresseur doesn't have enough money").build();
         }
 }
 }

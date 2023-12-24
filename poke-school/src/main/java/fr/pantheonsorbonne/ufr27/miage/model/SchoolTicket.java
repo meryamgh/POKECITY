@@ -8,7 +8,7 @@ public class SchoolTicket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idSchoolTicket", nullable = false)
-    private Integer idSchoolTicket;
+    private int idSchoolTicket;
 
     @Column(name = "pokemon_idPokemon", nullable = false)
     private int pokemonId;
@@ -16,7 +16,7 @@ public class SchoolTicket {
     @Column(name = "schoolSession_idSchoolSession", nullable = false)
     private int schoolSessionId;
 
-    public Integer getIdSchoolTicket() {
+    public int getIdSchoolTicket() {
         return idSchoolTicket;
     }
 

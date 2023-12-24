@@ -8,48 +8,48 @@ public class SchoolSession {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idSchoolSession", nullable = false)
-    private Integer idSchoolSession;
+    private int idSchoolSession;
 
     @Column(name = "timeSchoolSession", nullable = false, length = 45, columnDefinition = "INT DEFAULT 6")
-    private Integer timeSchoolSession;
+    private int timeSchoolSession;
 
 
     @Column(name = "priceSchoolSession", nullable = false, length = 45)
-    private Integer priceSchoolSession;
+    private int priceSchoolSession;
 
     @Column(name = "pokescoreGain", nullable = false, length = 45)
-    private Integer pokescoreGain;
+    private int pokescoreGain;
 
 
-    public Integer getIdSchoolSession() {
+    public int getIdSchoolSession() {
         return idSchoolSession;
     }
 
-    public void setIdSchoolSession(Integer idSchoolSession) {
+    public void setIdSchoolSession(int idSchoolSession) {
         this.idSchoolSession = idSchoolSession;
     }
 
-    public Integer getTimeSchoolSession() {
+    public int getTimeSchoolSession() {
         return timeSchoolSession;
     }
 
-    public void setTimeSchoolSession(Integer timeSchoolSession) {
+    public void setTimeSchoolSession(int timeSchoolSession) {
         this.timeSchoolSession = timeSchoolSession;
     }
 
-    public Integer getPriceSchoolSession() {
+    public int getPriceSchoolSession() {
         return priceSchoolSession;
     }
 
-    public void setPriceSchoolSession(Integer priceSchoolSession) {
+    public void setPriceSchoolSession(int priceSchoolSession) {
         this.priceSchoolSession = priceSchoolSession;
     }
 
-    public Integer getPokescoreGain() {
+    public int getPokescoreGain() {
         return pokescoreGain;
     }
 
-    public void setPokescoreGain(Integer pokescoreGain) {
+    public void setPokescoreGain(int pokescoreGain) {
         this.pokescoreGain = pokescoreGain;
     }
 }

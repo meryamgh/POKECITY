@@ -1,8 +1,7 @@
 package fr.pantheonsorbonne.ufr27.miage.services;
 
-import fr.pantheonsorbonne.ufr27.miage.camel.PurchasePokemonGateway;
 import fr.pantheonsorbonne.ufr27.miage.dao.PokemonStockDao;
-import fr.pantheonsorbonne.ufr27.miage.dao.PokemonStockDaoImpl;
+import fr.pantheonsorbonne.ufr27.miage.dao.ReceiptPokemonDao;
 import fr.pantheonsorbonne.ufr27.miage.exception.PokemonNotFoundException;
 import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -11,10 +10,12 @@ import jakarta.inject.Inject;
 import java.util.Collection;
 
 @ApplicationScoped
-public class StoreServiceImpl implements StoreService{
-
+public class InventoryPokemonServiceImpl implements InventoryPokemonService{
     @Inject
     PokemonStockDao stockDao;
+
+    @Inject
+    ReceiptPokemonDao receiptPokemonDao;
 
     @Override
     public Collection<Pokemon> getAllPokemon() {
@@ -27,25 +28,7 @@ public class StoreServiceImpl implements StoreService{
     }
 
     @Override
-    public void deletePokemon(int idPokemon)  throws PokemonNotFoundException{
+    public void deletePokemon(int idPokemon)  {
         this.stockDao.deletePokemon(idPokemon);
     }
-
-    @Override
-    public void createReceiptPokemon(int idPokemon, int idDresseur) {
-
-    }
-
-    @Inject
-    PurchasePokemonGateway pokemonGateway;
-
-
-
-    @Override
-    public void buyPokemon(int idPokemon) throws PokemonNotFoundException {
-        Pokemon pokemonToBuy = this.stockDao.getPokemonById(idPokemon);
-        pokemonGateway.checkBankCardDresseur(pokemonToBuy.getIdPokemon(),pokemonToBuy.getPrix());
-        System.out.println("icicic ");
-    }
-
 }

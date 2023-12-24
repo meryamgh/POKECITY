@@ -1,6 +1,10 @@
 package fr.pantheonsorbonne.ufr27.miage.camel;
 
 
+
+import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
+import fr.pantheonsorbonne.ufr27.miage.services.DresseurService;
+
 import fr.pantheonsorbonne.ufr27.miage.services.PokemonService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -22,13 +26,17 @@ public class PokemonGateway {
     @ConfigProperty(name = "fr.pantheonsorbonne.ufr27.miage.jmsPrefix")
     String jmsPrefix;
 
-    public void pokemonSalled(int pokemonSalled,int idDresseur) {
-        try (ProducerTemplate producerTemplate = camelContext.createProducerTemplate()) {
-            producerTemplate.sendBodyAndHeader("sjms2:queue:" + jmsPrefix +"pokemonSalled",pokemonSalled
-                    ,"idDresseur",idDresseur);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    @Inject
+    DresseurService dresseurService;
+
+    @Inject
+    PokemonService pokemonService;
+
+
+    public void affectPokemonToDresseur(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon, int idDresseur) {
+        System.out.println("ticet dans gatewat "+pokemon);
+        this.dresseurService.affectPokemonToDresseur(pokemon.idPokemon(), idDresseur);
+
     }
 
     public void improvePokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon){

@@ -10,16 +10,16 @@ public class Pokemon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idPokemon", nullable = false)
-    private Integer idPokemon;
+    private int idPokemon;
 
     @Column(name = "pokeScore", nullable = false, length = 45)
-    private Integer pokeScore;
+    private int pokeScore;
 
     @Column(name = "name", nullable = false, length = 45)
     private String name;
 
     @Column(name = "prix", nullable = false, length = 45)
-    private Integer prix;
+    private int prix;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Dresseur dresseur;
@@ -32,27 +32,27 @@ public class Pokemon {
         this.name = name;
     }
 
-    public Integer getPrix() {
+    public int getPrix() {
         return prix;
     }
 
-    public void setPrix(Integer prix) {
+    public void setPrix(int prix) {
         this.prix = prix;
     }
 
-    public Integer getIdPokemon() {
+    public int getIdPokemon() {
         return idPokemon;
     }
 
-    public void setIdPokemon(Integer idPokemon) {
+    public void setIdPokemon(int idPokemon) {
         this.idPokemon = idPokemon;
     }
 
-    public Integer getPokeScore() {
+    public int getPokeScore() {
         return pokeScore;
     }
 
-    public void setPokeScore(Integer pokeScore) {
+    public void setPokeScore(int pokeScore) {
         this.pokeScore = pokeScore;
     }
 
