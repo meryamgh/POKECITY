@@ -5,13 +5,13 @@ REPLACE INTO `Dresseur` (`bannedStatus`, `idDresseur`, `name`) VALUES
 
 REPLACE INTO `Pokemon` (`idPokemon`, `isAdopted`, `pokeScore`, `name`, `type`)
 VALUES
-    (1, false ,200, 'ghulamo', 'feu'),
+    (1, true ,200, 'ghulamo', 'feu'),
     (2, false, 80 ,'nabilo', 'plante'),
     (3, false, 90, 'lilio', 'eau'),
     (4, false, 95,'naloufio', 'eau'),
     (5, false, 70,'paudo', 'feu');
 
-
+REPLACE INTO `Dresseur_Pokemon` (`Dresseur_idDresseur`, `pokedex_idPokemon`) VALUES ('1', '1');
 REPLACE INTO `BankAccount` (`balance`, `dresseur_idDresseur`, `idBankAccount`) VALUES
                                                                                   (200, 2, 11122334),
                                                                                   (100, 1, 12345678);

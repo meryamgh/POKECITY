@@ -21,16 +21,10 @@ public class ReceiptRessource {
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public Response buyPokemon(@PathParam("idPokemon") int pokemon) throws PokemonNotFoundException {
-        try {
+    public Response buyPokemon(@PathParam("idPokemon") int pokemon)   {
+
             service.buyPokemon(pokemon);
-        } catch (PokemonNotFoundException e){
-            String errorMessage = "Le Pokémon avec l'ID " + pokemon + " n'existe pas dans le PokéStore.";
-            return Response.status(Response.Status.NOT_FOUND)
-                    .entity(errorMessage)
-                    .type(MediaType.TEXT_PLAIN)
-                    .build();
-        }
+
         return Response.status(Response.Status.OK).build();
     }
 

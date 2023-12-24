@@ -8,5 +8,5 @@ import java.util.Collection;
 public interface InventoryPokemonService {
     Collection<Pokemon> getAllPokemon();
     Collection<Pokemon> getPokemonByPrice(int price);
-    void deletePokemon(int idPokemon) throws PokemonNotFoundException;
+    void deletePokemon(int idPokemon);
 }

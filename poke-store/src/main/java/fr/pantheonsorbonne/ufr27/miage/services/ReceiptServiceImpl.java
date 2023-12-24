@@ -17,6 +17,9 @@ public class ReceiptServiceImpl implements ReceiptService{
     PokemonStockDao stockDao;
 
     @Inject
+    PurchasePokemonGateway pokemonGateway;
+
+    @Inject
     InventoryPokemonService inventoryPokemonService;
 
     @Inject
@@ -39,13 +42,11 @@ public class ReceiptServiceImpl implements ReceiptService{
         return this.receiptPokemonDao.getAllReceiptsOfStore();
     }
 
-    @Inject
-    PurchasePokemonGateway pokemonGateway;
 
 
 
     @Override
-    public void buyPokemon(int idPokemon) throws PokemonNotFoundException {
+    public void buyPokemon(int idPokemon)  {
         Pokemon pokemonToBuy = this.stockDao.getPokemonById(idPokemon);
         pokemonGateway.checkBankCardDresseur(pokemonToBuy.getIdPokemon(),pokemonToBuy.getPrix());
         System.out.println("icicic ");

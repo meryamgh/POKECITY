@@ -32,16 +32,14 @@ public class PurchasePokemonGateway {
         headers.put("source", "pokeStore");
         headers.put("price", price);
         try (ProducerTemplate producerTemplate = camelContext.createProducerTemplate()) {
-            producerTemplate.sendBodyAndHeaders("sjms2:queue:" + jmsPrefix +"bankRoute",new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(pokemonToBuy,price),headers);
+            producerTemplate.sendBodyAndHeaders("direct:bankRoute",new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(pokemonToBuy,price),headers);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void getPokemon(Pokemon pokemonSalled,int idDresseur) throws PokemonNotFoundException {
+    public void getPokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemonSalled,int idDresseur)  {
         this.storeService.pokemonSalled(pokemonSalled, idDresseur);
-
-
     }
 
     public void notEnoughTogetPokemon(){

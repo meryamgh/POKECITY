@@ -33,18 +33,7 @@ public class BankGateway {
     @ConfigProperty(name = "fr.pantheonsorbonne.ufr27.miage.jmsPrefix")
     String jmsPrefix;
 
-    @Inject
-    DresseurService dresseurService;
 
-    @Inject
-    PokemonService pokemonService;
-
-
-    public void affectPokemonToDresseur(Pokemon pokemon, int idDresseur) {
-        System.out.println("ticet dans gatewat "+pokemon);
-        this.dresseurService.affectPokemonToDresseur(pokemon.idPokemon(), idDresseur);
-
-    }
 
 
     public void checkBalance(@Header("price") int money, @Header("idDresseur") int idDresseur, Exchange exchange) {

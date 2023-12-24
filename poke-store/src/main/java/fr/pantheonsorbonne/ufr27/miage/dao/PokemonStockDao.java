@@ -11,7 +11,7 @@ public interface PokemonStockDao {
 
     Collection<Pokemon> getStockPokemonByPrice(int price);
 
-    Pokemon getPokemonById(int idPokemon) throws PokemonNotFoundException;
+    Pokemon getPokemonById(int idPokemon)  ;
 
-    void deletePokemon(int idPokemon) throws PokemonNotFoundException;
+    void deletePokemon(int idPokemon) ;
 }

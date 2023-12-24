@@ -32,18 +32,17 @@ public class PokemonStockDaoImpl implements PokemonStockDao{
 
     @Override
     @Transactional
-    public Pokemon getPokemonById(int idPokemon) throws PokemonNotFoundException {
-        try {
+    public Pokemon getPokemonById(int idPokemon)  {
+
             return em.createQuery("SELECT poke FROM Pokemon poke WHERE poke.idPokemon = :id", Pokemon.class)
                     .setParameter("id", idPokemon).getSingleResult();
-        } catch (NoResultException e) {
-        throw new PokemonNotFoundException(idPokemon);
-    }
+
+
     }
 
     @Override
     @Transactional
-    public void deletePokemon(int idPokemon) throws PokemonNotFoundException{
+    public void deletePokemon(int idPokemon){
         Pokemon pokemonToDelete = getPokemonById(idPokemon);
         if (pokemonToDelete != null) {
             em.remove(pokemonToDelete);

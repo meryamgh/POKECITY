@@ -6,7 +6,7 @@ import fr.pantheonsorbonne.ufr27.miage.model.ReceiptPokemon;
 import java.util.Collection;
 
 public interface ReceiptService {
-    void buyPokemon(int idPokemon) throws PokemonNotFoundException;
+    void buyPokemon(int idPokemon);
 
 
 
