@@ -2,12 +2,7 @@ package fr.pantheonsorbonne.ufr27.miage.services;
 
 import fr.pantheonsorbonne.ufr27.miage.camel.RedirectToMairieGateway;
 import fr.pantheonsorbonne.ufr27.miage.camel.SoignerPokemonGateway;
-import fr.pantheonsorbonne.ufr27.miage.dao.DresseurDao;
-import fr.pantheonsorbonne.ufr27.miage.dao.PokemonDao;
 import fr.pantheonsorbonne.ufr27.miage.dao.TreatmentDAO;
-import fr.pantheonsorbonne.ufr27.miage.dto.TreatmentSession;
-import fr.pantheonsorbonne.ufr27.miage.model.Dresseur;
-import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
@@ -15,13 +10,7 @@ import jakarta.inject.Inject;
 public class SoinServiceImpl implements SoinService{
 
     @Inject
-    PokemonDao pokemonDao;
-
-    @Inject
     TreatmentDAO treatmentDAO;
-
-    @Inject
-    DresseurDao dresseurDao;
 
     @Inject
     SoignerPokemonGateway pokemonGateway;
@@ -30,31 +19,34 @@ public class SoinServiceImpl implements SoinService{
     RedirectToMairieGateway redirectToMairieGateway;
 
     @Override
-    public boolean enoughMoney(int idPokemon, int priceTreatment) {
-        /**Pokemon pokemon = pokemonDao.getPokemonById(idPokemon);
-        pokemonGateway.checkBankAccount(pokemon.getPokeScore());**/
-        int idDresseur = dresseurDao.getIdDresseurByIdPokemon(idPokemon);
-        TreatmentSession treatmentSession = new TreatmentSession(idDresseur, idPokemon, priceTreatment);
-        pokemonGateway.checkBankAccount(treatmentSession);
-        return false;
+    public void checkEnoughMoney(int idPokemon, int price, int pokescore, int pricetreatment) {
+        pokemonGateway.checkBankAccount(idPokemon,price, pokescore, pricetreatment);
     }
 
     @Override
-    public void soignerPokemon() {
-        int pokeScore = pokemonDao.getPokeScorePokemon();
-        pokeScore = pokemonDao.getPrixPokemon();
+    public void soignerPokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon) {
+        int pokeScore = pokemon.pokeScore();
+        pokeScore = pokemon.prix();
+        System.out.println("pokescore" + pokeScore);
+        System.out.println("prix" + pokemon.prix());
+        treatmentDAO.insertTreatmentSession(pokemon);
     }
 
     @Override
-    public void redirectToMairie(int idPokemon) {
-        Pokemon pokemon = pokemonDao.getPokemonById(idPokemon);
+    public void redirectToMairie(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon) {
         redirectToMairieGateway.redirectToMairie(pokemon);
     }
 
     @Override
-    public int getPriceTreatment(int idPokemon) {
-        int intialPrice = pokemonDao.getPokemonById(idPokemon).getPrix();
+    public int getPriceTreatment(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon) {
+        int intialPrice = pokemon.prix();
+        System.out.println("initialPrice " + intialPrice);
         return intialPrice / 2;
+    }
+
+    @Override
+    public void priseEnCharge(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon){
+        checkEnoughMoney(pokemon.idPokemon(), pokemon.prix(), pokemon.pokeScore(), this.getPriceTreatment(pokemon));
     }
 
 }

@@ -14,16 +14,21 @@ public class TreatmentSession {
     private int idTreatment;
 
     @Column(name = "timeTreatment", nullable = false, length = 45)
-    private Time timeTreatment;
+    private int timeTreatment;
 
     @Column(name = "priceTreatment", nullable = false, length = 45)
     private int priceTreatment;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Dresseur dresseur;
+    public int getIdPokemon() {
+        return idPokemon;
+    }
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Pokemon pokemon;
+    public void setIdPokemon(int idPokemon) {
+        this.idPokemon = idPokemon;
+    }
+
+    @Column(name = "idPokemon", nullable = false, length = 45)
+    private int idPokemon;
 
     public int getIdTreatment() {
         return idTreatment;
@@ -33,11 +38,11 @@ public class TreatmentSession {
         this.idTreatment = idTreatment;
     }
 
-    public Time getTimeTreatment() {
+    public int getTimeTreatment() {
         return timeTreatment;
     }
 
-    public void setTimeTreatment(Time timeTreatment) {
+    public void setTimeTreatment(int timeTreatment) {
         this.timeTreatment = timeTreatment;
     }
 
@@ -47,21 +52,5 @@ public class TreatmentSession {
 
     public void setPriceTreatment(int priceTreatment) {
         this.priceTreatment = priceTreatment;
-    }
-
-    public Dresseur getDresseur() {
-        return dresseur;
-    }
-
-    public void setDresseur(Dresseur dresseur) {
-        this.dresseur = dresseur;
-    }
-
-    public Pokemon getPokemon() {
-        return pokemon;
-    }
-
-    public void setPokemon(Pokemon pokemon) {
-        this.pokemon = pokemon;
     }
 }
