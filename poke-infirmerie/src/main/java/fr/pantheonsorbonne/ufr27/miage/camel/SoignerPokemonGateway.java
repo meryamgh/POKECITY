@@ -36,7 +36,7 @@ public class SoignerPokemonGateway {
         }
     }
 
-    public void soigner(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon) {
-        service.soignerPokemon(pokemon);
+    public fr.pantheonsorbonne.ufr27.miage.dto.Pokemon soigner(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon) {
+        return service.soignerPokemon(pokemon);
     }
 }

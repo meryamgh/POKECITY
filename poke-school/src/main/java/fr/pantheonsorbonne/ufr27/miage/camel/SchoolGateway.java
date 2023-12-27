@@ -27,7 +27,7 @@ public class SchoolGateway {
     public void sendImprovedPokemonToMairie(Pokemon pokemon) {
         int idPokemon = pokemon.getIdPokemon();
         int pokeScore = pokemon.getPokeScore();
-        fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemonToSend = new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(idPokemon, pokeScore);
+        fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemonToSend = new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(idPokemon, pokeScore,pokeScore);
         try (ProducerTemplate producer = context.createProducerTemplate()) {
             producer.sendBody("direct:sendToMairie",pokemonToSend);
         } catch (IOException e) {

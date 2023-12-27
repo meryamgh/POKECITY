@@ -4,7 +4,7 @@ public interface SoinService {
 
     public void checkEnoughMoney(int idPokemon, int price, int pokescore, int pricetreatment);
 
-    public void soignerPokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon);
+    public fr.pantheonsorbonne.ufr27.miage.dto.Pokemon soignerPokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon);
 
     public void redirectToMairie(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon);
 

@@ -23,7 +23,7 @@ public class InfirmerieRessource {
     @Path("{idPokemon}")
     @POST
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response haveEnoughMoney(@PathParam("idPokemon") int idPokemon) {
+    public Response treatPokemon(@PathParam("idPokemon") int idPokemon) {
         fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon = new Pokemon(1, 0, 70);
         service.priseEnCharge(pokemon);
         System.out.println("haveEnoughMoney" + pokemon.prix());

@@ -23,11 +23,12 @@ public class CamelRoutes extends RouteBuilder {
     @Override
     public void configure() throws Exception {
 
-        from("sjms2:queue:"+jmsPrefix+"pokeInfirmerie")
+        from("sjms2:queue:" + jmsPrefix + "pokeInfirmerie")
                 .choice()
                 .when(simple("${headers.responseHaveEnoughMoney}"))
-                .bean(soignerPokemonGateway, "soigner(${body})")
-                .otherwise()
-                .bean(redirectToMairieGateway, "redirect(${body})");
+                .delay(5000)
+                .bean(soignerPokemonGateway, "soigner(${body})");
+
+
     }
 }

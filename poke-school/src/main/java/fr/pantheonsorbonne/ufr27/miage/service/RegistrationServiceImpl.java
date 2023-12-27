@@ -32,7 +32,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         //on augmente le score du pokemon qui a suivi le cours
         int gain = session.getPokescoreGain();
         int newScore = pokemon.pokeScore() + gain;
-        fr.pantheonsorbonne.ufr27.miage.dto.Pokemon improvedPokemon = new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(idPokemon, newScore);
+        fr.pantheonsorbonne.ufr27.miage.dto.Pokemon improvedPokemon = new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(idPokemon, newScore,newScore);
 
         return improvedPokemon;
     }

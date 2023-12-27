@@ -3,6 +3,7 @@ package fr.pantheonsorbonne.ufr27.miage.services;
 import fr.pantheonsorbonne.ufr27.miage.camel.RedirectToMairieGateway;
 import fr.pantheonsorbonne.ufr27.miage.camel.SoignerPokemonGateway;
 import fr.pantheonsorbonne.ufr27.miage.dao.TreatmentDAO;
+import fr.pantheonsorbonne.ufr27.miage.dto.Pokemon;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
@@ -24,12 +25,13 @@ public class SoinServiceImpl implements SoinService{
     }
 
     @Override
-    public void soignerPokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon) {
+    public fr.pantheonsorbonne.ufr27.miage.dto.Pokemon soignerPokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon) {
         int pokeScore = pokemon.pokeScore();
         pokeScore = pokemon.prix();
         System.out.println("pokescore" + pokeScore);
         System.out.println("prix" + pokemon.prix());
         treatmentDAO.insertTreatmentSession(pokemon);
+        return new Pokemon(pokemon.idPokemon(),pokemon.prix(),pokemon.prix());
     }
 
     @Override

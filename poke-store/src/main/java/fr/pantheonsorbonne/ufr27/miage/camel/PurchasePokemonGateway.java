@@ -32,7 +32,7 @@ public class PurchasePokemonGateway {
         headers.put("source", "pokeStore");
         headers.put("price", price);
         try (ProducerTemplate producerTemplate = camelContext.createProducerTemplate()) {
-            producerTemplate.sendBodyAndHeaders("direct:bankRoute",new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(pokemonToBuy,price),headers);
+            producerTemplate.sendBodyAndHeaders("direct:bankRoute",new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(pokemonToBuy,price,price),headers);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

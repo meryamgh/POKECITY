@@ -36,7 +36,12 @@ public class CamelRoutes extends RouteBuilder {
                 .setHeader("idDresseur", constant(idDresseur))
                 .bean(bank, "checkBalance(${headers.price}, ${headers.idDresseur})")
                 .log("le systeme: ${headers.source},money: ${headers.responseHaveEnoughMoney}")
-                .toD("sjms2:queue:"+jmsPrefix+"${headers.source}?exchangePattern=InOut")
+
+                .toD("sjms2:queue:" + jmsPrefix + "${headers.source}?exchangePattern=InOut&requestTimeout=60000")
+
+
+
+                .log("apres le toD le body : ${body}")
                 .choice()
                 .when(simple("${headers.source}").isEqualTo("pokestore"))
                 .bean(pokemonGateway, "affectPokemonToDresseur(${body},  ${headers.idDresseur})")

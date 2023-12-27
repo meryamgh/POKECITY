@@ -22,7 +22,7 @@ public class SchoolServiceImpl implements SchoolService{
         //if(dresseurDao.checkRightDresseur(dresseur)) {
             int id = pokemon.getIdPokemon();
             int score = pokemon.getPokeScore();
-            fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon1 = new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(id, score);
+            fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon1 = new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(id, score,score);
             gateway.sendToSchool(pokemon1);
         //}
         //else{
