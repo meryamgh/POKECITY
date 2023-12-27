@@ -1,5 +1,6 @@
 package fr.pantheonsorbonne.ufr27.miage.model;
 
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,6 +15,7 @@ public class BankAccount {
     private int balance;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JsonbTransient
     private Dresseur dresseur;
 
     public int getIdBankAccount() {
