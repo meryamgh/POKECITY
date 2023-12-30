@@ -22,9 +22,14 @@ public class ReceiptRessource {
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     public Response buyPokemon(@PathParam("idPokemon") int pokemon)   {
-
+        try {
             service.buyPokemon(pokemon);
-
+        } catch (PokemonNotFoundException e){
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(e.getMessage())
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
         return Response.status(Response.Status.OK).build();
     }
 

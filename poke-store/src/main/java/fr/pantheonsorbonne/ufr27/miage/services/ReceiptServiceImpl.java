@@ -46,9 +46,8 @@ public class ReceiptServiceImpl implements ReceiptService{
 
 
     @Override
-    public void buyPokemon(int idPokemon)  {
+    public void buyPokemon(int idPokemon) throws PokemonNotFoundException  {
         Pokemon pokemonToBuy = this.stockDao.getPokemonById(idPokemon);
         pokemonGateway.checkBankCardDresseur(pokemonToBuy.getIdPokemon(),pokemonToBuy.getPrix());
-        System.out.println("icicic ");
     }
 }

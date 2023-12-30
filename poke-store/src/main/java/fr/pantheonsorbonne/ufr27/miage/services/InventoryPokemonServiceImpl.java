@@ -14,9 +14,6 @@ public class InventoryPokemonServiceImpl implements InventoryPokemonService{
     @Inject
     PokemonStockDao stockDao;
 
-    @Inject
-    ReceiptPokemonDao receiptPokemonDao;
-
     @Override
     public Collection<Pokemon> getAllPokemon() {
         return stockDao.getStock();
@@ -28,7 +25,7 @@ public class InventoryPokemonServiceImpl implements InventoryPokemonService{
     }
 
     @Override
-    public void deletePokemon(int idPokemon)  {
+    public void deletePokemon(int idPokemon) throws PokemonNotFoundException  {
         this.stockDao.deletePokemon(idPokemon);
     }
 }

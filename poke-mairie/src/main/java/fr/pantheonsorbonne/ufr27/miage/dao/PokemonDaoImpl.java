@@ -22,8 +22,9 @@ public class PokemonDaoImpl implements PokemonDao{
     @Override
     @Transactional
     public void changeStatus(Pokemon pokemon, int idDresseur, boolean isAdopted) {
-        em.createQuery("update Pokemon p set p.isAdopted = :status where p.idPokemon = :idPokemon")
+        em.createQuery("update Pokemon p set p.isAdopted = :status, p.localisation = :loca where p.idPokemon = :idPokemon")
                 .setParameter("status", isAdopted)
+                .setParameter("loca", "mairie")
                 .setParameter("idPokemon", pokemon.getIdPokemon())
                 .executeUpdate();
     }

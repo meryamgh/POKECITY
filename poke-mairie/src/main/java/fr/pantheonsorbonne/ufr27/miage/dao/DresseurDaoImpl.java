@@ -1,6 +1,7 @@
 package fr.pantheonsorbonne.ufr27.miage.dao;
 
 
+import fr.pantheonsorbonne.ufr27.miage.exception.NotAvailablePokemonException;
 import fr.pantheonsorbonne.ufr27.miage.model.Dresseur;
 import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -39,7 +40,22 @@ public class DresseurDaoImpl implements DresseurDao{
     }
 
     @Override
+    @Transactional
     public boolean checkRightDresseur(Dresseur dresseur){
     return true;
+    }
+
+    @Override
+    @Transactional
+    public boolean isDresseurPokemon(int idDresseur, int idPokemon)throws NotAvailablePokemonException   {
+        Collection<Pokemon> allDresseurPokemons = this.getAllPokemons(idDresseur);
+
+        boolean pokemonExists = allDresseurPokemons.stream()
+                .anyMatch(pokemon -> pokemon.getIdPokemon() == idPokemon);
+        if (!pokemonExists) {
+            throw new NotAvailablePokemonException("The pokemon with ID " + idPokemon + " is not available for this dresseur.");
+        }
+        return true;
+
     }
 }

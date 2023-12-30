@@ -10,4 +10,6 @@ public interface PokemonDao {
 
     void setPokescorebyId(int idPokemon, int newPokescore);
 
+
+
 }

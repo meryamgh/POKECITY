@@ -39,8 +39,6 @@ public class CamelRoutes extends RouteBuilder {
 
                 .toD("sjms2:queue:" + jmsPrefix + "${headers.source}?exchangePattern=InOut&requestTimeout=60000")
 
-
-
                 .log("apres le toD le body : ${body}")
                 .choice()
                 .when(simple("${headers.source}").isEqualTo("pokestore"))
@@ -69,7 +67,7 @@ public class CamelRoutes extends RouteBuilder {
                 .bean(bank, "checkBalance(${headers.price}, ${headers.idDresseur})")
                 .choice()
                 .when(simple("${headers.responseHaveEnoughMoney}"))
-                .to("sjms2:queue:M1.BankResponse?exchangePattern=InOut")
+                .to("sjms2:queue:M1.BankResponse?exchangePattern=InOut&requestTimeout=60000")
                 .bean(pokemonGateway, "improvePokemon(${body})")
                 .log("improved pokemon : ${body}")
                 .otherwise()

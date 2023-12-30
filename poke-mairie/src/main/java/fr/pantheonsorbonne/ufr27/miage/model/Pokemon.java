@@ -19,8 +19,19 @@ public class Pokemon {
     @Column(name = "isAdopted", nullable = false, length = 45)
     private Boolean isAdopted;
 
+    public String getLocalisation() {
+        return localisation;
+    }
+
+    public void setLocalisation(String localisation) {
+        this.localisation = localisation;
+    }
+
     @Column(name = "name", nullable = false, length = 45)
     private String name;
+
+    @Column(name = "localisation", nullable = false, length = 45)
+    private String localisation;
 
     public int getIdPokemon() {
         return idPokemon;

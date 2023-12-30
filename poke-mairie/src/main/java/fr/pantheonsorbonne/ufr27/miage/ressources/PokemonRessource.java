@@ -1,5 +1,6 @@
 package fr.pantheonsorbonne.ufr27.miage.ressources;
 
+import fr.pantheonsorbonne.ufr27.miage.exception.NotAvailablePokemonException;
 import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
 import fr.pantheonsorbonne.ufr27.miage.services.SchoolService;
 import jakarta.inject.Inject;
@@ -25,11 +26,17 @@ public class PokemonRessource {
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
     public Response goToSchool(
             @PathParam("idPokemon") int idPokemon
-        ) {
-        Pokemon pokemon = getPokemonById(idPokemon);
-        schoolService.sendPokemonToSchool(pokemon);
-        return Response.ok().build();
-    }
+        ){
+        try{
+            schoolService.sendPokemonToSchool(idPokemon);
+        } catch (NotAvailablePokemonException e){
+            return Response.status(Response.Status.FORBIDDEN)
+                    .entity(e.getMessage())
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
 
+        return Response.status(Response.Status.OK).build();
+    }
 
 }

@@ -1,17 +1,11 @@
 package fr.pantheonsorbonne.ufr27.miage.camel;
 
-import fr.pantheonsorbonne.ufr27.miage.services.SoinService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.apache.camel.builder.RouteBuilder;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 @ApplicationScoped
 public class CamelRoutes extends RouteBuilder {
-    @Inject
-    SoinService soinService;
-
-    @Inject
-    RedirectToMairieGateway redirectToMairieGateway;
 
     @Inject
     SoignerPokemonGateway soignerPokemonGateway;
@@ -26,7 +20,7 @@ public class CamelRoutes extends RouteBuilder {
         from("sjms2:queue:" + jmsPrefix + "pokeInfirmerie")
                 .choice()
                 .when(simple("${headers.responseHaveEnoughMoney}"))
-                .delay(5000)
+                .delay(30000)
                 .bean(soignerPokemonGateway, "soigner(${body})");
 
 
