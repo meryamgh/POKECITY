@@ -10,6 +10,6 @@ public interface PokemonDao {
 
     void setPokescorebyId(int idPokemon, int newPokescore);
 
-
+    void setLocalisation(int idPokemon, String loca);
 
 }

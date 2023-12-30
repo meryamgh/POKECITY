@@ -55,6 +55,7 @@ public class CamelRoutes extends RouteBuilder {
         from("sjms2:queue:"+ jmsPrefix + "pokemonBuy")
                 .unmarshal().json(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon.class)
                 .bean(pokemonGateway, "affectPokemonToDresseur(${body},  ${headers.idDresseur})")
+                .bean(pokemonGateway, "setLocalisationPokemon(${body},'mairie')")
                 .marshal().json();
 
         from("direct:sendPokemonToSchool")
@@ -62,18 +63,29 @@ public class CamelRoutes extends RouteBuilder {
                 .log("Sending pokemon to school: ${body}")
                 .marshal().json()
                 .to("sjms2:queue:M1.PokemonToSchool?exchangePattern=InOut")
+                .unmarshal().json(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon.class)
                 .log("body : ${body}, header : ${header.price}")
                 .setHeader("idDresseur", constant(idDresseur))
                 .bean(bank, "checkBalance(${headers.price}, ${headers.idDresseur})")
+
+                .bean(pokemonGateway, "setLocalisationPokemon(${body},'school')")
                 .choice()
                 .when(simple("${headers.responseHaveEnoughMoney}"))
+                .marshal().json()
                 .to("sjms2:queue:M1.BankResponse?exchangePattern=InOut&requestTimeout=60000")
                 .bean(pokemonGateway, "improvePokemon(${body})")
                 .log("improved pokemon : ${body}")
+                .bean(pokemonGateway, "setLocalisationPokemon(${body},'mairie')")
                 .otherwise()
                 .log("pas assez d'argent")
 
         ;
+
+
+        from("direct:fightingPokemon")
+                .marshal().json()
+                .to("sjms2:queue:getPokemonForFight")
+                .log("the pokemon for fight is ${body}");
 
     }
 

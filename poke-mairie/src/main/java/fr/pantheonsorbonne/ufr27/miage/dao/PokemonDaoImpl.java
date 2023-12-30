@@ -39,4 +39,14 @@ public class PokemonDaoImpl implements PokemonDao{
         p.setPokeScore(newPokescore);
     }
 
+    @Override
+    @Transactional
+    public void setLocalisation(int idPokemon, String loca) {
+        em.createQuery("update Pokemon p set p.localisation = :loca where p.idPokemon = :idPokemon")
+                .setParameter("loca", loca)
+                .setParameter("idPokemon", idPokemon)
+                .executeUpdate();
+    }
+
+
 }

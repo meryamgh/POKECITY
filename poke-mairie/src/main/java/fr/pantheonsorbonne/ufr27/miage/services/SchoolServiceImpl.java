@@ -30,7 +30,7 @@ public class SchoolServiceImpl implements SchoolService{
             this.dresseurDao.isDresseurPokemon(idDresseur,idPokemon);
             Pokemon pokemon = this.pokemonDao.getPokemonById(idPokemon);
             if(!pokemon.getLocalisation().equals("mairie")){
-                throw new NotAvailablePokemonException("Pokemon is not available because is in the "+pokemon.getLocalisation());
+                throw new NotAvailablePokemonException("Pokemon with ID "+idPokemon+" is not available because is in the "+pokemon.getLocalisation());
             }
             int id = pokemon.getIdPokemon();
             int score = pokemon.getPokeScore();

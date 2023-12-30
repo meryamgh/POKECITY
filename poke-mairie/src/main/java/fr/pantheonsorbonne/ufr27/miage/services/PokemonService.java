@@ -7,4 +7,6 @@ public interface PokemonService {
 
     void updatePokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon);
 
+    void updatePokemonLocalisation(int idPokemon,String newLocalisation);
+
 }

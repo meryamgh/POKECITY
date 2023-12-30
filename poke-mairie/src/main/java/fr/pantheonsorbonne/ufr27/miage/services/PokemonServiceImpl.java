@@ -19,5 +19,10 @@ public class PokemonServiceImpl implements PokemonService{
         pokemonDao.setPokescorebyId(id, newScore);
     }
 
+    @Override
+    public void updatePokemonLocalisation(int idPokemon, String newLocalisation) {
+        this.pokemonDao.setLocalisation(idPokemon,newLocalisation);
+    }
+
 
 }
