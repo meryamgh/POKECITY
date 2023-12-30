@@ -27,4 +27,13 @@ public class InventoryPokemonServiceImpl implements InventoryPokemonService{
     public void deletePokemon(int idPokemon) throws PokemonNotFoundException  {
         this.stockDao.deletePokemon(idPokemon);
     }
+
+    @Override
+    public Pokemon getRandomPokemonFighting() throws PokemonNotFoundException {
+        Pokemon pokemonFind = this.stockDao.getRandomPokemon();
+        this.stockDao.deletePokemon(pokemonFind.getIdPokemon());
+        return pokemonFind;
+    }
+
+
 }

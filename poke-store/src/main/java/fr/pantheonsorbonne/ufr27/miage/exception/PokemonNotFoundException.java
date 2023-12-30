@@ -5,4 +5,8 @@ public class PokemonNotFoundException extends Throwable{
         super("Pokemon with id " + idPokemon
         + "is not available in the store");
     }
+
+    public PokemonNotFoundException(){
+        super("There is no pokemon available in the store");
+    }
 }

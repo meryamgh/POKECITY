@@ -14,4 +14,8 @@ public interface PokemonStockDao {
     Pokemon getPokemonById(int idPokemon) throws PokemonNotFoundException  ;
 
     void deletePokemon(int idPokemon)throws PokemonNotFoundException  ;
+
+    Pokemon getRandomPokemon();
+
+
 }

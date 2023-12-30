@@ -67,10 +67,9 @@ public class CamelRoutes extends RouteBuilder {
                 .log("body : ${body}, header : ${header.price}")
                 .setHeader("idDresseur", constant(idDresseur))
                 .bean(bank, "checkBalance(${headers.price}, ${headers.idDresseur})")
-
-                .bean(pokemonGateway, "setLocalisationPokemon(${body},'school')")
                 .choice()
                 .when(simple("${headers.responseHaveEnoughMoney}"))
+                .bean(pokemonGateway, "setLocalisationPokemon(${body},'school')")
                 .marshal().json()
                 .to("sjms2:queue:M1.BankResponse?exchangePattern=InOut&requestTimeout=60000")
                 .bean(pokemonGateway, "improvePokemon(${body})")
@@ -83,9 +82,15 @@ public class CamelRoutes extends RouteBuilder {
 
 
         from("direct:fightingPokemon")
+                .bean(pokemonGateway, "setLocalisationPokemon(${body},'fight')")
                 .marshal().json()
-                .to("sjms2:queue:getPokemonForFight")
-                .log("the pokemon for fight is ${body}");
+                .to("sjms2:queue:M1.getPokemonForFight?exchangePattern=InOut")
+                .log("the pokemon for fight ADVERSAIRE is ${body}")
+                .split(body())
+                .bean(pokemonGateway, "setLocalisationPokemon(${body},'fight')")
+                .end()
+                .to("sjms2:queue:M1.fight")
+        ;
 
     }
 

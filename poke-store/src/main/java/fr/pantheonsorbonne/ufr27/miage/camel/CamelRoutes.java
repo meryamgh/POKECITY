@@ -18,6 +18,9 @@ public class CamelRoutes extends RouteBuilder {
     @Inject
     CamelContext camelContext;
 
+    @Inject
+    FightGateway fightGateway;
+
     @Override
     public void configure() throws Exception {
 
@@ -35,19 +38,12 @@ public class CamelRoutes extends RouteBuilder {
                 .otherwise()
                 .bean(pokemonGateway,"notEnoughTogetPokemon")
                 .marshal().json();
-
-
-
-
         ;
 
-        from("sjms2:queue:"+jmsPrefix+"pokeStore?exchangePattern=InOut")
-                .bean(pokemonGateway,"getPokemon(${body}, ${headers.idDresseur})")
-                .choice()
-                .when(simple("${headers.responseHaveEnoughMoney}"))
-                .to("sjms2:queue:"+jmsPrefix+"buyPokemon")
-                .otherwise()
-                .bean(pokemonGateway,"notEnoughTogetPokemon");
+        from("sjms2:queue:M1.getPokemonForFight?exchangePattern=InOut")
+                .unmarshal().json(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon.class)
+                .bean(fightGateway,"getRandomPokemonForFight(${body})")
+                ;
 
     }
 }

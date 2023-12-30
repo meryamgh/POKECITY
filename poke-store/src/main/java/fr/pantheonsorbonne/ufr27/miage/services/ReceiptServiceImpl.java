@@ -3,6 +3,7 @@ package fr.pantheonsorbonne.ufr27.miage.services;
 import fr.pantheonsorbonne.ufr27.miage.camel.PurchasePokemonGateway;
 import fr.pantheonsorbonne.ufr27.miage.dao.PokemonStockDao;
 import fr.pantheonsorbonne.ufr27.miage.dao.ReceiptPokemonDao;
+import fr.pantheonsorbonne.ufr27.miage.exception.PokemonNotAvailable;
 import fr.pantheonsorbonne.ufr27.miage.exception.PokemonNotFoundException;
 import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
 import fr.pantheonsorbonne.ufr27.miage.model.ReceiptPokemon;
@@ -46,7 +47,7 @@ public class ReceiptServiceImpl implements ReceiptService{
 
 
     @Override
-    public void buyPokemon(int idPokemon) throws PokemonNotFoundException  {
+    public void buyPokemon(int idPokemon) throws PokemonNotFoundException {
         Pokemon pokemonToBuy = this.stockDao.getPokemonById(idPokemon);
         pokemonGateway.checkBankCardDresseur(pokemonToBuy.getIdPokemon(),pokemonToBuy.getPrix());
     }

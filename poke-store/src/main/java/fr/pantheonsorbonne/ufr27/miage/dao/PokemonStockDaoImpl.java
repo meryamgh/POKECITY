@@ -1,4 +1,5 @@
 package fr.pantheonsorbonne.ufr27.miage.dao;
+
 import fr.pantheonsorbonne.ufr27.miage.exception.PokemonNotFoundException;
 import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -8,6 +9,8 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Random;
 
 @ApplicationScoped
 public class PokemonStockDaoImpl implements PokemonStockDao{
@@ -24,9 +27,11 @@ public class PokemonStockDaoImpl implements PokemonStockDao{
     @Override
     @Transactional
     public Collection<Pokemon> getStockPokemonByPrice(int price) {
-        return em.createQuery("SELECT poke FROM Pokemon poke WHERE poke.prix <= :price", Pokemon.class)
-                .setParameter("price", price)
-                .getResultList();
+
+            return em.createQuery("SELECT poke FROM Pokemon poke WHERE poke.prix <= :price", Pokemon.class)
+                    .setParameter("price", price)
+                    .getResultList();
+
     }
 
     @Override
@@ -40,6 +45,8 @@ public class PokemonStockDaoImpl implements PokemonStockDao{
         }
     }
 
+
+
     @Override
     @Transactional
     public void deletePokemon(int idPokemon) throws PokemonNotFoundException {
@@ -48,6 +55,15 @@ public class PokemonStockDaoImpl implements PokemonStockDao{
             em.remove(pokemonToDelete);
         }
     }
+
+    @Override
+    public Pokemon getRandomPokemon() {
+        Collection<Pokemon> allAvailablePokemon = this.getStock();
+        List<Pokemon> availablePokemonList = List.copyOf(allAvailablePokemon);
+        int randomIndex = new Random().nextInt(availablePokemonList.size());
+        return availablePokemonList.get(randomIndex);
+    }
+
 
 
 }
