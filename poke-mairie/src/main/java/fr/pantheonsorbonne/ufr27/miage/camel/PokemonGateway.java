@@ -5,7 +5,6 @@ import fr.pantheonsorbonne.ufr27.miage.services.DresseurService;
 import fr.pantheonsorbonne.ufr27.miage.services.PokemonService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 
 @ApplicationScoped

@@ -1,6 +1,5 @@
 package fr.pantheonsorbonne.ufr27.miage.dao;
 
-import fr.pantheonsorbonne.ufr27.miage.exception.NotEnoughMoneyException;
 import fr.pantheonsorbonne.ufr27.miage.model.BankAccount;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;

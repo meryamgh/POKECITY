@@ -4,7 +4,6 @@ import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
 
 public interface PokemonService {
 
-    Pokemon getPokemonById(int idPokemon);
 
     void updatePokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon);
 

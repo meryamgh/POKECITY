@@ -41,12 +41,6 @@ public class DresseurDaoImpl implements DresseurDao{
 
     @Override
     @Transactional
-    public boolean checkRightDresseur(Dresseur dresseur){
-    return true;
-    }
-
-    @Override
-    @Transactional
     public boolean isDresseurPokemon(int idDresseur, int idPokemon)throws NotAvailablePokemonException   {
         Collection<Pokemon> allDresseurPokemons = this.getAllPokemons(idDresseur);
 

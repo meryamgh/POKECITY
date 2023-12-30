@@ -1,7 +1,6 @@
 package fr.pantheonsorbonne.ufr27.miage.ressources;
 
 import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
-import fr.pantheonsorbonne.ufr27.miage.services.BankService;
 import fr.pantheonsorbonne.ufr27.miage.services.DresseurService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;

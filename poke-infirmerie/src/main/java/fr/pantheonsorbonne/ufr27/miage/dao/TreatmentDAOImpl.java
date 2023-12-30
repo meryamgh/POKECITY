@@ -1,17 +1,15 @@
 package fr.pantheonsorbonne.ufr27.miage.dao;
 
+import fr.pantheonsorbonne.ufr27.miage.dto.Pokemon;
 import fr.pantheonsorbonne.ufr27.miage.model.TreatmentSession;
 import fr.pantheonsorbonne.ufr27.miage.services.SoinService;
-import fr.pantheonsorbonne.ufr27.miage.services.SoinServiceImpl;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
-
 import java.sql.Time;
-import java.time.Duration;
 import java.util.Collection;
-import java.util.Date;
+
 
 @ApplicationScoped
 public class TreatmentDAOImpl implements TreatmentDAO {
@@ -24,7 +22,7 @@ public class TreatmentDAOImpl implements TreatmentDAO {
 
     @Override
     @Transactional
-    public TreatmentSession insertTreatmentSession(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon) {
+    public void insertTreatmentSession(Pokemon pokemon) {
         TreatmentSession receipt = new TreatmentSession();
         receipt.setIdPokemon(pokemon.idPokemon());
         receipt.setTimeTreatment(3);
@@ -32,7 +30,6 @@ public class TreatmentDAOImpl implements TreatmentDAO {
         em.persist(receipt);
         em.flush();
 
-        return null;
     }
 
     @Override

@@ -1,7 +1,5 @@
 package fr.pantheonsorbonne.ufr27.miage.services;
 
-import fr.pantheonsorbonne.ufr27.miage.dto.TicketDresseurAchat;
-import fr.pantheonsorbonne.ufr27.miage.exception.NotEnoughMoneyException;
 import fr.pantheonsorbonne.ufr27.miage.model.BankAccount;
 
 public interface BankService {

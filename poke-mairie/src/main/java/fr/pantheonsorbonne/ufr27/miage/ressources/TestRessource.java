@@ -1,8 +1,5 @@
 package fr.pantheonsorbonne.ufr27.miage.ressources;
 
-
-import fr.pantheonsorbonne.ufr27.miage.dto.TicketDresseurAchat;
-import fr.pantheonsorbonne.ufr27.miage.exception.NotEnoughMoneyException;
 import fr.pantheonsorbonne.ufr27.miage.services.BankService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;

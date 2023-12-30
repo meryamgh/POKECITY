@@ -3,7 +3,6 @@ package fr.pantheonsorbonne.ufr27.miage.model;
 
 import jakarta.persistence.*;
 
-import java.sql.Time;
 
 @Entity
 public class TreatmentSession {

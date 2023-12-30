@@ -18,7 +18,7 @@ public class SchoolSessionRessource {
 
     @Path("/AllSessions")
     @GET
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON})
     public Collection<SchoolSession> getAllSchoolSessions() {
         return this.schoolSessionService.getAllSessions();
     }

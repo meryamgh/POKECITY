@@ -18,7 +18,7 @@ public class SchoolTicketRessource {
 
     @Path("/AllTickets")
     @GET
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON})
     public Collection<SchoolTicket> getAllSchoolTickets() {
         return this.ticketService.getAllTickets();
     }

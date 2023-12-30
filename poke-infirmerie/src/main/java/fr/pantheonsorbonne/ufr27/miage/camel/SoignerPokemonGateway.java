@@ -1,7 +1,6 @@
 package fr.pantheonsorbonne.ufr27.miage.camel;
 
 import fr.pantheonsorbonne.ufr27.miage.dto.Pokemon;
-import fr.pantheonsorbonne.ufr27.miage.dto.TreatmentSession;
 import fr.pantheonsorbonne.ufr27.miage.services.SoinService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

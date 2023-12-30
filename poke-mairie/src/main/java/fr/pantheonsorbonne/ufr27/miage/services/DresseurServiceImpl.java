@@ -1,7 +1,6 @@
 package fr.pantheonsorbonne.ufr27.miage.services;
 
 
-import fr.pantheonsorbonne.ufr27.miage.camel.PokemonGateway;
 import fr.pantheonsorbonne.ufr27.miage.dao.DresseurDao;
 import fr.pantheonsorbonne.ufr27.miage.dao.PokemonDao;
 import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
@@ -19,8 +18,6 @@ public class DresseurServiceImpl implements DresseurService{
     @Inject
     DresseurDao dresseurDao;
 
-    @Inject
-    PokemonGateway pokemonGateway;
 
 
     @Override

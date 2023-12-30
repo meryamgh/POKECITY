@@ -22,9 +22,10 @@ public class InfirmerieRessource {
 
     @Path("{idPokemon}")
     @POST
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
     public Response treatPokemon(@PathParam("idPokemon") int idPokemon) {
-        fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon = new Pokemon(1, 0, 70);
+        fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon = new Pokemon(idPokemon, 0, 70);
         service.priseEnCharge(pokemon);
         System.out.println("haveEnoughMoney" + pokemon.prix());
         return Response.ok().build();
@@ -32,7 +33,7 @@ public class InfirmerieRessource {
 
     @Path("treatments")
     @GET
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON})
     public Collection<TreatmentSession> getAllTreatments() {
         return treatmentDAO.getAllTreatmentSessions();
     }

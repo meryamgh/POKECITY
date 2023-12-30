@@ -1,6 +1,6 @@
 package fr.pantheonsorbonne.ufr27.miage.dao;
 
-import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
+
 import fr.pantheonsorbonne.ufr27.miage.model.ReceiptPokemon;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;

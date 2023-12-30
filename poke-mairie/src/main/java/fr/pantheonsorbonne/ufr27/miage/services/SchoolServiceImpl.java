@@ -14,7 +14,7 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 public class SchoolServiceImpl implements SchoolService{
 
     @Inject
-    PokemonDao pokemonDao;;
+    PokemonDao pokemonDao;
 
     @Inject
     DresseurDao dresseurDao;
