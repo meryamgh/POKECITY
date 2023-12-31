@@ -89,6 +89,7 @@ public class CamelRoutes extends RouteBuilder {
                 .split(body())
                 .bean(pokemonGateway, "setLocalisationPokemon(${body},'fight')")
                 .end()
+                .setHeader("idDresseur", constant(idDresseur))
                 .to("sjms2:queue:M1.fight")
         ;
 

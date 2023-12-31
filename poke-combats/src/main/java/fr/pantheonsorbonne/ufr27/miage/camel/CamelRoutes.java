@@ -21,7 +21,8 @@ public class CamelRoutes extends RouteBuilder {
     @Inject
     CamelContext camelContext;
 
-
+    @Inject
+    FightSessionGateway fightSessionGateway;
 
     @Override
     public void configure() throws Exception {
@@ -29,6 +30,8 @@ public class CamelRoutes extends RouteBuilder {
 
         from("sjms2:queue:M1.fight")
                 .log("fight have begin ${body}")
+                .bean(fightSessionGateway, "playBattle(${body},${headers.idDresseur})")
+               // .delayer(12)
         ;
 
     }
