@@ -30,11 +30,4 @@ public class FightSessionRessource {
             return sessions;
         }
     }
-
-    @Path("{idPokemon}")
-    @POST
-    @Produces({MediaType.APPLICATION_JSON})
-    public void fight() {
-
-    }
 }

@@ -27,13 +27,10 @@ public class FightSessionServiceImpl implements FightSessionService{
     }
 
     @Override
-    public FightingSession play(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon dresseurPokemon) {
-        //this.fightSessionDao.createFightingSession(,dresseurPokemon, 50, );
-        //Pokemon PNJ = getAdversaire();
-        Pokemon PNJ = new Pokemon(4, 60, 60, "feu");
-        int gain = abs(dresseurPokemon.pokeScore() - PNJ.pokeScore());
-        boolean isWinner = winnerService.getWinner(PNJ, dresseurPokemon);
-        return this.fightSessionDao.createFightingSession(1, dresseurPokemon.idPokemon(), PNJ.idPokemon(), gain, isWinner);
+    public FightingSession play(Pokemon oponent, Pokemon ourPokemon, int idDresseur) {
+        int gain = abs(ourPokemon.pokeScore() - oponent.pokeScore());
+        boolean isWinner = winnerService.getWinner(oponent, ourPokemon);
+        return this.fightSessionDao.createFightingSession(idDresseur, ourPokemon.idPokemon(), oponent.idPokemon(), gain, isWinner);
     }
 
 }

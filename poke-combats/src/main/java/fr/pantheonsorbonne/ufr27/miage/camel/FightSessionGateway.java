@@ -11,6 +11,8 @@ public class FightSessionGateway {
 
     public void playBattle(Collection<Pokemon> pokemons, int idDresseur){
 
+        //récupérer pokemon adversaire avec boolean du dto
+        //return fightSession dto (pokemon dto adversaire, pokemon dto le notre, gain, isWinner)
     }
 
 }

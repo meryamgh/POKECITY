@@ -9,6 +9,6 @@ public interface FightSessionService {
 
     Collection<FightingSession> getAllFights();
 
-    FightingSession play(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon dresseurPokemon);
+    FightingSession play(Pokemon oponent, Pokemon ourPokemon, int idDresseur);
 
 }
