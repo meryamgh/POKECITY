@@ -19,7 +19,7 @@ public class FightGateway {
         Pokemon randomPokemon = this.inventoryPokemonService.getRandomPokemonFighting();
         Collection<fr.pantheonsorbonne.ufr27.miage.dto.Pokemon> pokemonFights = new ArrayList<>();
         pokemonFights.add(pokemonDresseur);
-        pokemonFights.add( new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(randomPokemon.getIdPokemon(),randomPokemon.getPrix(),randomPokemon.getPrix()));
+        pokemonFights.add( new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(randomPokemon.getIdPokemon(),randomPokemon.getPrix(),randomPokemon.getPrix(), randomPokemon.getType()));
         return pokemonFights;
     }
 

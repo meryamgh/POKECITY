@@ -25,7 +25,7 @@ public class InfirmerieRessource {
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     public Response treatPokemon(@PathParam("idPokemon") int idPokemon) {
-        fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon = new Pokemon(idPokemon, 0, 70);
+        fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon = new Pokemon(idPokemon, 0, 70, "eau");
         service.priseEnCharge(pokemon);
         System.out.println("haveEnoughMoney" + pokemon.prix());
         return Response.ok().build();

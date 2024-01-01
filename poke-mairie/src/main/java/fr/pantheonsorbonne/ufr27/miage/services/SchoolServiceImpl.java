@@ -34,7 +34,8 @@ public class SchoolServiceImpl implements SchoolService{
             }
             int id = pokemon.getIdPokemon();
             int score = pokemon.getPokeScore();
-            fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemonDTO = new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(id, score,score);
+            String type = pokemon.getType();
+            fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemonDTO = new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(id, score,score, type);
             gateway.sendToSchool(pokemonDTO);
     }
 

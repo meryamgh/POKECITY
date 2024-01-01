@@ -2,7 +2,7 @@ package fr.pantheonsorbonne.ufr27.miage.services;
 
 public interface SoinService {
 
-    void checkEnoughMoney(int idPokemon, int price, int pokescore, int pricetreatment);
+    void checkEnoughMoney(int idPokemon, int price, int pokescore, int pricetreatment, String type);
 
     fr.pantheonsorbonne.ufr27.miage.dto.Pokemon soignerPokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon);
 

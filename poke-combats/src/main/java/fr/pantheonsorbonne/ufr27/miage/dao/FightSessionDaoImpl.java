@@ -1,8 +1,6 @@
 package fr.pantheonsorbonne.ufr27.miage.dao;
 
-import fr.pantheonsorbonne.ufr27.miage.models.Dresseur;
 import fr.pantheonsorbonne.ufr27.miage.models.FightingSession;
-import fr.pantheonsorbonne.ufr27.miage.models.Pokemon;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -26,18 +24,18 @@ public class FightSessionDaoImpl implements FightSessionDao{
     @Override
     @Transactional
     public Collection<FightingSession> getFightingSessionByDresseurId(int idDresseur) {
-        return em.createQuery("SELECT fight FROM FightingSession fight WHERE fight.dresseur.idDresseur = :dresseur", FightingSession.class)
+        return em.createQuery("SELECT fight FROM FightingSession fight WHERE fight.idDresseur = :dresseur", FightingSession.class)
                 .setParameter("dresseur", idDresseur)
                 .getResultList();
     }
 
     @Override
     @Transactional
-    public FightingSession createFightingSession(Dresseur dresseur, Pokemon pokemon, Pokemon oponent, int amountWin, boolean isWinner) {
+    public FightingSession createFightingSession(int idDresseur, int idPokemon, int idOponent, int amountWin, boolean isWinner) {
         FightingSession battle = new FightingSession();
-        battle.setDresseur(dresseur);
-        battle.setPokemonDresseur(pokemon);
-        battle.setPokemonPNJ(oponent);
+        battle.setIdDresseur(idDresseur);
+        battle.setIdPokemon(idPokemon);
+        battle.setIdPNJ(idOponent);
         battle.setReward(amountWin);
         battle.setWinner(isWinner);
         return battle;

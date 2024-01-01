@@ -20,8 +20,8 @@ public class SoinServiceImpl implements SoinService{
     RedirectToMairieGateway redirectToMairieGateway;
 
     @Override
-    public void checkEnoughMoney(int idPokemon, int price, int pokescore, int pricetreatment) {
-        pokemonGateway.checkBankAccount(idPokemon,price, pokescore, pricetreatment);
+    public void checkEnoughMoney(int idPokemon, int price, int pokescore, int pricetreatment, String type) {
+        pokemonGateway.checkBankAccount(idPokemon,price, pokescore, pricetreatment, type);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class SoinServiceImpl implements SoinService{
         System.out.println("pokescore" + pokeScore);
         System.out.println("prix" + pokemon.prix());
         treatmentDAO.insertTreatmentSession(pokemon);
-        return new Pokemon(pokemon.idPokemon(),pokemon.prix(),pokemon.prix());
+        return new Pokemon(pokemon.idPokemon(),pokemon.prix(),pokemon.prix(), pokemon.type());
     }
 
     @Override
@@ -48,7 +48,7 @@ public class SoinServiceImpl implements SoinService{
 
     @Override
     public void priseEnCharge(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon){
-        checkEnoughMoney(pokemon.idPokemon(), pokemon.prix(), pokemon.pokeScore(), this.getPriceTreatment(pokemon));
+        checkEnoughMoney(pokemon.idPokemon(), pokemon.prix(), pokemon.pokeScore(), this.getPriceTreatment(pokemon), pokemon.type());
     }
 
 }

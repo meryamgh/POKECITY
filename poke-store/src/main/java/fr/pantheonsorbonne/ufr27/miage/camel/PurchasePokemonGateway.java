@@ -19,9 +19,9 @@ public class PurchasePokemonGateway {
     ReceiptService storeService;
 
 
-    public void checkBankCardDresseur(int pokemonToBuy,int price) {
+    public void checkBankCardDresseur(int pokemonToBuy,int price, String type) {
         try (ProducerTemplate producerTemplate = camelContext.createProducerTemplate()) {
-            producerTemplate.sendBodyAndHeader("direct:bankRoute",new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(pokemonToBuy,price,price),"price",price);
+            producerTemplate.sendBodyAndHeader("direct:bankRoute",new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(pokemonToBuy,price,price, type),"price",price);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
