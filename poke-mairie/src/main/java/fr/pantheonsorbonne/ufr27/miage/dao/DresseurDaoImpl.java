@@ -21,6 +21,7 @@ public class DresseurDaoImpl implements DresseurDao{
     public void addPokemonToPokedex(Pokemon idPokemon, int idDresseur) {
         Dresseur dresseur = this.getDresseur(idDresseur);
         dresseur.getPokedex().add(idPokemon);
+        em.merge(dresseur);
 
     }
 
