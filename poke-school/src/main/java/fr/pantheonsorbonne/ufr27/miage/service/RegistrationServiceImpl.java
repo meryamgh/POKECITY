@@ -24,10 +24,10 @@ public class RegistrationServiceImpl implements RegistrationService {
         int idPokemon= pokemon.idPokemon();
 
         //on récupère l'id de la session
-        SchoolSession session = schoolSessionService.findRightSession(pokescore);
+        SchoolSession session = this.schoolSessionService.findRightSession(pokescore);
 
         //on crée un ticket pour garder l'historique des cours effectués par un pokemon
-        schoolTicketDao.createSchoolTicket(idPokemon, session.getIdSchoolSession());
+        this.schoolTicketDao.createSchoolTicket(idPokemon, session.getIdSchoolSession());
 
         //on augmente le score du pokemon qui a suivi le cours
         int gain = session.getPokescoreGain();

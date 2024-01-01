@@ -17,7 +17,7 @@ public class SchoolTicketDaoImpl implements SchoolTicketDao{
     @Override
     @Transactional
     public SchoolTicket getSchoolTicketById(int idSchoolTicket){
-        return em.find(SchoolTicket.class, idSchoolTicket);
+        return this.em.find(SchoolTicket.class, idSchoolTicket);
     }
 
     @Override
@@ -27,13 +27,13 @@ public class SchoolTicketDaoImpl implements SchoolTicketDao{
         SchoolTicket s = new SchoolTicket();
         s.setPokemon_id(idPokemon);
         s.setSchoolSession_id(idSession);
-        em.persist(s);
+        this.em.persist(s);
         return s;
     }
 
     @Override
     @Transactional
     public Collection<SchoolTicket> getSchoolTickets() {
-        return em.createQuery("SELECT ticket FROM SchoolTicket ticket", SchoolTicket.class).getResultList();
+        return this.em.createQuery("SELECT ticket FROM SchoolTicket ticket", SchoolTicket.class).getResultList();
     }
 }

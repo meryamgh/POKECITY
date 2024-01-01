@@ -18,7 +18,7 @@ public class SchoolGateway {
     CamelContext context;
 
     @Inject
-    RegistrationService schoolService;
+    RegistrationService registrationService;
 
     @Inject
     SchoolSessionService schoolSessionService;
@@ -28,7 +28,7 @@ public class SchoolGateway {
         int idPokemon = pokemon.getIdPokemon();
         int pokeScore = pokemon.getPokeScore();
         fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemonToSend = new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(idPokemon, pokeScore);
-        try (ProducerTemplate producer = context.createProducerTemplate()) {
+        try (ProducerTemplate producer = this.context.createProducerTemplate()) {
             producer.sendBody("direct:sendToMairie",pokemonToSend);
         } catch (IOException e) {
             e.printStackTrace();
@@ -36,12 +36,12 @@ public class SchoolGateway {
     }
 
     public fr.pantheonsorbonne.ufr27.miage.dto.Pokemon improvePokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon){
-        return schoolService.inscrirePokemon(pokemon);
+        return this.registrationService.inscrirePokemon(pokemon);
     }
 
 
     public void getPriceRightSession(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon, Exchange exchange){
-        exchange.getIn().setHeader("price", schoolSessionService.findRightSession(pokemon.pokeScore()).getPriceSchoolSession());
+        exchange.getIn().setHeader("price", this.schoolSessionService.findRightSession(pokemon.pokeScore()).getPriceSchoolSession());
     }
 
 

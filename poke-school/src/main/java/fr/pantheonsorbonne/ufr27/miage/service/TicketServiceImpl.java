@@ -14,6 +14,6 @@ public class TicketServiceImpl implements TicketService{
 
     @Override
     public Collection<SchoolTicket> getAllTickets() {
-       return schoolTicketDao.getSchoolTickets();
+       return this.schoolTicketDao.getSchoolTickets();
     }
 }

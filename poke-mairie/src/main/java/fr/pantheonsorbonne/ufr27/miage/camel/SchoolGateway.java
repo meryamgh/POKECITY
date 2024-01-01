@@ -16,9 +16,6 @@ public class SchoolGateway {
     @Inject
     CamelContext context;
 
-
-
-
     public void sendToSchool(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon){
         try (ProducerTemplate producer = context.createProducerTemplate()) {
             producer.sendBody("direct:sendPokemonToSchool",pokemon);

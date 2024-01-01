@@ -15,7 +15,7 @@ public class SchoolSessionServiceImpl implements SchoolSessionService{
 
     @Override
     public Collection<SchoolSession> getAllSessions() {
-        return schoolSessionDao.getSchoolSessions();
+        return this.schoolSessionDao.getSchoolSessions();
     }
 
     @Override
@@ -29,7 +29,7 @@ public class SchoolSessionServiceImpl implements SchoolSessionService{
             idRightSession = 3;
         }
 
-        return schoolSessionDao.getSchoolSessionById(idRightSession);
+        return this.schoolSessionDao.getSchoolSessionById(idRightSession);
     }
 
 
