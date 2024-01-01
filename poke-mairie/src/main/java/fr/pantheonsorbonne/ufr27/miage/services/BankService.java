@@ -7,4 +7,7 @@ public interface BankService {
     boolean checkBalance(int amount,int idDresseur) ;
 
     BankAccount getCardBank(int idDresseur);
+
+    void creditBankAccount(int amount, int idDresseur);
+
 }

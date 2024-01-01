@@ -1,4 +1,6 @@
 package fr.pantheonsorbonne.ufr27.miage.dto;
 
-public record FightSession(Integer idDresseur ,Pokemon oponnent, Pokemon ourPokemon, boolean isWinner, int amountWin) {
+import java.io.Serializable;
+
+public record FightSession(Integer idDresseur , Pokemon oponnent, Pokemon ourPokemon, boolean isWinner, int amountWin) implements Serializable {
 }

@@ -7,7 +7,7 @@ import java.util.Collection;
 
 public interface TreatmentDAO {
 
-    void insertTreatmentSession(Pokemon pokemon);
+    void insertTreatmentSession(Pokemon pokemon, int treatPrice);
 
     Collection<TreatmentSession> getAllTreatmentSessions();
 

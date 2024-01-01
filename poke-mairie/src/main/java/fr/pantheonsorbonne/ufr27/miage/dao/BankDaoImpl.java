@@ -31,4 +31,13 @@ public class BankDaoImpl implements BankDao{
         return false;
     }
 
+    @Override
+    @Transactional
+    public void creditBank(int amount, int idDresseur) {
+        BankAccount balance = this.getBankAccountDresseur(idDresseur);
+        balance.setBalance(balance.getBalance() + amount);
+        this.em.merge(balance);
+    }
+
+
 }

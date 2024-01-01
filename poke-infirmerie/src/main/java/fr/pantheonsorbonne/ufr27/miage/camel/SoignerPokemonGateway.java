@@ -23,11 +23,11 @@ public class SoignerPokemonGateway {
     @Inject
     SoinService service;
 
-    public void checkBankAccount(Pokemon pokemon) {
+    public void checkBankAccount(Pokemon pokemon,int treatPrice) {
         System.out.println("le id poke"+pokemon.name()+" le price "+pokemon.prix());
         Map<String, Object> headers = new HashMap<>();
         headers.put("source", "pokeInfirmerie");
-        headers.put("price", pokemon.prix());
+        headers.put("price", treatPrice);
         try (ProducerTemplate producerTemplate = camelContext.createProducerTemplate()) {
             producerTemplate.sendBodyAndHeaders("sjms2:queue:" + jmsPrefix +"bankRoute",pokemon ,headers);
         } catch (IOException e) {
@@ -35,7 +35,12 @@ public class SoignerPokemonGateway {
         }
     }
 
-    public fr.pantheonsorbonne.ufr27.miage.dto.Pokemon soigner(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon) {
+    public fr.pantheonsorbonne.ufr27.miage.dto.Pokemon soigner(Pokemon pokemon) {
         return service.soignerPokemon(pokemon);
     }
+
+    public void getPriceTreatment(Pokemon pokemon){
+        this.service.soignerPokemon(pokemon);
+    }
+
 }

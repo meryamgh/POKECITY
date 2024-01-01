@@ -5,30 +5,25 @@ import fr.pantheonsorbonne.ufr27.miage.dto.Pokemon;
 import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @ApplicationScoped
 public class FightSessionGateway {
 
 
-    public FightSession playBattle(Collection<Pokemon> pokemons, int idDresseur){
-        Optional<Pokemon> ourPokemon = pokemons.stream()
-                .filter(Pokemon::isAdopted)
-                .findFirst();
-
-        if (ourPokemon.isPresent()) {
-            Pokemon pokemonDresseur = ourPokemon.get();
-
-            Optional<Pokemon> otherPokemon = pokemons.stream()
-                    .filter(pokemon -> !pokemon.isAdopted())
-                    .findFirst();
-
-            if (otherPokemon.isPresent()) {
-                Pokemon pokemonAdversaire = otherPokemon.get();
-                return new FightSession(idDresseur,pokemonAdversaire,pokemonDresseur,true,500);
-            }
+    public FightSession playBattle(List<Pokemon> pokemons, int idDresseur){
+        Pokemon ourPokemon;
+        Pokemon PNJ;
+        if(pokemons.get(0).isAdopted()){
+            ourPokemon = pokemons.get(0);
+            PNJ = pokemons.get(1);
         }
-        return null;
+        else{
+            ourPokemon = pokemons.get(1);
+            PNJ = pokemons.get(0);
+        }
+        return new FightSession(idDresseur, PNJ, ourPokemon, false, 300);
 
     }
 

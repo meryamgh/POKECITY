@@ -8,4 +8,6 @@ public interface BankDao {
 
     boolean debitBank(int amount, int idDresseur);
 
+    void creditBank(int amount, int idDresseur);
+
 }

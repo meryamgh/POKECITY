@@ -40,6 +40,7 @@ public class PokemonDaoImpl implements PokemonDao{
                 .getSingleResult();
 
         p.setPokeScore(newPokescore);
+
     }
 
 

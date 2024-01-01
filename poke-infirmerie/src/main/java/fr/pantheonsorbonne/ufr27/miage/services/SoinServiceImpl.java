@@ -20,17 +20,12 @@ public class SoinServiceImpl implements SoinService{
     RedirectToMairieGateway redirectToMairieGateway;
 
     @Override
-    public void checkEnoughMoney(Pokemon pokemon) {
-        pokemonGateway.checkBankAccount(pokemon);
-    }
-
-    @Override
     public Pokemon soignerPokemon(Pokemon pokemon) {
         int pokeScore = pokemon.pokeScore();
         pokeScore = pokemon.prix();
         System.out.println("pokescore" + pokeScore);
         System.out.println("prix" + pokemon.prix());
-        treatmentDAO.insertTreatmentSession(pokemon);
+        treatmentDAO.insertTreatmentSession(pokemon, getPriceTreatment(pokemon));
         return new Pokemon(pokemon.idPokemon(),pokemon.prix(),pokemon.prix(),pokemon.type(), pokemon.isAdopted(),pokemon.name());
     }
 
@@ -48,7 +43,7 @@ public class SoinServiceImpl implements SoinService{
 
     @Override
     public void priseEnCharge(Pokemon pokemon){
-        checkEnoughMoney(pokemon);
+        pokemonGateway.checkBankAccount(pokemon, this.getPriceTreatment(pokemon));
     }
 
 }

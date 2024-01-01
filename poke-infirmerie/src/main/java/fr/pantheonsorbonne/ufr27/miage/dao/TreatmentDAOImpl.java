@@ -17,16 +17,13 @@ public class TreatmentDAOImpl implements TreatmentDAO {
     @Inject
     EntityManager em;
 
-    @Inject
-    SoinService service;
-
     @Override
     @Transactional
-    public void insertTreatmentSession(Pokemon pokemon) {
+    public void insertTreatmentSession(Pokemon pokemon, int treatPrice) {
         TreatmentSession receipt = new TreatmentSession();
         receipt.setIdPokemon(pokemon.idPokemon());
         receipt.setTimeTreatment(3);
-        receipt.setPriceTreatment(service.getPriceTreatment(pokemon));
+        receipt.setPriceTreatment(treatPrice);
         em.persist(receipt);
         em.flush();
 

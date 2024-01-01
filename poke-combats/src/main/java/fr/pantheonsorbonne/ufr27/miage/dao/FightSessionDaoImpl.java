@@ -40,6 +40,7 @@ public class FightSessionDaoImpl implements FightSessionDao{
         battle.setPokemonPNJ(oponent);
         battle.setReward(amountWin);
         battle.setWinner(isWinner);
+        this.em.persist(battle);
         return battle;
     }
 

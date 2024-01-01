@@ -32,17 +32,16 @@ public class CamelRoutes extends RouteBuilder {
     public void configure() throws Exception {
         this.camelContext.setTracing(true);
         from("sjms2:queue:" + jmsPrefix +"bankRoute")
-                .log("Le body est arriver a la mairie pour le check bank ${body}")
                 .setHeader("idDresseur", constant(idDresseur))
                 .bean(bank, "checkBalance(${headers.price}, ${headers.idDresseur})")
-                .log("le systeme: ${headers.source},money: ${headers.responseHaveEnoughMoney}")
-
-                .toD("sjms2:queue:" + jmsPrefix + "${headers.source}?exchangePattern=InOut&requestTimeout=60000")
-
-                .log("apres le toD le body : ${body}")
                 .choice()
-                .when(simple("${headers.source}").isEqualTo("pokestore"))
-                .bean(pokemonGateway, "affectPokemonToDresseur(${body},  ${headers.idDresseur})")
+                .when(simple("${headers.responseHaveEnoughMoney}"))
+                .toD("sjms2:queue:" + jmsPrefix + "${headers.source}?exchangePattern=InOut&requestTimeout=60000")
+                .otherwise()
+                .to("sjms2:queue:M1.pokestore-after-fight")
+
+
+
         ;
 
         from("sjms2:queue:"+ jmsPrefix + "pokemonBuyCheckPrice?exchangePattern=InOut")
@@ -92,6 +91,17 @@ public class CamelRoutes extends RouteBuilder {
                 .setHeader("idDresseur", constant(idDresseur))
                 .to("sjms2:queue:M1.fight?exchangePattern=InOut")
                 .log("apres vombat mairie ${body}")
+                .choice()
+                .when(simple("${body.isWinner}"))
+                .bean(bank, "addAmountWinToBankAccount(${body})")
+                .bean(pokemonGateway, "setLocalisationPokemon(${body.ourPokemon()},'mairie')" )
+                .otherwise()
+                .to("sjms2:queue:M1.soin")
+                .end()
+                .bean(pokemonGateway, "setLocalisationPokemon(${body.oponnent()},'store')" )
+                //renvoyer le pokemon au store
+
+
         ;
 
     }

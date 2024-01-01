@@ -15,10 +15,8 @@ public class PokemonDaoImpl implements PokemonDao{
     @Override
     @Transactional
     public Pokemon getPokemonById(int idPokemon) {
-        return em.createQuery("SELECT poke FROM Pokemon poke WHERE poke.idPokemon = :id", Pokemon.class)
-                .setParameter("id", idPokemon).getSingleResult();
+        return em.find(Pokemon.class, idPokemon);
     }
-
     @Override
     @Transactional
     public void changeStatus(Pokemon pokemon, int idDresseur, boolean isAdopted) {
@@ -27,6 +25,7 @@ public class PokemonDaoImpl implements PokemonDao{
                 .setParameter("loca", "mairie")
                 .setParameter("idPokemon", pokemon.getIdPokemon())
                 .executeUpdate();
+
     }
 
     @Override
