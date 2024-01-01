@@ -1,5 +1,6 @@
 package fr.pantheonsorbonne.ufr27.miage.camel;
 
+import fr.pantheonsorbonne.ufr27.miage.dto.Pokemon;
 import fr.pantheonsorbonne.ufr27.miage.services.SoinService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -16,7 +17,7 @@ public class RedirectToMairieGateway {
     @Inject
     SoinService service;
 
-    public void redirectToMairie(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon) {
+    public void redirectToMairie(Pokemon pokemon) {
         try (ProducerTemplate producerTemplate = camelContext.createProducerTemplate()) {
             producerTemplate.sendBody("direct:redirectToMairie", pokemon);
             System.out.println("redirectToMairie" + pokemon.prix());

@@ -1,14 +1,16 @@
 package fr.pantheonsorbonne.ufr27.miage.services;
 
+import fr.pantheonsorbonne.ufr27.miage.dto.Pokemon;
+
 public interface SoinService {
 
-    void checkEnoughMoney(int idPokemon, int price, int pokescore, int pricetreatment);
+    void checkEnoughMoney(Pokemon pokemon);
 
-    fr.pantheonsorbonne.ufr27.miage.dto.Pokemon soignerPokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon);
+    fr.pantheonsorbonne.ufr27.miage.dto.Pokemon soignerPokemon(Pokemon pokemon);
 
-    void redirectToMairie(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon);
+    void redirectToMairie(Pokemon pokemon);
 
-     int getPriceTreatment(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon);
-     void priseEnCharge(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon);
+     int getPriceTreatment(Pokemon pokemon);
+     void priseEnCharge(Pokemon pokemon);
 
 }

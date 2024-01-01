@@ -24,17 +24,6 @@ public class SchoolGateway {
     SchoolSessionService schoolSessionService;
 
 
-    public void sendImprovedPokemonToMairie(Pokemon pokemon) {
-        int idPokemon = pokemon.getIdPokemon();
-        int pokeScore = pokemon.getPokeScore();
-        fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemonToSend = new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(idPokemon, pokeScore,pokeScore);
-        try (ProducerTemplate producer = context.createProducerTemplate()) {
-            producer.sendBody("direct:sendToMairie",pokemonToSend);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public fr.pantheonsorbonne.ufr27.miage.dto.Pokemon improvePokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon){
         return schoolService.inscrirePokemon(pokemon);
     }

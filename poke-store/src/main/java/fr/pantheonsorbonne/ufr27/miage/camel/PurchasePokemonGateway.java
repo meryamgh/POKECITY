@@ -1,6 +1,7 @@
 package fr.pantheonsorbonne.ufr27.miage.camel;
 
 import fr.pantheonsorbonne.ufr27.miage.exception.PokemonNotFoundException;
+import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
 import fr.pantheonsorbonne.ufr27.miage.services.ReceiptService;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.apache.camel.CamelContext;
@@ -19,9 +20,9 @@ public class PurchasePokemonGateway {
     ReceiptService storeService;
 
 
-    public void checkBankCardDresseur(int pokemonToBuy,int price) {
+    public void checkBankCardDresseur(Pokemon pokemonToBuy) {
         try (ProducerTemplate producerTemplate = camelContext.createProducerTemplate()) {
-            producerTemplate.sendBodyAndHeader("direct:bankRoute",new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(pokemonToBuy,price,price),"price",price);
+            producerTemplate.sendBodyAndHeader("direct:bankRoute",new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(pokemonToBuy.getIdPokemon(),pokemonToBuy.getPrix(),pokemonToBuy.getPrix(),pokemonToBuy.getType(),false,pokemonToBuy.getName()),"price",pokemonToBuy.getPrix());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

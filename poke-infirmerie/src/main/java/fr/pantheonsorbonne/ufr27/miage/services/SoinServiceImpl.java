@@ -20,35 +20,35 @@ public class SoinServiceImpl implements SoinService{
     RedirectToMairieGateway redirectToMairieGateway;
 
     @Override
-    public void checkEnoughMoney(int idPokemon, int price, int pokescore, int pricetreatment) {
-        pokemonGateway.checkBankAccount(idPokemon,price, pokescore, pricetreatment);
+    public void checkEnoughMoney(Pokemon pokemon) {
+        pokemonGateway.checkBankAccount(pokemon);
     }
 
     @Override
-    public fr.pantheonsorbonne.ufr27.miage.dto.Pokemon soignerPokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon) {
+    public Pokemon soignerPokemon(Pokemon pokemon) {
         int pokeScore = pokemon.pokeScore();
         pokeScore = pokemon.prix();
         System.out.println("pokescore" + pokeScore);
         System.out.println("prix" + pokemon.prix());
         treatmentDAO.insertTreatmentSession(pokemon);
-        return new Pokemon(pokemon.idPokemon(),pokemon.prix(),pokemon.prix());
+        return new Pokemon(pokemon.idPokemon(),pokemon.prix(),pokemon.prix(),pokemon.type(), pokemon.isAdopted(),pokemon.name());
     }
 
     @Override
-    public void redirectToMairie(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon) {
+    public void redirectToMairie(Pokemon pokemon) {
         redirectToMairieGateway.redirectToMairie(pokemon);
     }
 
     @Override
-    public int getPriceTreatment(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon) {
+    public int getPriceTreatment(Pokemon pokemon) {
         int intialPrice = pokemon.prix();
         System.out.println("initialPrice " + intialPrice);
         return intialPrice / 2;
     }
 
     @Override
-    public void priseEnCharge(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon){
-        checkEnoughMoney(pokemon.idPokemon(), pokemon.prix(), pokemon.pokeScore(), this.getPriceTreatment(pokemon));
+    public void priseEnCharge(Pokemon pokemon){
+        checkEnoughMoney(pokemon);
     }
 
 }

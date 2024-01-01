@@ -31,6 +31,7 @@ public class CamelRoutes extends RouteBuilder {
         from("sjms2:queue:M1.fight")
                 .log("fight have begin ${body}")
                 .bean(fightSessionGateway, "playBattle(${body},${headers.idDresseur})")
+                .log("apres le combat ${body}")
                // .delayer(12)
         ;
 
