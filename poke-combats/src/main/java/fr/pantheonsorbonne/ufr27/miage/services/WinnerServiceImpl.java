@@ -34,7 +34,7 @@ public class WinnerServiceImpl implements WinnerService{
             case "plante":
                 if(oponent.type() == "eau") {
                     chanceToWin+=10;
-                } else if (oponent.type() == "feu"){
+                } else if (oponent.type().equals("feu")){
                     chanceToWin-=10;
                 }
                 break;

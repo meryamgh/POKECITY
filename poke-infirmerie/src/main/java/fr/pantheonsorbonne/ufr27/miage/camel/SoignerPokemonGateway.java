@@ -23,13 +23,13 @@ public class SoignerPokemonGateway {
     @Inject
     SoinService service;
 
-    public void checkBankAccount(int pokemonToCure,int price, int pokescore, int pricetreatment, String type) {
+    public void checkBankAccount(int pokemonToCure, String name, int price, int pokescore, int pricetreatment, String type, boolean isAdopted) {
         System.out.println("le id poke"+pokemonToCure+" le price "+price);
         Map<String, Object> headers = new HashMap<>();
         headers.put("source", "pokeInfirmerie");
         headers.put("price", pricetreatment);
         try (ProducerTemplate producerTemplate = camelContext.createProducerTemplate()) {
-            producerTemplate.sendBodyAndHeaders("sjms2:queue:" + jmsPrefix +"bankRoute",new Pokemon(pokemonToCure,pokescore, price, type),headers);
+            producerTemplate.sendBodyAndHeaders("sjms2:queue:" + jmsPrefix +"bankRoute",new Pokemon(pokemonToCure, pokescore, price, type, isAdopted, name),headers);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
