@@ -23,7 +23,9 @@ public class FightSessionGateway {
             ourPokemon = pokemons.get(1);
             PNJ = pokemons.get(0);
         }
-        return new FightSession(idDresseur, PNJ, ourPokemon, false, 300);
+
+        Pokemon newPoke = new Pokemon(ourPokemon.idPokemon(),0,ourPokemon.prix(),ourPokemon.type(),ourPokemon.isAdopted(),ourPokemon.name());
+        return new FightSession(idDresseur, PNJ, newPoke, false, 300);
 
     }
 

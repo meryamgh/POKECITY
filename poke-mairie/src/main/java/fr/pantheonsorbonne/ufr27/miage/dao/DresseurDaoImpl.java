@@ -52,4 +52,22 @@ public class DresseurDaoImpl implements DresseurDao{
         return true;
 
     }
+
+    @Override
+    @Transactional
+    public int getNumberPokemon(int idDresseur) {
+        Long count = em.createQuery("SELECT COUNT(p) FROM Dresseur dre JOIN dre.pokedex p WHERE dre.idDresseur = :id", Long.class)
+                .setParameter("id", idDresseur)
+                .getSingleResult();
+        return count.intValue();
+    }
+
+    @Override
+    @Transactional
+    public void setDresseurBannedStatus(int idDresseur) {
+        em.createQuery("UPDATE Dresseur d SET d.bannedStatus = true WHERE d.idDresseur = :id")
+                .setParameter("id", idDresseur)
+                .executeUpdate();
+    }
+
 }

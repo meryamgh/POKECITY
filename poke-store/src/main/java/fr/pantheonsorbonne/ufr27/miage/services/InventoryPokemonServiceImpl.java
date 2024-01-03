@@ -35,5 +35,10 @@ public class InventoryPokemonServiceImpl implements InventoryPokemonService{
         return pokemonFind;
     }
 
+    @Override
+    public void addPokemonToStore(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon) {
+        this.stockDao.addPokemonToStore(pokemon);
+    }
+
 
 }

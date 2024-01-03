@@ -12,13 +12,13 @@ VALUES
         (5, false, 70,'paudo', 'feu', 'store'),
         (6, false, 50,'nherbo', 'plante', 'store'),
         (7, false, 100,'carlo', 'feu', 'store'),
-        (8, false, 90,'ounissio', 'eau', 'store'),
+        (8, false, 50,'ounissio', 'eau', 'store'),
         (9, false, 110,'chenno', 'plante', 'store'),
         (10, false, 110,'olivio', 'plante', 'store'),
-        (11, false, 110,'chiriaco', 'eau', 'store'),
+        (11, false, 50,'chiriaco', 'eau', 'store'),
         (12, false, 110,'clavelo', 'feu', 'store');
 
 REPLACE INTO `Dresseur_Pokemon` (`Dresseur_idDresseur`, `pokedex_idPokemon`) VALUES ('1', '1');
 REPLACE INTO `BankAccount` (`balance`, `dresseur_idDresseur`, `idBankAccount`) VALUES
                                                                                   (200, 2, 11122334),
-                                                                                  (10000, 1, 12345678);
+                                                                                  (50, 1, 12345678);

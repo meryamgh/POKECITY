@@ -33,5 +33,15 @@ public class DresseurServiceImpl implements DresseurService{
         return this.dresseurDao.getAllPokemons(idDresseur);
     }
 
+    @Override
+    public boolean checkIfLastPokemon(int idDresseur) {
+        return this.dresseurDao.getNumberPokemon(idDresseur)==1;
+    }
+
+    @Override
+    public void changeBannedStatus(int idDresseur) {
+        this.dresseurDao.setDresseurBannedStatus(idDresseur);
+    }
+
 
 }

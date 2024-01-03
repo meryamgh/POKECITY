@@ -6,6 +6,7 @@ import fr.pantheonsorbonne.ufr27.miage.services.DresseurService;
 import fr.pantheonsorbonne.ufr27.miage.services.PokemonService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import org.apache.camel.Exchange;
 
 import java.util.Collection;
 
@@ -36,6 +37,11 @@ public class PokemonGateway {
     public void setLocalisationPokemon(Pokemon pokemon, String newLocalisation){
         this.pokeService.updatePokemonLocalisation(pokemon.idPokemon(), newLocalisation);
     }
+
+    public void checkLastPokemon(int idDresseur, Exchange exchange){
+        exchange.getIn().setHeader("isLastPokemon",this.dresseurService.checkIfLastPokemon(idDresseur));
+    }
+
 
 
 }

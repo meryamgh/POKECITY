@@ -29,5 +29,8 @@ public class CamelRoutes extends RouteBuilder {
         ;
 
 
+        from("sjms2:topic:M1.dresseurBanned")
+                .log("DRESSEUR WITH ID ${headers.idDresseur} IS BANNED");
+
     }
 }

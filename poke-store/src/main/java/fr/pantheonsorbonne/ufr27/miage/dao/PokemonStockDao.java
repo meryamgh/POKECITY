@@ -17,5 +17,6 @@ public interface PokemonStockDao {
 
     Pokemon getRandomPokemon();
 
+    void addPokemonToStore(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon);
 
 }

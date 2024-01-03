@@ -10,4 +10,8 @@ public interface DresseurService {
 
     Collection<Pokemon> getAllDresseurPokemon(int idDresseur);
 
+    boolean checkIfLastPokemon(int idDresseur);
+
+    void changeBannedStatus(int idDresseur);
+
 }

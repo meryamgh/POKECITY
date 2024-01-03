@@ -23,4 +23,8 @@ public class FightGateway {
         return pokemonFights;
     }
 
+    public void stockPokemonToStore(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon){
+        this.inventoryPokemonService.addPokemonToStore(pokemon);
+    }
+
 }

@@ -1,5 +1,6 @@
 package fr.pantheonsorbonne.ufr27.miage.camel;
 
+import fr.pantheonsorbonne.ufr27.miage.dto.Pokemon;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.apache.camel.CamelContext;
@@ -45,5 +46,21 @@ public class CamelRoutes extends RouteBuilder {
                 .bean(fightGateway,"getRandomPokemonForFight(${body})")
                 ;
 
+//        from("sjms2:queue:M1.returnPNJ")
+//                .unmarshal().json(Pokemon.class)
+//                .bean(fightGateway, "stockPokemonToStore(${body})");
+//
+
+        from("sjms2:queue:M1.returnPNJ")
+                .choice()
+                .when().simple("${body} != null && ${body.getClass().getName()} == 'fr.pantheonsorbonne.ufr27.miage.dto.Pokemon.class'")
+                .bean(fightGateway, "stockPokemonToStore(${body})")
+                .otherwise()
+                .log("Ignoring non-Pokemon message");
+
+
+
+        from("sjms2:topic:M1.dresseurBanned")
+                .log("DRESSEUR WITH ID ${headers.idDresseur} IS BANNED");
     }
 }

@@ -5,6 +5,7 @@ import fr.pantheonsorbonne.ufr27.miage.services.SoinService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.apache.camel.CamelContext;
+import org.apache.camel.Exchange;
 import org.apache.camel.ProducerTemplate;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
@@ -39,8 +40,10 @@ public class SoignerPokemonGateway {
         return service.soignerPokemon(pokemon);
     }
 
-    public void getPriceTreatment(Pokemon pokemon){
-        this.service.soignerPokemon(pokemon);
+    public void getPriceTreatment(Pokemon pokemon, Exchange exchange){
+        System.out.println(this.service.getPriceTreatment(pokemon));
+        exchange.getIn().setHeader("price",this.service.getPriceTreatment(pokemon));
+
     }
 
 }

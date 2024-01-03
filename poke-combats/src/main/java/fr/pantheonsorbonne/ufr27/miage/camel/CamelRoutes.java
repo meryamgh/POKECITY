@@ -32,9 +32,12 @@ public class CamelRoutes extends RouteBuilder {
                 .log("fight have begin ${body}")
                 .bean(fightSessionGateway, "playBattle(${body},${headers.idDresseur})")
                 .log("apres le combat ${body}")
-
+              //  .delay(30000)
                // .delayer(12)
         ;
+
+        from("sjms2:topic:M1.dresseurBanned")
+                .log("DRESSEUR WITH ID ${headers.idDresseur} IS BANNED");
 
     }
 

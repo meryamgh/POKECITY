@@ -12,5 +12,6 @@ public interface InventoryPokemonService {
 
     Pokemon getRandomPokemonFighting() throws PokemonNotFoundException;
 
+    void addPokemonToStore(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon);
 
 }

@@ -64,6 +64,18 @@ public class PokemonStockDaoImpl implements PokemonStockDao{
         return availablePokemonList.get(randomIndex);
     }
 
+    @Override
+    @Transactional
+    public void addPokemonToStore(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon) {
+        Pokemon pokemonToAdd = new Pokemon();
+        pokemonToAdd.setName(pokemon.name());
+        pokemonToAdd.setLocalisation("store");
+        pokemonToAdd.setIdPokemon(pokemon.idPokemon());
+        pokemonToAdd.setPrix(pokemon.prix());
+        pokemonToAdd.setType(pokemon.type());
+        this.em.persist(pokemonToAdd);
+        this.em.flush();
+    }
 
 
 }

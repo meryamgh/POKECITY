@@ -16,4 +16,8 @@ public interface DresseurDao {
 
     boolean isDresseurPokemon(int idDresseur, int idPokemon) throws NotAvailablePokemonException;
 
+    int getNumberPokemon(int idDresseur);
+
+    void setDresseurBannedStatus(int idDresseur);
+
 }
