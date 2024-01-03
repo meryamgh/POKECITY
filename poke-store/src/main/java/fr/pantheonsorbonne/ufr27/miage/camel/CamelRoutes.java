@@ -46,17 +46,11 @@ public class CamelRoutes extends RouteBuilder {
                 .bean(fightGateway,"getRandomPokemonForFight(${body})")
                 ;
 
-//        from("sjms2:queue:M1.returnPNJ")
-//                .unmarshal().json(Pokemon.class)
-//                .bean(fightGateway, "stockPokemonToStore(${body})");
-//
-
         from("sjms2:queue:M1.returnPNJ")
-                .choice()
-                .when().simple("${body} != null && ${body.getClass().getName()} == 'fr.pantheonsorbonne.ufr27.miage.dto.Pokemon.class'")
-                .bean(fightGateway, "stockPokemonToStore(${body})")
-                .otherwise()
-                .log("Ignoring non-Pokemon message");
+                .log("recu dans le store pour etre ajouter dans ma bdd ${body}")
+                .bean(fightGateway, "stockPokemonToStore(${body})");
+
+
 
 
 

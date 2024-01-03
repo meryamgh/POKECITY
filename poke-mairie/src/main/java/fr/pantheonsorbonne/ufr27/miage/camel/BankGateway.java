@@ -24,8 +24,8 @@ public class BankGateway {
         exchange.getIn().setHeader("responseHaveEnoughMoney", haveEnoughMoney);
     }
 
-    public void addAmountWinToBankAccount(FightSession fightSession){
-        this.bankService.creditBankAccount(fightSession.amountWin(),fightSession.idDresseur());
+    public void addAmountWinToBankAccount(int amount, int idDresseur){
+        this.bankService.creditBankAccount(amount,idDresseur);
         System.out.println("ok ajout d'argent");
     }
 

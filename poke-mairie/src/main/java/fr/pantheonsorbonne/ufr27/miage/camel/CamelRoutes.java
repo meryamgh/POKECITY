@@ -1,10 +1,16 @@
 package fr.pantheonsorbonne.ufr27.miage.camel;
 
+import fr.pantheonsorbonne.ufr27.miage.dto.FightSession;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.apache.camel.CamelContext;
+import org.apache.camel.Exchange;
+import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 @ApplicationScoped
 public class CamelRoutes extends RouteBuilder {
@@ -93,64 +99,49 @@ public class CamelRoutes extends RouteBuilder {
                 .end()
                 .setHeader("idDresseur", constant(idDresseur))
                 .to("sjms2:queue:M1.fight?exchangePattern=InOut&requestTimeout=60000")
-                .marshal().json()
+                .split(body())
+                .choice()
+                .when(simple("${body.isAdopted}"))
+                    .log("je suis le pokemon du dresseur ${body}")
+                    .choice()
+                        .when(simple("${headers.isWinner}"))
+                            .bean(bank, "addAmountWinToBankAccount(${headers.amountWin},${headers.idDresseur})")
+                            .bean(pokemonGateway, "setLocalisationPokemon(${body},'mairie')" )
+                            .log("J'ai gagner")
 
-                .split(xpath("//ourPokemon"))
-                //.unmarshal().json(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon.class)
-                .log("apres vombat mairie ${body}")
+                        .otherwise()
+                            .to("sjms2:queue:M1.soin?exchangePattern=InOut")
+                            .log("Je vais me faire soigner peut etre")
+                            .bean(bank, "checkBalance(${header.price}, ${headers.idDresseur})")
+                            .choice()
+                                .when(simple("${headers.responseHaveEnoughMoney}"))
+                                    .bean(pokemonGateway, "setLocalisationPokemon(${body},'soin')")
+                                    .toD("sjms2:queue:" + jmsPrefix + "pokeInfirmerie?exchangePattern=InOut&requestTimeout=60000")
+                                    .bean(pokemonGateway, "setLocalisationPokemon(${body},'mairie')")
+                                    .log("j'ai assez je vais me faire soigner")
+                                .otherwise()
+                                    .log("j'ai pas assez je vais pas me faire soigner")
+                                    .bean(pokemonGateway, "checkLastPokemon(${headers.idDresseur})")
+                                    .choice()
+                                        .when(simple("${headers.isLastPokemon}"))
+                                            .log("mon dernier pokemon ${body}")
+                                            .bean(pokemonGateway, "setLocalisationPokemon(${body},'store')" )
 
-              //  .unmarshal().json(Pokemon.class)
-              //  .bean(fightGateway, "stockPokemonToStore(${body})")
+                                            .to("sjms2:queue:M1.returnPNJ")
 
+                                            .bean(dresseurGateway,"bannedDresseur(${headers.idDresseur})")
+                                            .to("sjms2:topic:M1.dresseurBanned")
 
-//                .choice()
-//                    .when(simple("${body.isWinner}"))
-//                        .bean(bank, "addAmountWinToBankAccount(${body})")
-//                        .bean(pokemonGateway, "setLocalisationPokemon(${body.ourPokemon()},'mairie')" )
-//                        .log("setloca id pokemon dresseur")
-//                    .endChoice() // Close the current choice block
-//s
-//                    .otherwise()
-//                        .to("sjms2:queue:M1.soin?exchangePattern=InOut")
-//                        .log("price treeatment")
-//                        .bean(bank, "checkBalance(${header.price}, ${headers.idDresseur})")
-//                        .choice()
-//                            .when(simple("${headers.responseHaveEnoughMoney}"))
-//                                .bean(pokemonGateway, "setLocalisationPokemon(${body.ourPokemon()},'soin')")
-//                                .toD("sjms2:queue:" + jmsPrefix + "pokeInfirmerie?exchangePattern=InOut&requestTimeout=60000")
-//                                .bean(pokemonGateway, "setLocalisationPokemon(${body.ourPokemon()},'mairie')")
-//                            .otherwise()
-//                .log("le body1 figthing session ${body}")
-//                                .bean(pokemonGateway, "checkLastPokemon(${headers.idDresseur})")
-//                                .choice()
-//                                    .when(simple("${headers.isLastPokemon}"))
-//                .log("le body figthing session ${body}")
-//                                        .bean(pokemonGateway, "setLocalisationPokemon(${body},'store')" )
-//                                        .marshal().json()
-//                                        .split(body())
-//                                            .log("body apres le split ${body}")
-//                                   //     .to("sjms2:queue:M1.returnPNJ")
-//                                       // .bean(pokemonGateway, "setLocalisationPokemon(${body.ourPokemon()},'store')")
-//
-//                                        .bean(dresseurGateway,"bannedDresseur(${headers.idDresseur})")
-//                                        .to("sjms2:topic:M1.dresseurBanned")
-//                                        .end()
-//
-//                                        .log("pas son dernier pokemon")
-//                                .endChoice()
-//                            .endChoice()
-//                        .end() // Close the inner choice block
-//
-//                    .end() // Close the outer choice block
-//
-//                .end() // Close the entire choice block
-//
-//                .end()
-//                .log("go back to store")
-//               // .setBody(simple("${body.oponnent()}"))
-//                .unmarshal().json(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon.class)
-//                .bean(pokemonGateway, "setLocalisationPokemon(${body},'store')" )
-//                .to("sjms2:queue:M1.returnPNJ");
+                                        .otherwise()
+                                            .log("pas son dernier pokemon")
+
+                .log("go back to store je suis pokemon du store ${body}")
+                .choice()
+                .when(simple("${body.isAdopted}"))
+                 .bean(pokemonGateway, "setLocalisationPokemon(${body},'store')" )
+                .to("sjms2:queue:M1.returnPNJ")
+                .log("pokemon pas au dresseur ${body}")
+
 
         ;
 
