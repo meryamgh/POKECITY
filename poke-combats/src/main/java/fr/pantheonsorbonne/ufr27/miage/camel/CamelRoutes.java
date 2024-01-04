@@ -32,7 +32,7 @@ public class CamelRoutes extends RouteBuilder {
                 .log("fight have begin ${body}")
                 .bean(fightSessionGateway, "playBattle(${body},${headers.idDresseur})")
                 .log("apres le combat ${body}")
-              //  .delay(30000)
+                .delay(30000)
                // .delayer(12)
         ;
 

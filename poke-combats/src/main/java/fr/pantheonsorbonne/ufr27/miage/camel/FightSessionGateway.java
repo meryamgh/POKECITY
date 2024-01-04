@@ -33,7 +33,7 @@ public class FightSessionGateway {
          pokemonsAfterFight.add(PNJ);
          exchange.getMessage().setBody(pokemonsAfterFight);
          exchange.getIn().setHeader("amountWin",300);
-         exchange.getIn().setHeader("isWinner",true);
+         exchange.getIn().setHeader("isWinner",false);
 
     }
 

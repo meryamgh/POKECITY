@@ -39,7 +39,7 @@ public class CamelRoutes extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        this.camelContext.setTracing(true);
+        //this.camelContext.setTracing(true);
         from("sjms2:queue:" + jmsPrefix +"bankRoute")
                 .setHeader("idDresseur", constant(idDresseur))
                 .bean(bank, "checkBalance(${headers.price}, ${headers.idDresseur})")
@@ -102,49 +102,49 @@ public class CamelRoutes extends RouteBuilder {
                 .split(body())
                 .choice()
                 .when(simple("${body.isAdopted}"))
-                    .log("je suis le pokemon du dresseur ${body}")
-                    .choice()
-                        .when(simple("${headers.isWinner}"))
-                            .bean(bank, "addAmountWinToBankAccount(${headers.amountWin},${headers.idDresseur})")
-                            .bean(pokemonGateway, "setLocalisationPokemon(${body},'mairie')" )
-                            .log("J'ai gagner")
-
-                        .otherwise()
-                            .to("sjms2:queue:M1.soin?exchangePattern=InOut")
-                            .log("Je vais me faire soigner peut etre")
-                            .bean(bank, "checkBalance(${header.price}, ${headers.idDresseur})")
-                            .choice()
-                                .when(simple("${headers.responseHaveEnoughMoney}"))
-                                    .bean(pokemonGateway, "setLocalisationPokemon(${body},'soin')")
-                                    .toD("sjms2:queue:" + jmsPrefix + "pokeInfirmerie?exchangePattern=InOut&requestTimeout=60000")
-                                    .bean(pokemonGateway, "setLocalisationPokemon(${body},'mairie')")
-                                    .log("j'ai assez je vais me faire soigner")
-                                .otherwise()
-                                    .log("j'ai pas assez je vais pas me faire soigner")
-                                    .bean(pokemonGateway, "checkLastPokemon(${headers.idDresseur})")
-                                    .choice()
-                                        .when(simple("${headers.isLastPokemon}"))
-                                            .log("mon dernier pokemon ${body}")
-                                            .bean(pokemonGateway, "setLocalisationPokemon(${body},'store')" )
-
-                                            .to("sjms2:queue:M1.returnPNJ")
-
-                                            .bean(dresseurGateway,"bannedDresseur(${headers.idDresseur})")
-                                            .to("sjms2:topic:M1.dresseurBanned")
-
-                                        .otherwise()
-                                            .log("pas son dernier pokemon")
-
-                .log("go back to store je suis pokemon du store ${body}")
-                .choice()
-                .when(simple("${body.isAdopted}"))
-                 .bean(pokemonGateway, "setLocalisationPokemon(${body},'store')" )
-                .to("sjms2:queue:M1.returnPNJ")
-                .log("pokemon pas au dresseur ${body}")
-
-
+                    .to("direct:pokemonAdopted")
+                .otherwise()
+                    .log("go back to store je suis pokemon du store ${body}")
+                    .bean(pokemonGateway, "setLocalisationPokemon(${body},'store')" )
+                    .to("sjms2:queue:M1.returnPNJ")
+                    .log("pokemon pas au dresseur ${body}")
         ;
 
+
+        from("direct:pokemonAdopted")
+                .log("je suis le pokemon du dresseur ${body}")
+                .choice()
+                    .when(simple("${headers.isWinner}"))
+                    .bean(bank, "addAmountWinToBankAccount(${headers.amountWin},${headers.idDresseur})")
+                    .bean(pokemonGateway, "setLocalisationPokemon(${body},'mairie')" )
+                    .log("J'ai gagner ${headers.amountWin}")
+                .endChoice()
+                .otherwise()
+                    .log("perdu")
+                    .to("sjms2:queue:M1.soin?exchangePattern=InOut")
+                    .log("Je vais me faire soigner peut etre")
+                    .bean(bank, "checkBalance(${header.price}, ${headers.idDresseur})")
+                    .choice()
+                        .when(simple("${headers.responseHaveEnoughMoney}"))
+                        .bean(pokemonGateway, "setLocalisationPokemon(${body},'soin')")
+                        .toD("sjms2:queue:" + jmsPrefix + "pokeInfirmerie?exchangePattern=InOut&requestTimeout=60000")
+                        .bean(pokemonGateway, "setLocalisationPokemon(${body},'mairie')")
+                        .log("j'ai assez je vais me faire soigner")
+                    .endChoice()
+                    .otherwise()
+                        .log("j'ai pas assez je vais pas me faire soigner")
+                        .bean(pokemonGateway, "setLocalisationPokemon(${body},'store')" )
+                        .to("sjms2:queue:M1.returnPNJ")
+                        .bean(pokemonGateway, "checkLastPokemon(${headers.idDresseur})")
+                        .choice()
+                            .when(simple("${headers.isLastPokemon}"))
+                            .log("mon dernier pokemon ${body}")
+                            .bean(dresseurGateway,"bannedDresseur(${headers.idDresseur})")
+                            .to("sjms2:topic:M1.dresseurBanned")
+                        .endChoice()
+                            .otherwise()
+                            .log("pas son dernier pokemon")
+                ;
     }
 
 }
