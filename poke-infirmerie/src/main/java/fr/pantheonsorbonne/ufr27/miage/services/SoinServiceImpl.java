@@ -20,8 +20,8 @@ public class SoinServiceImpl implements SoinService{
     RedirectToMairieGateway redirectToMairieGateway;
 
     @Override
-    public void checkEnoughMoney(int idPokemon, int price, int pokescore, int pricetreatment, String type) {
-        pokemonGateway.checkBankAccount(idPokemon,price, pokescore, pricetreatment, type);
+    public void checkEnoughMoney(int idPokemon, int price, int pokescore, int pricetreatment, String type, boolean isAdopted, String name) {
+        pokemonGateway.checkBankAccount(idPokemon, name, price, pokescore, pricetreatment, type, isAdopted);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class SoinServiceImpl implements SoinService{
         System.out.println("pokescore" + pokeScore);
         System.out.println("prix" + pokemon.prix());
         treatmentDAO.insertTreatmentSession(pokemon);
-        return new Pokemon(pokemon.idPokemon(),pokemon.prix(),pokemon.prix(), pokemon.type());
+        return new Pokemon(pokemon.idPokemon(),pokemon.prix(),pokemon.prix(), pokemon.type(), pokemon.isAdopted(), pokemon.name());
     }
 
     @Override
@@ -48,7 +48,7 @@ public class SoinServiceImpl implements SoinService{
 
     @Override
     public void priseEnCharge(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon){
-        checkEnoughMoney(pokemon.idPokemon(), pokemon.prix(), pokemon.pokeScore(), this.getPriceTreatment(pokemon), pokemon.type());
+        checkEnoughMoney(pokemon.idPokemon(), pokemon.prix(), pokemon.pokeScore(), this.getPriceTreatment(pokemon), pokemon.type(), pokemon.isAdopted(), pokemon.name());
     }
 
 }

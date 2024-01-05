@@ -21,8 +21,10 @@ public class RegistrationServiceImpl implements RegistrationService {
     public fr.pantheonsorbonne.ufr27.miage.dto.Pokemon inscrirePokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon) {
 
         int pokescore= pokemon.pokeScore();
+        String name = pokemon.name();
         int idPokemon= pokemon.idPokemon();
         String type = pokemon.type();
+        boolean isAdopted = pokemon.isAdopted();
 
         //on récupère l'id de la session
         SchoolSession session = schoolSessionService.findRightSession(pokescore);
@@ -33,7 +35,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         //on augmente le score du pokemon qui a suivi le cours
         int gain = session.getPokescoreGain();
         int newScore = pokemon.pokeScore() + gain;
-        fr.pantheonsorbonne.ufr27.miage.dto.Pokemon improvedPokemon = new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(idPokemon, newScore,newScore, type);
+        fr.pantheonsorbonne.ufr27.miage.dto.Pokemon improvedPokemon = new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(idPokemon, newScore,newScore, type, isAdopted, name);
 
         return improvedPokemon;
     }

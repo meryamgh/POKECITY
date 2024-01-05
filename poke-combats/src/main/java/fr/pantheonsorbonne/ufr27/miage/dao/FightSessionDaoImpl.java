@@ -38,6 +38,7 @@ public class FightSessionDaoImpl implements FightSessionDao{
         battle.setIdPNJ(idOponent);
         battle.setReward(amountWin);
         battle.setWinner(isWinner);
+        em.persist(battle);
         return battle;
     }
 

@@ -3,6 +3,7 @@ package fr.pantheonsorbonne.ufr27.miage.services;
 
 import fr.pantheonsorbonne.ufr27.miage.dao.FightSessionDao;
 import fr.pantheonsorbonne.ufr27.miage.dto.Dresseur;
+import fr.pantheonsorbonne.ufr27.miage.dto.FightSession;
 import fr.pantheonsorbonne.ufr27.miage.dto.Pokemon;
 import fr.pantheonsorbonne.ufr27.miage.models.FightingSession;
 import jakarta.enterprise.context.ApplicationScoped;

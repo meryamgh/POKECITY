@@ -19,6 +19,7 @@ public class Pokemon {
     @Column(name = "prix", nullable = false, length = 45)
     private int prix;
 
+
     @Column(name = "localisation", nullable = false, length = 45)
     private String localisation;
 
@@ -62,4 +63,6 @@ public class Pokemon {
     public void setLocalisation(String localisation) {
         this.localisation = localisation;
     }
+
+
 }

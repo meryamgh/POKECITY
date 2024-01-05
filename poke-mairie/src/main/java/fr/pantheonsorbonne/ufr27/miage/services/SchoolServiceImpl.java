@@ -33,9 +33,11 @@ public class SchoolServiceImpl implements SchoolService{
                 throw new NotAvailablePokemonException("Pokemon with ID "+idPokemon+" is not available because is in the "+pokemon.getLocalisation());
             }
             int id = pokemon.getIdPokemon();
+            String name = pokemon.getName();
             int score = pokemon.getPokeScore();
             String type = pokemon.getType();
-            fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemonDTO = new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(id, score,score, type);
+            boolean isAdopted = pokemon.getAdopted();
+            fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemonDTO = new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(id, score,score, type, isAdopted, name);
             gateway.sendToSchool(pokemonDTO);
     }
 
