@@ -5,6 +5,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.Random;
 
+import static java.lang.Math.abs;
+
 @ApplicationScoped
 public class WinnerServiceImpl implements WinnerService{
 
@@ -12,6 +14,7 @@ public class WinnerServiceImpl implements WinnerService{
     public boolean getWinner(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon oponent, Pokemon ourPokemon) {
 
         int chanceToWin = 50;
+        int ecart = ourPokemon.pokeScore() - oponent.pokeScore();
 
         switch (ourPokemon.type()) {
 
@@ -40,11 +43,35 @@ public class WinnerServiceImpl implements WinnerService{
                 break;
         }
 
-        if(ourPokemon.pokeScore() < oponent.pokeScore()) {
+        if(ecart < 0) {
+            if(ecart >= -10) {
+                chanceToWin-=5;
+            } else if(ecart >= -50) {
+                chanceToWin-=10;
+            } else if (ecart >= -100) {
+                chanceToWin-=15;
+            } else {
+                chanceToWin-=20;
+            }
+        }
+
+        if(ecart > 0) {
+            if(ecart <= 10) {
+                chanceToWin+=5;
+            } else if(ecart <= 50) {
+                chanceToWin+=10;
+            } else if (ecart <= 100) {
+                chanceToWin+=15;
+            } else {
+                chanceToWin+=20;
+            }
+        }
+
+        /**if(ourPokemon.pokeScore() < oponent.pokeScore()) {
             chanceToWin-=15;
         } else if (ourPokemon.pokeScore() > oponent.pokeScore()) {
             chanceToWin+=15;
-        }
+        }**/
 
         return percentGiven(chanceToWin);
     }
