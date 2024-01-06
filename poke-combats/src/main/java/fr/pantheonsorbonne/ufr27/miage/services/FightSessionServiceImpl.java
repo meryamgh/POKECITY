@@ -29,7 +29,7 @@ public class FightSessionServiceImpl implements FightSessionService{
 
     @Override
     public FightingSession play(Pokemon oponent, Pokemon ourPokemon, int idDresseur) {
-        int gain = abs(ourPokemon.pokeScore() - oponent.pokeScore());
+        int gain = oponent.pokeScore();
         boolean isWinner = winnerService.getWinner(oponent, ourPokemon);
         return this.fightSessionDao.createFightingSession(idDresseur, ourPokemon.idPokemon(), oponent.idPokemon(), gain, isWinner);
     }

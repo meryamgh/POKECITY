@@ -67,12 +67,6 @@ public class WinnerServiceImpl implements WinnerService{
             }
         }
 
-        /**if(ourPokemon.pokeScore() < oponent.pokeScore()) {
-            chanceToWin-=15;
-        } else if (ourPokemon.pokeScore() > oponent.pokeScore()) {
-            chanceToWin+=15;
-        }**/
-
         return percentGiven(chanceToWin);
     }
 
