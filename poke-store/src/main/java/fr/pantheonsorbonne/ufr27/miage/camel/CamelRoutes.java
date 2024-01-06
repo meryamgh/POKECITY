@@ -43,7 +43,9 @@ public class CamelRoutes extends RouteBuilder {
 
         from("sjms2:queue:M1.getPokemonForFight?exchangePattern=InOut")
                 .unmarshal().json(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon.class)
+                .log("${body}")
                 .bean(fightGateway,"getRandomPokemonForFight(${body})")
+
                 ;
 
         from("sjms2:queue:M1.returnPNJ")

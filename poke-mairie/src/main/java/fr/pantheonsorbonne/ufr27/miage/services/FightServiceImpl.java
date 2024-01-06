@@ -32,8 +32,11 @@ public class FightServiceImpl implements FightService{
             throw new NotAvailablePokemonException("Pokemon with ID "+idPokemon+" is not available because is in the "+pokemon.getLocalisation());
         }
         int id = pokemon.getIdPokemon();
+        String name = pokemon.getName();
         int score = pokemon.getPokeScore();
-        fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemonDTO = new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(id, score,score, pokemon.getType(),pokemon.getAdopted(),pokemon.getName());
+        String type = pokemon.getType();
+        boolean isAdopted = pokemon.getAdopted();
+        fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemonDTO = new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(id, score,score, type, isAdopted, name);
         gateway.retrievePokemonFromStoreToFight(pokemonDTO);
     }
 }

@@ -18,6 +18,9 @@ public class TreatmentSession {
     @Column(name = "priceTreatment", nullable = false, length = 45)
     private int priceTreatment;
 
+    @Column(name = "idPokemon", nullable = false, length = 45)
+    private int idPokemon;
+
     public int getIdPokemon() {
         return idPokemon;
     }
@@ -25,9 +28,6 @@ public class TreatmentSession {
     public void setIdPokemon(int idPokemon) {
         this.idPokemon = idPokemon;
     }
-
-    @Column(name = "idPokemon", nullable = false, length = 45)
-    private int idPokemon;
 
     public int getIdTreatment() {
         return idTreatment;

@@ -18,18 +18,25 @@ public class FightingSession {
     @Column(name = "reward", nullable = false, length = 45)
     private int reward;
 
+    @Column(name = "idPokemon", nullable = false, length = 45)
+    private int idPokemon;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Dresseur dresseur;
+    @Column(name = "idPNJ", nullable = false, length = 45)
+    private int idPNJ;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Pokemon pokemonDresseur;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Pokemon pokemonPNJ;
+    @Column(name = "idDresseur", nullable = false, length = 45)
+    private int idDresseur;
 
     @Column(name = "timeFight", nullable = false, length = 45)
     private Time timeFight;
+
+    public int getIdPokemon() {
+        return idPokemon;
+    }
+
+    public void setIdPokemon(int idPokemon) {
+        this.idPokemon = idPokemon;
+    }
 
     public int getIdFight() {
         return idFight;
@@ -55,30 +62,6 @@ public class FightingSession {
         this.reward = reward;
     }
 
-    public Dresseur getDresseur() {
-        return dresseur;
-    }
-
-    public void setDresseur(Dresseur dresseur) {
-        this.dresseur = dresseur;
-    }
-
-    public Pokemon getPokemonDresseur() {
-        return pokemonDresseur;
-    }
-
-    public void setPokemonDresseur(Pokemon pokemonDresseur) {
-        this.pokemonDresseur = pokemonDresseur;
-    }
-
-    public Pokemon getPokemonPNJ() {
-        return pokemonPNJ;
-    }
-
-    public void setPokemonPNJ(Pokemon pokemonPNJ) {
-        this.pokemonPNJ = pokemonPNJ;
-    }
-
     public Time getTimeFight() {
         return timeFight;
     }
@@ -87,4 +70,19 @@ public class FightingSession {
         this.timeFight = timeFight;
     }
 
+    public int getIdPNJ() {
+        return idPNJ;
+    }
+
+    public void setIdPNJ(int idPNJ) {
+        this.idPNJ = idPNJ;
+    }
+
+    public int getIdDresseur() {
+        return idDresseur;
+    }
+
+    public void setIdDresseur(int idDresseur) {
+        this.idDresseur = idDresseur;
+    }
 }
