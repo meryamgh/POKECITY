@@ -43,5 +43,11 @@ public class DresseurServiceImpl implements DresseurService{
         this.dresseurDao.setDresseurBannedStatus(idDresseur);
     }
 
+    @Override
+    public void deletePokemonDresseur(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon, int idDresseur) {
+        Pokemon pokemonToDelete = this.pokemonDao.getPokemonById(pokemon.idPokemon());
+        this.dresseurDao.deletePokemon(pokemonToDelete,idDresseur);
+    }
+
 
 }

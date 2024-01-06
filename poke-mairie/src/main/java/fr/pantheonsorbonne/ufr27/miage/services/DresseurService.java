@@ -14,4 +14,6 @@ public interface DresseurService {
 
     void changeBannedStatus(int idDresseur);
 
+    void deletePokemonDresseur(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon, int idDresseur);
+
 }

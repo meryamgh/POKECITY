@@ -1,5 +1,6 @@
 package fr.pantheonsorbonne.ufr27.miage.camel;
 
+import fr.pantheonsorbonne.ufr27.miage.dto.Pokemon;
 import fr.pantheonsorbonne.ufr27.miage.services.DresseurService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -12,6 +13,10 @@ public class DresseurGateway {
 
     public void bannedDresseur(int idDresseur){
         this.dresseurService.changeBannedStatus(idDresseur);
+    }
+
+    public void deletePokemonFromDresseurPokedex(Pokemon pokemon, int idDresseur){
+        this.dresseurService.deletePokemonDresseur(pokemon,idDresseur);
     }
 
 }

@@ -10,6 +10,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 
 import java.util.Collection;
+import java.util.List;
 
 @ApplicationScoped
 public class DresseurDaoImpl implements DresseurDao{
@@ -68,6 +69,14 @@ public class DresseurDaoImpl implements DresseurDao{
         em.createQuery("UPDATE Dresseur d SET d.bannedStatus = true WHERE d.idDresseur = :id")
                 .setParameter("id", idDresseur)
                 .executeUpdate();
+    }
+
+    @Override
+    @Transactional
+    public void deletePokemon(Pokemon pokemon, int idDresseur) {
+        Dresseur dresseur = this.getDresseur(idDresseur);
+        dresseur.getPokedex().remove(pokemon);
+        this.em.persist(dresseur);
     }
 
 }

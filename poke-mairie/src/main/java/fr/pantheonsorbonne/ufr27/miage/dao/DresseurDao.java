@@ -20,4 +20,6 @@ public interface DresseurDao {
 
     void setDresseurBannedStatus(int idDresseur);
 
+    void deletePokemon(Pokemon pokemon, int idDreseur);
+
 }

@@ -133,6 +133,7 @@ public class CamelRoutes extends RouteBuilder {
                     .endChoice()
                     .otherwise()
                         .log("j'ai pas assez je vais pas me faire soigner")
+                        .bean(dresseurGateway, "deletePokemonFromDresseurPokedex(${body},${headers.idDresseur})")
                         .bean(pokemonGateway, "setLocalisationPokemon(${body},'store')" )
                         .to("sjms2:queue:M1.returnPNJ")
                         .bean(pokemonGateway, "checkLastPokemon(${headers.idDresseur})")
