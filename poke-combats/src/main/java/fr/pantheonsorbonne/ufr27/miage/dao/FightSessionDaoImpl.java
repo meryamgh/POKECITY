@@ -44,4 +44,12 @@ public class FightSessionDaoImpl implements FightSessionDao{
         return battle;
     }
 
+    @Override
+    @Transactional
+    public Collection<FightingSession> getAllFightingSessionByDresseur(int idDresseur) {
+        return this.em.createQuery("SELECT fight FROM FightingSession fight WHERE fight.idDresseur = :dresseur", FightingSession.class)
+                .setParameter("dresseur", idDresseur)
+                .getResultList();
+    }
+
 }

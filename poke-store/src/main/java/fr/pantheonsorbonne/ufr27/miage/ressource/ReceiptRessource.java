@@ -40,4 +40,11 @@ public class ReceiptRessource {
     public Collection<ReceiptPokemon> getAllReceiptPokemon(){
         return this.service.getAllReceipts();
     }
+
+    @Path("receipts/{idDresseur}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public Collection<ReceiptPokemon> getAllReceiptPokemon(@PathParam("idDresseur") int idDresseur){
+        return this.service.getAllReceiptsByDresseur(idDresseur);
+    }
 }

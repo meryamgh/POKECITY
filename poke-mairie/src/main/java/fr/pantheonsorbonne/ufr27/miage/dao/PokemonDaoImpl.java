@@ -6,6 +6,9 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 
+import java.util.Collection;
+import java.util.List;
+
 @ApplicationScoped
 public class PokemonDaoImpl implements PokemonDao{
 
@@ -45,6 +48,14 @@ public class PokemonDaoImpl implements PokemonDao{
                 .setParameter("loca", loca)
                 .setParameter("idPokemon", idPokemon)
                 .executeUpdate();
+    }
+
+
+    @Override
+    @Transactional
+    public Collection<Pokemon> getAllPokemon() {
+        return em.createQuery("SELECT p FROM Pokemon p", Pokemon.class)
+                .getResultList();
     }
 
 

@@ -16,6 +16,28 @@ public class SchoolTicket {
     @Column(name = "schoolSession_idSchoolSession", nullable = false)
     private int schoolSessionId;
 
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
+    public int getIdDresseur() {
+        return idDresseur;
+    }
+
+    public void setIdDresseur(int idDresseur) {
+        this.idDresseur = idDresseur;
+    }
+
+    @Column(name = "cost", nullable = false)
+    private int cost;
+
+    @Column(name = "idDresseur", nullable = false)
+    private int idDresseur;
+
     public int getIdSchoolTicket() {
         return idSchoolTicket;
     }

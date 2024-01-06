@@ -25,7 +25,7 @@ public class CamelRoutes extends RouteBuilder {
         from("sjms2:queue:M1.BankResponse?exchangePattern=InOut")
                 .unmarshal().json(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon.class)
                 .delay(30000)
-                .bean(gateway, "improvePokemon(${body})")
+                .bean(gateway, "improvePokemon(${body}, ${headers.idDresseur})")
         ;
 
 

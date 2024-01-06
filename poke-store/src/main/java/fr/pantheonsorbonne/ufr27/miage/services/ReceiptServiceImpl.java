@@ -43,6 +43,11 @@ public class ReceiptServiceImpl implements ReceiptService{
         return this.receiptPokemonDao.getAllReceiptsOfStore();
     }
 
+    @Override
+    public Collection<ReceiptPokemon> getAllReceiptsByDresseur(int idDresseur) {
+        return this.receiptPokemonDao.getAllReceiptsOfStoreByDresseur(idDresseur);
+    }
+
 
 
 

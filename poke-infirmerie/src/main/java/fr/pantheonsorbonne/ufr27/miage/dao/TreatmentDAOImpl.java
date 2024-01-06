@@ -19,11 +19,12 @@ public class TreatmentDAOImpl implements TreatmentDAO {
 
     @Override
     @Transactional
-    public void insertTreatmentSession(Pokemon pokemon, int treatPrice) {
+    public void insertTreatmentSession(Pokemon pokemon, int treatPrice, int idDresseur) {
         TreatmentSession receipt = new TreatmentSession();
         receipt.setIdPokemon(pokemon.idPokemon());
         receipt.setTimeTreatment(3);
         receipt.setPriceTreatment(treatPrice);
+        receipt.setIdDresseur(idDresseur);
         em.persist(receipt);
         em.flush();
 
@@ -37,5 +38,14 @@ public class TreatmentDAOImpl implements TreatmentDAO {
     @Override
     public String getTimeTreatmentAsString(Time timeTreatment) {
         return timeTreatment.toString();
+    }
+
+
+
+    @Override
+    public Collection<TreatmentSession> getAllTreatmentSessionsByDresseuer(int idDresseur){
+        return em.createQuery("SELECT session FROM TreatmentSession session WHERE session.idDresseur = :idDresseur", TreatmentSession.class)
+                .setParameter("idDresseur", idDresseur)
+                .getResultList();
     }
 }

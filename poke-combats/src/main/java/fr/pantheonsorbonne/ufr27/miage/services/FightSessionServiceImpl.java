@@ -34,4 +34,9 @@ public class FightSessionServiceImpl implements FightSessionService{
         return this.fightSessionDao.createFightingSession(idDresseur, ourPokemon.idPokemon(), oponent.idPokemon(), gain, isWinner);
     }
 
+    @Override
+    public Collection<FightingSession> getAllFightsDresseur(int idDresseur){
+        return this.fightSessionDao.getAllFightingSessionByDresseur(idDresseur);
+    }
+
 }

@@ -76,6 +76,10 @@ public class DresseurDaoImpl implements DresseurDao{
     public void deletePokemon(Pokemon pokemon, int idDresseur) {
         Dresseur dresseur = this.getDresseur(idDresseur);
         dresseur.getPokedex().remove(pokemon);
+        for(Pokemon poke : dresseur.getPokedex()){
+            System.out.println(poke.getName());
+        }
+
         this.em.persist(dresseur);
     }
 

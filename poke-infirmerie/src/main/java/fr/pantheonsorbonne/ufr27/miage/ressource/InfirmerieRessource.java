@@ -37,5 +37,12 @@ public class InfirmerieRessource {
     public Collection<TreatmentSession> getAllTreatments() {
         return treatmentDAO.getAllTreatmentSessions();
     }
+
+    @Path("treatments/{idDresseur}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public Collection<TreatmentSession> getAllTreatments(@PathParam("idDresseur") int idDresseur) {
+        return service.getAllTreatmentSessionsDresseur(idDresseur);
+    }
 }
 

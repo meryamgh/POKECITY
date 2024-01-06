@@ -24,8 +24,8 @@ public class SchoolGateway {
     SchoolSessionService schoolSessionService;
 
 
-    public fr.pantheonsorbonne.ufr27.miage.dto.Pokemon improvePokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon){
-        return schoolService.inscrirePokemon(pokemon);
+    public fr.pantheonsorbonne.ufr27.miage.dto.Pokemon improvePokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon, int idDresseur){
+        return schoolService.inscrirePokemon(pokemon, idDresseur);
     }
 
 

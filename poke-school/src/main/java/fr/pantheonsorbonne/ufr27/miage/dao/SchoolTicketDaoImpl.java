@@ -22,10 +22,12 @@ public class SchoolTicketDaoImpl implements SchoolTicketDao{
 
     @Override
     @Transactional
-    public SchoolTicket createSchoolTicket(int idPokemon, int idSession)
+    public SchoolTicket createSchoolTicket(int idPokemon, int idSession, int cost, int idDresseur)
     {
         SchoolTicket s = new SchoolTicket();
         s.setPokemon_id(idPokemon);
+        s.setCost(cost);
+        s.setIdDresseur(idDresseur);
         s.setSchoolSession_id(idSession);
         em.persist(s);
         return s;
@@ -35,5 +37,14 @@ public class SchoolTicketDaoImpl implements SchoolTicketDao{
     @Transactional
     public Collection<SchoolTicket> getSchoolTickets() {
         return em.createQuery("SELECT ticket FROM SchoolTicket ticket", SchoolTicket.class).getResultList();
+    }
+
+    @Override
+    @Transactional
+    public Collection<SchoolTicket> getSchoolTicketsByDresseur(int idDresseur){
+        return em.createQuery("SELECT ticket FROM SchoolTicket ticket WHERE ticket.idDresseur = :idDresseur", SchoolTicket.class)
+                .setParameter("idDresseur", idDresseur)
+                .getResultList();
+
     }
 }

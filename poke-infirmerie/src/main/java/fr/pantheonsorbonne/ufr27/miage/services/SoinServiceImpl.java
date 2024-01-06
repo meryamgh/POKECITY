@@ -4,8 +4,11 @@ import fr.pantheonsorbonne.ufr27.miage.camel.RedirectToMairieGateway;
 import fr.pantheonsorbonne.ufr27.miage.camel.SoignerPokemonGateway;
 import fr.pantheonsorbonne.ufr27.miage.dao.TreatmentDAO;
 import fr.pantheonsorbonne.ufr27.miage.dto.Pokemon;
+import fr.pantheonsorbonne.ufr27.miage.model.TreatmentSession;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+
+import java.util.Collection;
 
 @ApplicationScoped
 public class SoinServiceImpl implements SoinService{
@@ -20,12 +23,12 @@ public class SoinServiceImpl implements SoinService{
     RedirectToMairieGateway redirectToMairieGateway;
 
     @Override
-    public Pokemon soignerPokemon(Pokemon pokemon) {
+    public Pokemon soignerPokemon(Pokemon pokemon, int idDDresseur) {
         int pokeScore = pokemon.pokeScore();
         pokeScore = pokemon.prix();
         System.out.println("pokescore" + pokeScore);
         System.out.println("prix" + pokemon.prix());
-        treatmentDAO.insertTreatmentSession(pokemon, getPriceTreatment(pokemon));
+        treatmentDAO.insertTreatmentSession(pokemon, getPriceTreatment(pokemon), idDDresseur);
         return new Pokemon(pokemon.idPokemon(),pokemon.prix(),pokemon.prix(),pokemon.type(), pokemon.isAdopted(),pokemon.name());
     }
 
@@ -44,6 +47,12 @@ public class SoinServiceImpl implements SoinService{
     @Override
     public void priseEnCharge(Pokemon pokemon){
         pokemonGateway.checkBankAccount(pokemon, this.getPriceTreatment(pokemon));
+    }
+
+
+    @Override
+    public Collection<TreatmentSession> getAllTreatmentSessionsDresseur(int idDresseur){
+        return this.treatmentDAO.getAllTreatmentSessionsByDresseuer(idDresseur);
     }
 
 }

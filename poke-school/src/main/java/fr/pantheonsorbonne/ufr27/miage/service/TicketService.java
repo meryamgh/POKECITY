@@ -5,4 +5,7 @@ import java.util.Collection;
 
 public interface TicketService {
     Collection<SchoolTicket> getAllTickets();
+
+
+    Collection<SchoolTicket> getAllTicketsByDresseur(int idDresseur);
 }

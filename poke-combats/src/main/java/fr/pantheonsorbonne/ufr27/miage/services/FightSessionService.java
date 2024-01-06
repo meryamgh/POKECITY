@@ -11,4 +11,6 @@ public interface FightSessionService {
 
     FightingSession play(Pokemon oponent, Pokemon ourPokemon, int idDresseur);
 
+    Collection<FightingSession> getAllFightsDresseur(int idDresseur);
+
 }

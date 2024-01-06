@@ -1,8 +1,11 @@
 package fr.pantheonsorbonne.ufr27.miage.services;
 
 import fr.pantheonsorbonne.ufr27.miage.dao.PokemonDao;
+import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+
+import java.util.Collection;
 
 
 @ApplicationScoped
@@ -22,6 +25,11 @@ public class PokemonServiceImpl implements PokemonService{
     @Override
     public void updatePokemonLocalisation(int idPokemon, String newLocalisation) {
         this.pokemonDao.setLocalisation(idPokemon,newLocalisation);
+    }
+
+    @Override
+    public Collection<Pokemon> getAllPokemon(){
+        return this.pokemonDao.getAllPokemon();
     }
 
 

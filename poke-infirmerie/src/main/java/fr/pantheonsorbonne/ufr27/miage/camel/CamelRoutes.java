@@ -21,7 +21,7 @@ public class CamelRoutes extends RouteBuilder {
                 .choice()
                 .when(simple("${headers.responseHaveEnoughMoney}"))
                 .delay(30000)
-                .bean(soignerPokemonGateway, "soigner(${body})");
+                .bean(soignerPokemonGateway, "soigner(${body}, ${headers.idDresseur})");
 
         from("sjms2:queue:M1.soin")
                 .log("pokemon recu à l'infirmerie ${body}")

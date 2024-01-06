@@ -90,7 +90,7 @@ public class CamelRoutes extends RouteBuilder {
 
 
         from("direct:fightingPokemon")
-                .bean(pokemonGateway, "setLocalisationPokemon(${body},'fight')")
+              //  .bean(pokemonGateway, "setLocalisationPokemon(${body},'fight')")
                 .marshal().json()
                 .to("sjms2:queue:M1.getPokemonForFight?exchangePattern=InOut")
                 .log("the pokemon for fight ADVERSAIRE is ${body}")

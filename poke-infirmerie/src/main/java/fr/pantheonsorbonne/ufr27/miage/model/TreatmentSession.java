@@ -21,6 +21,17 @@ public class TreatmentSession {
     @Column(name = "idPokemon", nullable = false, length = 45)
     private int idPokemon;
 
+    public int getIdDresseur() {
+        return idDresseur;
+    }
+
+    public void setIdDresseur(int idDresseur) {
+        this.idDresseur = idDresseur;
+    }
+
+    @Column(name = "idDresseur", nullable = false, length = 45)
+    private int idDresseur;
+
     public int getIdPokemon() {
         return idPokemon;
     }

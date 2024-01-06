@@ -2,6 +2,8 @@ package fr.pantheonsorbonne.ufr27.miage.dao;
 
 import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
 
+import java.util.Collection;
+
 public interface PokemonDao {
 
     Pokemon getPokemonById(int idPokemon);
@@ -11,5 +13,7 @@ public interface PokemonDao {
     void setPokescorebyId(int idPokemon, int newPokescore);
 
     void setLocalisation(int idPokemon, String loca);
+
+    Collection<Pokemon> getAllPokemon();
 
 }

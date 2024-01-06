@@ -11,4 +11,6 @@ public interface ReceiptPokemonDao {
 
     Collection<ReceiptPokemon> getAllReceiptsOfStore();
 
+    Collection<ReceiptPokemon> getAllReceiptsOfStoreByDresseur(int iDresseur);
+
 }

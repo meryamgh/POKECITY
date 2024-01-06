@@ -36,8 +36,8 @@ public class SoignerPokemonGateway {
         }
     }
 
-    public fr.pantheonsorbonne.ufr27.miage.dto.Pokemon soigner(Pokemon pokemon) {
-        return service.soignerPokemon(pokemon);
+    public fr.pantheonsorbonne.ufr27.miage.dto.Pokemon soigner(Pokemon pokemon, int idDresseur) {
+        return service.soignerPokemon(pokemon, idDresseur);
     }
 
     public void getPriceTreatment(Pokemon pokemon, Exchange exchange){
