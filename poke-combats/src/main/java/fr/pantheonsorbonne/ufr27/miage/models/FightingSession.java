@@ -27,8 +27,9 @@ public class FightingSession {
     @Column(name = "idDresseur", nullable = false, length = 45)
     private int idDresseur;
 
-    @Column(name = "timeFight", nullable = false, length = 45)
+    @Column(name = "timeFight", nullable = false, columnDefinition = "TIME DEFAULT '00:00:40'")
     private Time timeFight;
+
 
     public int getIdPokemon() {
         return idPokemon;

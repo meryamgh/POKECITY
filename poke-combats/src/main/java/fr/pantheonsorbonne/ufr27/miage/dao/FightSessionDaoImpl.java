@@ -6,6 +6,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 
+import java.sql.Time;
 import java.util.Collection;
 
 @ApplicationScoped
@@ -38,6 +39,7 @@ public class FightSessionDaoImpl implements FightSessionDao{
         battle.setIdPNJ(idOponent);
         battle.setReward(amountWin);
         battle.setWinner(isWinner);
+        battle.setTimeFight(new Time(0,0,40));
         em.persist(battle);
         return battle;
     }

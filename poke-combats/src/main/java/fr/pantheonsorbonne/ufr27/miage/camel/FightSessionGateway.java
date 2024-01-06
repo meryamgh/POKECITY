@@ -30,17 +30,22 @@ public class FightSessionGateway {
             PNJ = pokemons.get(0);
         }
 
-        Pokemon newPoke = new Pokemon(ourPokemon.idPokemon(),0,ourPokemon.prix(),ourPokemon.type(),ourPokemon.isAdopted(),ourPokemon.name());
-        new FightSession(idDresseur, PNJ, newPoke, false, 300);
-        FightingSession fightingSession = fightSessionService.play(PNJ, ourPokemon, idDresseur);
+         FightingSession fightingSession = fightSessionService.play(PNJ, ourPokemon, idDresseur);
 
         Collection<Pokemon> pokemonsAfterFight = new ArrayList<>();
-        pokemonsAfterFight.add(newPoke);
-        pokemonsAfterFight.add(PNJ);
-        exchange.getMessage().setBody(pokemonsAfterFight);
-        exchange.getIn().setHeader("amountWin",300);
-        exchange.getIn().setHeader("isWinner",false);
 
+        exchange.getMessage().setBody(pokemonsAfterFight);
+        if(fightingSession.isWinner()){
+            pokemonsAfterFight.add(ourPokemon);
+            exchange.getIn().setHeader("amountWin",fightingSession.getReward());
+
+            exchange.getIn().setHeader("isWinner",fightingSession.isWinner());
+        }else{
+            Pokemon newPoke = new Pokemon(ourPokemon.idPokemon(),0,ourPokemon.prix(),ourPokemon.type(),ourPokemon.isAdopted(),ourPokemon.name());
+             pokemonsAfterFight.add(newPoke);
+             exchange.getIn().setHeader("isWinner",fightingSession.isWinner());
+        }
+        pokemonsAfterFight.add(PNJ);
 
     }
 
