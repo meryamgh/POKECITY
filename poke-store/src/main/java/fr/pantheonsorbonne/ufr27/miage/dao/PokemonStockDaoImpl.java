@@ -74,7 +74,7 @@ public class PokemonStockDaoImpl implements PokemonStockDao{
         pokemonToAdd.setPrix(pokemon.prix());
         pokemonToAdd.setType(pokemon.type());
         this.em.merge(pokemonToAdd);
-     }
+      }
 
 
 }

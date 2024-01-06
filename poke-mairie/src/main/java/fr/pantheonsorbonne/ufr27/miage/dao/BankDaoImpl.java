@@ -36,7 +36,7 @@ public class BankDaoImpl implements BankDao{
     public void creditBank(int amount, int idDresseur) {
         BankAccount balance = this.getBankAccountDresseur(idDresseur);
         balance.setBalance(balance.getBalance() + amount);
-        this.em.merge(balance);
+        this.em.persist(balance);
     }
 
 
