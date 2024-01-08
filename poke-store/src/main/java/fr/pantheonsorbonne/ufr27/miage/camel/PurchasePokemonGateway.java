@@ -5,7 +5,6 @@ import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
 import fr.pantheonsorbonne.ufr27.miage.services.ReceiptService;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.apache.camel.CamelContext;
-import org.apache.camel.Exchange;
 import org.apache.camel.ProducerTemplate;
 import jakarta.inject.Inject;
 import java.io.IOException;

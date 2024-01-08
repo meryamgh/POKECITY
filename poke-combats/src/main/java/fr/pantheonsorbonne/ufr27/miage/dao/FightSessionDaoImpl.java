@@ -25,14 +25,6 @@ public class FightSessionDaoImpl implements FightSessionDao{
 
     @Override
     @Transactional
-    public Collection<FightingSession> getFightingSessionByDresseurId(int idDresseur) {
-        return em.createQuery("SELECT fight FROM FightingSession fight WHERE fight.idDresseur = :dresseur", FightingSession.class)
-                .setParameter("dresseur", idDresseur)
-                .getResultList();
-    }
-
-    @Override
-    @Transactional
     public FightingSession createFightingSession(int idDresseur, int idPokemon, int idOponent, int amountWin, boolean isWinner) {
         FightingSession battle = new FightingSession();
         battle.setIdDresseur(idDresseur);

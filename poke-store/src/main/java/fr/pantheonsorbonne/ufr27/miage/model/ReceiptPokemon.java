@@ -20,8 +20,6 @@ public class ReceiptPokemon {
     @Column(name = "idPokemon", nullable = false, length = 45)
     private int pokemon;
 
-
-
     public int getIdReceipt() {
         return idReceipt;
     }

@@ -1,15 +1,12 @@
 package fr.pantheonsorbonne.ufr27.miage.camel;
 
-import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
 import fr.pantheonsorbonne.ufr27.miage.service.RegistrationService;
 import fr.pantheonsorbonne.ufr27.miage.service.SchoolSessionService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
-import org.apache.camel.ProducerTemplate;
 
-import java.io.IOException;
 
 @ApplicationScoped
 public class SchoolGateway {

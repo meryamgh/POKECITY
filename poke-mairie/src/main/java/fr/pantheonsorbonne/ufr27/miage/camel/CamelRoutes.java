@@ -1,16 +1,13 @@
 package fr.pantheonsorbonne.ufr27.miage.camel;
 
-import fr.pantheonsorbonne.ufr27.miage.dto.FightSession;
+import fr.pantheonsorbonne.ufr27.miage.camel.gateways.BankGateway;
+import fr.pantheonsorbonne.ufr27.miage.camel.gateways.DresseurGateway;
+import fr.pantheonsorbonne.ufr27.miage.camel.gateways.PokemonGateway;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import org.apache.camel.CamelContext;
-import org.apache.camel.Exchange;
-import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
-import java.util.ArrayList;
-import java.util.Collection;
 
 @ApplicationScoped
 public class CamelRoutes extends RouteBuilder {
@@ -32,13 +29,9 @@ public class CamelRoutes extends RouteBuilder {
     @Inject
     DresseurGateway dresseurGateway;
 
-    @Inject
-    CamelContext camelContext;
-
-
 
     @Override
-    public void configure() throws Exception {
+    public void configure() {
         //this.camelContext.setTracing(true);
         from("sjms2:queue:" + jmsPrefix +"bankRoute")
                 .setHeader("idDresseur", constant(idDresseur))
@@ -90,14 +83,14 @@ public class CamelRoutes extends RouteBuilder {
 
 
         from("direct:fightingPokemon")
-              //  .bean(pokemonGateway, "setLocalisationPokemon(${body},'fight')")
                 .marshal().json()
                 .to("sjms2:queue:M1.getPokemonForFight?exchangePattern=InOut")
                 .log("the pokemon for fight ADVERSAIRE is ${body}")
+                .setHeader("idDresseur", constant(idDresseur))
                 .split(body())
                 .bean(pokemonGateway, "setLocalisationPokemon(${body},'fight')")
                 .end()
-                .setHeader("idDresseur", constant(idDresseur))
+
                 .to("sjms2:queue:M1.fight?exchangePattern=InOut&requestTimeout=60000")
                 .split(body())
                 .choice()

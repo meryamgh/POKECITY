@@ -22,14 +22,15 @@ public class PokemonRessource {
 
     @Path("/pokemon/{id}")
     @GET
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON})
     public Pokemon getPokemonById(@PathParam("id") int id) {
         return this.schoolService.getPokemon(id);
     }
 
     @Path("/goToSchool/{idPokemon}")
     @POST
-    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+    @Produces({ MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
     public Response goToSchool(
             @PathParam("idPokemon") int idPokemon
         ){
@@ -47,14 +48,14 @@ public class PokemonRessource {
 
     @Path("/pokemon/all")
     @GET
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON})
     public Collection<Pokemon> getAllPokemonFromStore() {
         return this.pokemonService.getAllPokemon();
     }
 
     @Path("pokemon/localisation/{localisation}")
     @GET
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON})
     public Collection<Pokemon> getPokemonByLocalisation(@PathParam("localisation") String localisation) {
         return this.pokemonService.getPokemonByLocalisation(localisation);
     }

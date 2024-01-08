@@ -19,13 +19,7 @@ public class FightSessionRessource {
     @Path("pokemon")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public Collection<FightingSession> getAllSession() throws FightSessionNotFoundException {
-//        Collection<FightingSession> sessions =  service.getAllFights();
-//        if (sessions.isEmpty()) {
-//            throw new FightSessionNotFoundException();
-//        } else {
-//            return sessions;
-//        }
+    public Collection<FightingSession> getAllSession(){
         return service.getAllFights();
     }
 

@@ -40,7 +40,7 @@ public class SoinServiceImpl implements SoinService{
     @Override
     public int getPriceTreatment(Pokemon pokemon) {
         int intialPrice = pokemon.prix();
-        System.out.println("initialPrice " + intialPrice);
+        System.out.println("initialPrice : " + intialPrice);
         return intialPrice / 2;
     }
 
@@ -53,6 +53,11 @@ public class SoinServiceImpl implements SoinService{
     @Override
     public Collection<TreatmentSession> getAllTreatmentSessionsDresseur(int idDresseur){
         return this.treatmentDAO.getAllTreatmentSessionsByDresseuer(idDresseur);
+    }
+
+    @Override
+    public Collection<TreatmentSession> getAllTreatmentSessions() {
+        return treatmentDAO.getAllTreatmentSessions();
     }
 
 }

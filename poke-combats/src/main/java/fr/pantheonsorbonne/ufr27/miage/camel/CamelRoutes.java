@@ -6,16 +6,9 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 @ApplicationScoped
 public class CamelRoutes extends RouteBuilder {
-
-
-
-    @ConfigProperty(name = "fr.pantheonsorbonne.ufr27.miage.jmsPrefix")
-    String jmsPrefix;
-
 
 
     @Inject
@@ -25,7 +18,7 @@ public class CamelRoutes extends RouteBuilder {
     FightSessionGateway fightSessionGateway;
 
     @Override
-    public void configure() throws Exception {
+    public void configure() {
         this.camelContext.setTracing(true);
 
         from("sjms2:queue:M1.fight")

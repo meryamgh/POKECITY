@@ -1,6 +1,6 @@
 package fr.pantheonsorbonne.ufr27.miage.services;
 
-import fr.pantheonsorbonne.ufr27.miage.camel.StoreGateway;
+import fr.pantheonsorbonne.ufr27.miage.camel.gateways.StoreGateway;
 import fr.pantheonsorbonne.ufr27.miage.dao.DresseurDao;
 import fr.pantheonsorbonne.ufr27.miage.dao.PokemonDao;
 import fr.pantheonsorbonne.ufr27.miage.exception.NotAvailablePokemonException;

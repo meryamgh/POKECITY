@@ -1,6 +1,5 @@
 package fr.pantheonsorbonne.ufr27.miage.services;
 
-import fr.pantheonsorbonne.ufr27.miage.camel.BankGateway;
 import fr.pantheonsorbonne.ufr27.miage.dao.BankDaoImpl;
 import fr.pantheonsorbonne.ufr27.miage.model.BankAccount;
 import jakarta.enterprise.context.ApplicationScoped;

@@ -12,7 +12,7 @@ public class CamelRoutes extends RouteBuilder {
     SchoolGateway gateway;
 
     @Override
-    public void configure() throws Exception {
+    public void configure() {
 
 
         from("sjms2:queue:M1.PokemonToSchool?exchangePattern=InOut")

@@ -6,6 +6,7 @@ import fr.pantheonsorbonne.ufr27.miage.services.InventoryPokemonService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 import java.util.Collection;
 
@@ -31,12 +32,12 @@ public class PokemonRessource {
     @Path("pokemon/{price}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public Collection<Pokemon> getSotredPokemonsByPriceLimit(@PathParam("price") int price) throws PokemonNotFoundException {
+    public Response getSotredPokemonsByPriceLimit(@PathParam("price") int price) throws PokemonNotFoundException {
         Collection<Pokemon> pokemons =  service.getPokemonByPrice(price);
-        if (pokemons.isEmpty()) {
+         if (pokemons.isEmpty()) {
             throw new PokemonNotFoundException();
         } else {
-            return pokemons;
+            return Response.ok(pokemons).build();
         }
     }
 

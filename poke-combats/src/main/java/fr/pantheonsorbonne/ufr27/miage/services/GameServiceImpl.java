@@ -1,14 +1,13 @@
 package fr.pantheonsorbonne.ufr27.miage.services;
 
 import fr.pantheonsorbonne.ufr27.miage.dto.Pokemon;
+import fr.pantheonsorbonne.ufr27.miage.dto.PokemonType;
 import jakarta.enterprise.context.ApplicationScoped;
-
 import java.util.Random;
 
-import static java.lang.Math.abs;
 
 @ApplicationScoped
-public class WinnerServiceImpl implements WinnerService{
+public class GameServiceImpl implements GameService {
 
     @Override
     public boolean getWinner(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon oponent, Pokemon ourPokemon) {
@@ -19,25 +18,25 @@ public class WinnerServiceImpl implements WinnerService{
         switch (ourPokemon.type()) {
 
             case "eau":
-                if(oponent.type() == "feu") {
+                if(oponent.type().equals(PokemonType.FEU.toString())) {
                     chanceToWin+=10;
-                } else if (oponent.type() == "plante"){
+                } else if (oponent.type().equals(PokemonType.PLANTE.toString())){
                     chanceToWin-=10;
                 }
                 break;
 
             case "feu":
-                if(oponent.type() == "plante") {
+                if(oponent.type().equals(PokemonType.PLANTE.toString())) {
                     chanceToWin+=10;
-                } else if (oponent.type() == "eau"){
+                } else if (oponent.type().equals(PokemonType.EAU.toString())){
                     chanceToWin-=10;
                 }
                 break;
 
             case "plante":
-                if(oponent.type() == "eau") {
+                if(oponent.type().equals(PokemonType.EAU.toString())) {
                     chanceToWin+=10;
-                } else if (oponent.type().equals("feu")){
+                } else if (oponent.type().equals(PokemonType.FEU.toString())){
                     chanceToWin-=10;
                 }
                 break;
@@ -75,9 +74,6 @@ public class WinnerServiceImpl implements WinnerService{
     {
         Random rand = new Random();
         int number = rand.nextInt(100);
-        if(number < percent)
-            return true;
-        else
-            return false;
+        return number < percent;
     }
 }

@@ -19,10 +19,6 @@ public class Pokemon {
     private int prix;
 
 
-    @Column(name = "localisation", nullable = false, length = 45)
-    private String localisation;
-
-
     public int getIdPokemon() {
         return idPokemon;
     }
@@ -54,14 +50,5 @@ public class Pokemon {
     public void setName(String name) {
         this.name = name;
     }
-
-    public String getLocalisation() {
-        return localisation;
-    }
-
-    public void setLocalisation(String localisation) {
-        this.localisation = localisation;
-    }
-
 
 }

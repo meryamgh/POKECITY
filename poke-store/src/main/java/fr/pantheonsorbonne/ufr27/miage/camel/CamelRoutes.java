@@ -1,6 +1,5 @@
 package fr.pantheonsorbonne.ufr27.miage.camel;
 
-import fr.pantheonsorbonne.ufr27.miage.dto.Pokemon;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.apache.camel.CamelContext;
@@ -23,7 +22,7 @@ public class CamelRoutes extends RouteBuilder {
     FightGateway fightGateway;
 
     @Override
-    public void configure() throws Exception {
+    public void configure(){
 
         this.camelContext.setTracing(true);
 
@@ -39,7 +38,7 @@ public class CamelRoutes extends RouteBuilder {
                 .otherwise()
                 .bean(pokemonGateway,"notEnoughTogetPokemon")
                 .marshal().json();
-        ;
+
 
         from("sjms2:queue:M1.getPokemonForFight?exchangePattern=InOut")
                 .unmarshal().json(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon.class)

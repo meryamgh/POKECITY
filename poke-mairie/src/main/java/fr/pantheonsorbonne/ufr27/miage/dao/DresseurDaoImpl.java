@@ -74,13 +74,10 @@ public class DresseurDaoImpl implements DresseurDao{
     @Override
     @Transactional
     public void deletePokemon(Pokemon pokemon, int idDresseur) {
-        Dresseur dresseur = this.getDresseur(idDresseur);
-        dresseur.getPokedex().remove(pokemon);
-        for(Pokemon poke : dresseur.getPokedex()){
-            System.out.println(poke.getName());
-        }
+        this.em.createQuery("DELETE FROM Pokedex WHERE pokemon.idPokemon = : idPokemon")
+                .setParameter("idPokemon", pokemon.getIdPokemon())
+                .executeUpdate();
 
-        this.em.persist(dresseur);
     }
 
 }

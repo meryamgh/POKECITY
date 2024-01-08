@@ -1,4 +1,4 @@
-package fr.pantheonsorbonne.ufr27.miage.camel;
+package fr.pantheonsorbonne.ufr27.miage.camel.gateways;
 
 
 import fr.pantheonsorbonne.ufr27.miage.dto.Pokemon;
@@ -7,8 +7,6 @@ import fr.pantheonsorbonne.ufr27.miage.services.PokemonService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.apache.camel.Exchange;
-
-import java.util.Collection;
 
 
 @ApplicationScoped

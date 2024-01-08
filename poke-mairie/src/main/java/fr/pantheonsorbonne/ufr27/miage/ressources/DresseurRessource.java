@@ -21,7 +21,6 @@ public class DresseurRessource {
     @GET
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Collection<Pokemon> getSotredPokemonsByPriceLimit(@PathParam("id") int idDresseur){
-        System.out.println("okok");
         return this.service.getAllDresseurPokemon(idDresseur);
     }
 
@@ -29,7 +28,6 @@ public class DresseurRessource {
     @GET
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Collection<Pokemon> getDresseurBankaccount (@PathParam("id") int idDresseur){
-        System.out.println("okok");
         return this.service.getAllDresseurPokemon(idDresseur);
     }
 }

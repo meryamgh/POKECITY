@@ -18,6 +18,8 @@ public class BankAccount {
     @JsonbTransient
     private Dresseur dresseur;
 
+
+
     public int getIdBankAccount() {
         return idBankAccount;
     }

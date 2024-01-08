@@ -1,6 +1,5 @@
 package fr.pantheonsorbonne.ufr27.miage.ressource;
 
-import fr.pantheonsorbonne.ufr27.miage.exception.PokemonNotAvailable;
 import fr.pantheonsorbonne.ufr27.miage.exception.PokemonNotFoundException;
 import fr.pantheonsorbonne.ufr27.miage.model.ReceiptPokemon;
 import fr.pantheonsorbonne.ufr27.miage.services.ReceiptService;

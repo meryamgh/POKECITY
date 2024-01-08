@@ -1,6 +1,5 @@
 package fr.pantheonsorbonne.ufr27.miage.ressource;
 
-import fr.pantheonsorbonne.ufr27.miage.dao.TreatmentDAO;
 import fr.pantheonsorbonne.ufr27.miage.dto.Pokemon;
 import fr.pantheonsorbonne.ufr27.miage.model.TreatmentSession;
 import fr.pantheonsorbonne.ufr27.miage.services.SoinService;
@@ -17,8 +16,6 @@ public class InfirmerieRessource {
     @Inject
     protected SoinService service;
 
-    @Inject
-    TreatmentDAO treatmentDAO;
 
     @Path("{idPokemon}")
     @POST
@@ -35,13 +32,13 @@ public class InfirmerieRessource {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public Collection<TreatmentSession> getAllTreatments() {
-        return treatmentDAO.getAllTreatmentSessions();
+        return service.getAllTreatmentSessions();
     }
 
     @Path("treatments/{idDresseur}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public Collection<TreatmentSession> getAllTreatments(@PathParam("idDresseur") int idDresseur) {
+    public Collection<TreatmentSession> getAllTreatmentsByIdDresseur(@PathParam("idDresseur") int idDresseur) {
         return service.getAllTreatmentSessionsDresseur(idDresseur);
     }
 }

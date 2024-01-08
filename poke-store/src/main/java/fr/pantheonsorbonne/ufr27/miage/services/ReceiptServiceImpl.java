@@ -3,7 +3,6 @@ package fr.pantheonsorbonne.ufr27.miage.services;
 import fr.pantheonsorbonne.ufr27.miage.camel.PurchasePokemonGateway;
 import fr.pantheonsorbonne.ufr27.miage.dao.PokemonStockDao;
 import fr.pantheonsorbonne.ufr27.miage.dao.ReceiptPokemonDao;
-import fr.pantheonsorbonne.ufr27.miage.exception.PokemonNotAvailable;
 import fr.pantheonsorbonne.ufr27.miage.exception.PokemonNotFoundException;
 import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
 import fr.pantheonsorbonne.ufr27.miage.model.ReceiptPokemon;

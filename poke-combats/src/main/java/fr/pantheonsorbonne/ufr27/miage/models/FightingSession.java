@@ -40,12 +40,6 @@ public class FightingSession {
         this.fightDate = datePurchase;
     }
 
-
-//    @Column(name = "timeFight", nullable = false, columnDefinition = "TIME DEFAULT '00:00:40'")
-//    @JsonbDateFormat("HH:mm:ss")
-//    private Time timeFight;
-
-
     public int getIdPokemon() {
         return idPokemon;
     }

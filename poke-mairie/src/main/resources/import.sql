@@ -5,18 +5,18 @@ REPLACE INTO `Dresseur` (`bannedStatus`, `idDresseur`, `name`) VALUES
 
 REPLACE INTO `Pokemon` (`idPokemon`, `isAdopted`, `pokeScore`, `name`, `type`, `localisation`)
 VALUES
-       (1, true ,90, 'carlo', 'feu', 'mairie'),
-        (2, false, 80 ,'nabilo', 'plante', 'store'),
-        (3, false, 90, 'lilio', 'eau', 'store'),
-        (4, false, 95,'naloufio', 'eau', 'store'),
-        (5, false, 70,'paudo', 'feu', 'store'),
-        (6, false, 50,'machoc', 'plante', 'store'),
-        (7, false, 100,'ghulamo', 'feu', 'store'),
-        (8, false, 50,'ounissio', 'eau', 'store'),
-        (9, false, 110,'chenno', 'plante', 'store'),
-        (10, false, 110,'olivio', 'plante', 'store'),
-        (11, false, 50,'chiriaco', 'eau', 'store'),
-        (12, false, 110,'clavelo', 'feu', 'store');
+       (1, true ,40, 'carlo', 'FEU', 'mairie'),
+        (2, false, 80 ,'nabilo', 'PLANTE', 'store'),
+        (3, false, 90, 'lilio', 'EAU', 'store'),
+        (4, false, 95,'naloufio', 'EAU', 'store'),
+        (5, false, 70,'paudo', 'FEU', 'store'),
+        (6, false, 50,'machoc', 'PLANTE', 'store'),
+        (7, false, 100,'ghulamo', 'FEU', 'store'),
+        (8, false, 50,'ounissio', 'EAU', 'store'),
+        (9, false, 110,'chenno', 'PLANTE', 'store'),
+        (10, false, 110,'olivio', 'PLANTE', 'store'),
+        (11, false, 50,'chiriaco', 'EAU', 'store'),
+        (12, false, 110,'clavelo', 'FEU', 'store');
 
 REPLACE INTO `Dresseur_Pokemon` (`Dresseur_idDresseur`, `pokedex_idPokemon`) VALUES ('1', '1');
 REPLACE INTO `BankAccount` (`balance`, `dresseur_idDresseur`, `idBankAccount`) VALUES

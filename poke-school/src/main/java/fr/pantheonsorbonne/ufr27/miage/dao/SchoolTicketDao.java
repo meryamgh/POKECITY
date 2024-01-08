@@ -6,7 +6,7 @@ import java.util.Collection;
 
 public interface SchoolTicketDao {
     public SchoolTicket getSchoolTicketById(int idSchoolTicket);
-    public SchoolTicket createSchoolTicket(int idPokemon, int idSession, int cost, int idDresseur);
+    public void createSchoolTicket(int idPokemon, int idSession, int cost, int idDresseur);
     public Collection<SchoolTicket> getSchoolTickets();
     Collection<SchoolTicket> getSchoolTicketsByDresseur(int idDresseur);
 }

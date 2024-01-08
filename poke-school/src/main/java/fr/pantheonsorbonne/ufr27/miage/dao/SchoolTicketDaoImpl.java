@@ -23,7 +23,7 @@ public class SchoolTicketDaoImpl implements SchoolTicketDao{
 
     @Override
     @Transactional
-    public SchoolTicket createSchoolTicket(int idPokemon, int idSession, int cost, int idDresseur)
+    public void createSchoolTicket(int idPokemon, int idSession, int cost, int idDresseur)
     {
         SchoolTicket s = new SchoolTicket();
         s.setPokemon_id(idPokemon);
@@ -32,7 +32,6 @@ public class SchoolTicketDaoImpl implements SchoolTicketDao{
         s.setSchoolSession_id(idSession);
         s.setSchoolSessionDate(new Date());
         em.persist(s);
-        return s;
     }
 
     @Override

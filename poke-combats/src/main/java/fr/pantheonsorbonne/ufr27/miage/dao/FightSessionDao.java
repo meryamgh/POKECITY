@@ -8,8 +8,6 @@ public interface FightSessionDao {
 
     Collection<FightingSession> getAllFightingSession();
 
-    Collection<FightingSession> getFightingSessionByDresseurId(int idDresseur);
-
     FightingSession createFightingSession(int idDresseur, int idPokemon, int idOponent, int amountWin, boolean isWinner);
 
     Collection<FightingSession> getAllFightingSessionByDresseur(int idDresseur);

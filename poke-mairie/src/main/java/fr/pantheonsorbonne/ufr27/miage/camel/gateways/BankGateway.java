@@ -1,7 +1,5 @@
-package fr.pantheonsorbonne.ufr27.miage.camel;
+package fr.pantheonsorbonne.ufr27.miage.camel.gateways;
 
-
-import fr.pantheonsorbonne.ufr27.miage.dto.FightSession;
 import fr.pantheonsorbonne.ufr27.miage.services.BankService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -26,7 +24,7 @@ public class BankGateway {
 
     public void addAmountWinToBankAccount(int amount, int idDresseur){
         this.bankService.creditBankAccount(amount,idDresseur);
-        System.out.println("ok ajout d'argent");
+        System.out.println("dresseur vainqueur donc ajout d'argent");
     }
 
 

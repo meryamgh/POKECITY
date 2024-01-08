@@ -16,4 +16,6 @@ public interface SoinService {
 
     Collection<TreatmentSession> getAllTreatmentSessionsDresseur(int idDresseur);
 
+    Collection<TreatmentSession> getAllTreatmentSessions();
+
 }
