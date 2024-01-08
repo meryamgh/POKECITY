@@ -19,6 +19,7 @@ public class FightSessionGateway {
     FightSessionService fightSessionService;
 
     public void playBattle(List<Pokemon> pokemons, int idDresseur, Exchange exchange){
+
         Pokemon ourPokemon;
         Pokemon PNJ;
         if(pokemons.get(0).isAdopted()){

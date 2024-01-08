@@ -13,4 +13,6 @@ public interface PokemonService {
 
     Collection<Pokemon> getAllPokemon();
 
+    Collection<Pokemon> getPokemonByLocalisation(String localisation);
+
 }

@@ -7,6 +7,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 
 import java.util.Collection;
+import java.util.Date;
 
 @ApplicationScoped
 public class SchoolTicketDaoImpl implements SchoolTicketDao{
@@ -29,6 +30,7 @@ public class SchoolTicketDaoImpl implements SchoolTicketDao{
         s.setCost(cost);
         s.setIdDresseur(idDresseur);
         s.setSchoolSession_id(idSession);
+        s.setSchoolSessionDate(new Date());
         em.persist(s);
         return s;
     }

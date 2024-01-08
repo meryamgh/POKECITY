@@ -36,7 +36,6 @@ public class ReceiptPokemonDaoImpl implements ReceiptPokemonDao{
     @Transactional
     public Collection<ReceiptPokemon> getAllReceiptsOfStore() {
         Collection<ReceiptPokemon> rec= em.createQuery("SELECT receipt FROM ReceiptPokemon receipt", ReceiptPokemon.class).getResultList();
-        System.out.println(rec);
         return em.createQuery("SELECT receipt FROM ReceiptPokemon receipt", ReceiptPokemon.class).getResultList();
     }
 
@@ -48,7 +47,6 @@ public class ReceiptPokemonDaoImpl implements ReceiptPokemonDao{
         Collection<ReceiptPokemon> rec= em.createQuery("SELECT receipt FROM ReceiptPokemon receipt WHERE receipt.dresseur = :idDresseur", ReceiptPokemon.class)
                 .setParameter("idDresseur", iDresseur)
                 .getResultList();
-        System.out.println(rec);
         return em.createQuery("SELECT receipt FROM ReceiptPokemon receipt", ReceiptPokemon.class).getResultList();
     }
 

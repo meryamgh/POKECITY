@@ -8,6 +8,7 @@ import jakarta.transaction.Transactional;
 
 import java.sql.Time;
 import java.util.Collection;
+import java.util.Date;
 
 @ApplicationScoped
 public class FightSessionDaoImpl implements FightSessionDao{
@@ -39,7 +40,8 @@ public class FightSessionDaoImpl implements FightSessionDao{
         battle.setIdPNJ(idOponent);
         battle.setReward(amountWin);
         battle.setWinner(isWinner);
-        battle.setTimeFight(new Time(0,0,40));
+        battle.setFightDate(new Date());
+     //   battle.setTimeFight(new Time(0,0,40));
         em.persist(battle);
         return battle;
     }

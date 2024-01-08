@@ -1,8 +1,10 @@
 package fr.pantheonsorbonne.ufr27.miage.models;
 
 
+import jakarta.json.bind.annotation.JsonbDateFormat;
 import jakarta.persistence.*;
 import java.sql.Time;
+import java.util.Date;
 
 @Entity
 public class FightingSession {
@@ -27,8 +29,21 @@ public class FightingSession {
     @Column(name = "idDresseur", nullable = false, length = 45)
     private int idDresseur;
 
-    @Column(name = "timeFight", nullable = false, columnDefinition = "TIME DEFAULT '00:00:40'")
-    private Time timeFight;
+    @Column(name = "fightDate", nullable = false, length = 45)
+    private Date fightDate;
+
+    public Date getFightDate() {
+        return fightDate;
+    }
+
+    public void setFightDate(Date datePurchase) {
+        this.fightDate = datePurchase;
+    }
+
+
+//    @Column(name = "timeFight", nullable = false, columnDefinition = "TIME DEFAULT '00:00:40'")
+//    @JsonbDateFormat("HH:mm:ss")
+//    private Time timeFight;
 
 
     public int getIdPokemon() {
@@ -61,14 +76,6 @@ public class FightingSession {
 
     public void setReward(int reward) {
         this.reward = reward;
-    }
-
-    public Time getTimeFight() {
-        return timeFight;
-    }
-
-    public void setTimeFight(Time timeFight) {
-        this.timeFight = timeFight;
     }
 
     public int getIdPNJ() {

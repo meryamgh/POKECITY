@@ -52,5 +52,12 @@ public class PokemonRessource {
         return this.pokemonService.getAllPokemon();
     }
 
+    @Path("pokemon/localisation/{localisation}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public Collection<Pokemon> getPokemonByLocalisation(@PathParam("localisation") String localisation) {
+        return this.pokemonService.getPokemonByLocalisation(localisation);
+    }
+
 
 }

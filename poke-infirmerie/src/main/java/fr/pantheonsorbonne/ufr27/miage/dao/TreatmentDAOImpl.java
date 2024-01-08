@@ -9,6 +9,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import java.sql.Time;
 import java.util.Collection;
+import java.util.Date;
 
 
 @ApplicationScoped
@@ -25,6 +26,7 @@ public class TreatmentDAOImpl implements TreatmentDAO {
         receipt.setTimeTreatment(3);
         receipt.setPriceTreatment(treatPrice);
         receipt.setIdDresseur(idDresseur);
+        receipt.setTreatmentDate(new Date());
         em.persist(receipt);
         em.flush();
 

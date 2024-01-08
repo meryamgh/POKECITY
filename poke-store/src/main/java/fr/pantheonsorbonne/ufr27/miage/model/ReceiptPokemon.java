@@ -20,8 +20,7 @@ public class ReceiptPokemon {
     @Column(name = "idPokemon", nullable = false, length = 45)
     private int pokemon;
 
-    @Column(name = "datePurchase", nullable = false, length = 45)
-    private Date datePurchase;
+
 
     public int getIdReceipt() {
         return idReceipt;
@@ -38,6 +37,9 @@ public class ReceiptPokemon {
     public void setCost(int cost) {
         this.cost = cost;
     }
+
+    @Column(name = "datePurchase", nullable = false, length = 45)
+    private Date datePurchase;
 
     public Date getDatePurchase() {
         return datePurchase;

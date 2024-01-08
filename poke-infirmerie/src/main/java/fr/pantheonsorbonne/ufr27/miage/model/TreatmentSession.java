@@ -3,6 +3,8 @@ package fr.pantheonsorbonne.ufr27.miage.model;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 
 @Entity
 public class TreatmentSession {
@@ -31,6 +33,17 @@ public class TreatmentSession {
 
     @Column(name = "idDresseur", nullable = false, length = 45)
     private int idDresseur;
+
+    @Column(name = "treatmentDate", nullable = false, length = 45)
+    private Date treatmentDate;
+
+    public Date getTreatmentDate() {
+        return treatmentDate;
+    }
+
+    public void setTreatmentDate(Date datePurchase) {
+        this.treatmentDate = datePurchase;
+    }
 
     public int getIdPokemon() {
         return idPokemon;

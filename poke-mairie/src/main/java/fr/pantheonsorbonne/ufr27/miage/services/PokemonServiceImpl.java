@@ -32,5 +32,10 @@ public class PokemonServiceImpl implements PokemonService{
         return this.pokemonDao.getAllPokemon();
     }
 
+    @Override
+    public Collection<Pokemon> getPokemonByLocalisation(String localisation) {
+        return this.pokemonDao.getPokemonByLocation(localisation);
+    }
+
 
 }
