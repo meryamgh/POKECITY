@@ -61,39 +61,10 @@ Chaque combat est associé à une somme à gagner (pokescore fixé)
 - La pokeBank a le pokescore du dresseur qui joue 
 - Lorsque que la mairie élimine le joueur, elle l’efface de sa liste et le notifie 
 
-## Interfaces
 
-```
-artist->master: POST venue
-vendor->master: GET Gigs
-master->vendor: Collection<Gigs>
-
-Customer->vendor: cli:gig selection
-
-vendor->master: jms:booking
-alt booking successfull
-    master->vendor: transitional tickets
-    vendor->Customer: ticket purshase ok
-    Customer->vendor: cli:customer informations
-    
-    vendor->master: jms:ticketing
-    master->vendor: tickets
-
-else booking unsuccessfull
-    master->vendor: no quota for gigs
-end
-
-opt venue cancellation
-    artist->master: DELETE venue
-    master->vendor: jms:topic:cancellation
-    vendor->Customer: smtp:cancellation email
-end
-```
 ![](seqDiagram.png)
 
-## Schéma relationnel
-
-![](EER.png)
+![](send_Pokemon_School)
 
 ## Exigences fonctionnelles
 
