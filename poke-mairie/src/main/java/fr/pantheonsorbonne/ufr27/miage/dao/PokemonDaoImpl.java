@@ -1,5 +1,6 @@
 package fr.pantheonsorbonne.ufr27.miage.dao;
 
+import fr.pantheonsorbonne.ufr27.miage.exception.PokemonNotFoundException;
 import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
@@ -16,8 +17,12 @@ public class PokemonDaoImpl implements PokemonDao{
 
     @Override
     @Transactional
-    public Pokemon getPokemonById(int idPokemon) {
-        return em.find(Pokemon.class, idPokemon);
+    public Pokemon getPokemonById(int idPokemon) throws PokemonNotFoundException{
+        Pokemon pokemon = em.find(Pokemon.class, idPokemon);
+        if (pokemon == null) {
+            throw new PokemonNotFoundException(idPokemon);
+        }
+        return pokemon;
     }
     @Override
     @Transactional

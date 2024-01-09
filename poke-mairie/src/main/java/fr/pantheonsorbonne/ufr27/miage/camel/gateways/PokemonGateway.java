@@ -2,6 +2,7 @@ package fr.pantheonsorbonne.ufr27.miage.camel.gateways;
 
 
 import fr.pantheonsorbonne.ufr27.miage.dto.Pokemon;
+import fr.pantheonsorbonne.ufr27.miage.exception.PokemonNotFoundException;
 import fr.pantheonsorbonne.ufr27.miage.services.DresseurService;
 import fr.pantheonsorbonne.ufr27.miage.services.PokemonService;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -22,13 +23,13 @@ public class PokemonGateway {
 
 
 
-    public void affectPokemonToDresseur(Pokemon pokemon, int idDresseur) {
+    public void affectPokemonToDresseur(Pokemon pokemon, int idDresseur) throws PokemonNotFoundException {
         System.out.println("ticet dans gatewat "+pokemon);
         this.dresseurService.affectPokemonToDresseur(pokemon.idPokemon(), idDresseur);
 
     }
 
-    public void improvePokemon(Pokemon pokemon){
+    public void improvePokemon(Pokemon pokemon) throws PokemonNotFoundException {
         pokeService.updatePokemon(pokemon);
     }
 
@@ -36,8 +37,8 @@ public class PokemonGateway {
         this.pokeService.updatePokemonLocalisation(pokemon.idPokemon(), newLocalisation);
     }
 
-    public void checkLastPokemon(int idDresseur, Exchange exchange){
-        exchange.getIn().setHeader("isLastPokemon",this.dresseurService.checkIfLastPokemon(idDresseur));
+    public void isDresseurOutOfPokemons(int idDresseur, Exchange exchange){
+        exchange.getIn().setHeader("isLastPokemon",this.dresseurService.isDresseurOutOfPokemons(idDresseur));
     }
 
 

@@ -8,9 +8,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
-
 import java.util.Collection;
-import java.util.List;
 
 @ApplicationScoped
 public class DresseurDaoImpl implements DresseurDao{
@@ -42,22 +40,16 @@ public class DresseurDaoImpl implements DresseurDao{
 
     @Override
     @Transactional
-    public boolean isDresseurPokemon(int idDresseur, int idPokemon)throws NotAvailablePokemonException   {
+    public boolean isDresseurPokemon(int idDresseur, int idPokemon)   {
         Collection<Pokemon> allDresseurPokemons = this.getAllPokemons(idDresseur);
-
-        boolean pokemonExists = allDresseurPokemons.stream()
+        return allDresseurPokemons.stream()
                 .anyMatch(pokemon -> pokemon.getIdPokemon() == idPokemon);
-        if (!pokemonExists) {
-            throw new NotAvailablePokemonException("The pokemon with ID " + idPokemon + " is not available for this dresseur.");
-        }
-        return true;
-
     }
 
     @Override
     @Transactional
     public int getNumberPokemon(int idDresseur) {
-        Long count = em.createQuery("SELECT COUNT(p) FROM Dresseur dre JOIN dre.pokedex p WHERE dre.idDresseur = :id", Long.class)
+        Long count = em.createQuery("SELECT COUNT(p) FROM Pokedex p WHERE p.dresseur.idDresseur = :id", Long.class)
                 .setParameter("id", idDresseur)
                 .getSingleResult();
         return count.intValue();

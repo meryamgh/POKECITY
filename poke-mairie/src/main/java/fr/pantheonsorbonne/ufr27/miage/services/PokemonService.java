@@ -1,5 +1,6 @@
 package fr.pantheonsorbonne.ufr27.miage.services;
 
+import fr.pantheonsorbonne.ufr27.miage.exception.PokemonNotFoundException;
 import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
 
 import java.util.Collection;
@@ -7,7 +8,7 @@ import java.util.Collection;
 public interface PokemonService {
 
 
-    void updatePokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon);
+    void updatePokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon) throws PokemonNotFoundException;
 
     void updatePokemonLocalisation(int idPokemon,String newLocalisation);
 

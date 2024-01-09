@@ -3,10 +3,17 @@ package fr.pantheonsorbonne.ufr27.miage.camel;
 import fr.pantheonsorbonne.ufr27.miage.camel.gateways.BankGateway;
 import fr.pantheonsorbonne.ufr27.miage.camel.gateways.DresseurGateway;
 import fr.pantheonsorbonne.ufr27.miage.camel.gateways.PokemonGateway;
+import fr.pantheonsorbonne.ufr27.miage.dto.Fighters;
+import fr.pantheonsorbonne.ufr27.miage.dto.Pokemon;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import org.apache.camel.Exchange;
+import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+
+import java.util.HashMap;
+import java.util.List;
 
 
 @ApplicationScoped
@@ -87,20 +94,33 @@ public class CamelRoutes extends RouteBuilder {
                 .to("sjms2:queue:M1.getPokemonForFight?exchangePattern=InOut")
                 .log("the pokemon for fight ADVERSAIRE is ${body}")
                 .setHeader("idDresseur", constant(idDresseur))
-                .split(body())
-                .bean(pokemonGateway, "setLocalisationPokemon(${body},'fight')")
+                .log("1 ${body}")
+                .marshal().json()
+                .log("json ${body}")
+                .split().jsonpath("$.oponnent")
+                .log("Opponent JSON: ${body}")
+                .unmarshal().json(Pokemon.class)
+                .log("Processed Opponent: ${body}")
                 .end()
+                .split().jsonpath("$.ourPokemon")
+                .log("OurPokemon JSON: ${body}")
+                .unmarshal().json(Pokemon.class)
+                .log("Processed OurPokemon: ${body}")
 
-                .to("sjms2:queue:M1.fight?exchangePattern=InOut&requestTimeout=60000")
-                .split(body())
-                .choice()
-                .when(simple("${body.isAdopted}"))
-                    .to("direct:pokemonAdopted")
-                .otherwise()
-                    .log("go back to store je suis pokemon du store ${body}")
-                    .bean(pokemonGateway, "setLocalisationPokemon(${body},'store')" )
-                    .to("sjms2:queue:M1.returnPNJ")
-                    .log("pokemon pas au dresseur ${body}")
+               .bean(pokemonGateway, "setLocalisationPokemon(${body},'fight')")
+           //     .bean(pokemonGateway, "setLocalisationPokemon(${body},'fight')")
+                .end()
+                .log("iici pas d'erreur ${body}")
+         //       .to("sjms2:queue:M1.fight?exchangePattern=InOut&requestTimeout=60000")
+        //        .split(body())
+//                .choice()
+//                .when(simple("${body.isAdopted}"))
+//                    .to("direct:pokemonAdopted")
+//                .otherwise()
+//                    .log("go back to store je suis pokemon du store ${body}")
+//                    .bean(pokemonGateway, "setLocalisationPokemon(${body},'store')" )
+//                    .to("sjms2:queue:M1.returnPNJ")
+//                    .log("pokemon pas au dresseur ${body}")
         ;
 
 
@@ -129,10 +149,10 @@ public class CamelRoutes extends RouteBuilder {
                         .bean(dresseurGateway, "deletePokemonFromDresseurPokedex(${body},${headers.idDresseur})")
                         .bean(pokemonGateway, "setLocalisationPokemon(${body},'store')" )
                         .to("sjms2:queue:M1.returnPNJ")
-                        .bean(pokemonGateway, "checkLastPokemon(${headers.idDresseur})")
+                        .bean(pokemonGateway, "isDresseurOutOfPokemons(${headers.idDresseur})")
                         .choice()
                             .when(simple("${headers.isLastPokemon}"))
-                            .log("mon dernier pokemon ${body}")
+                            .log("plus de pokemon ${body}")
                             .bean(dresseurGateway,"bannedDresseur(${headers.idDresseur})")
                             .to("sjms2:topic:M1.dresseurBanned")
                         .endChoice()

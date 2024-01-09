@@ -8,7 +8,7 @@ import org.apache.camel.ProducerTemplate;
 import java.io.IOException;
 
 @ApplicationScoped
-public class StoreGateway {
+public class FightGateway {
 
     @Inject
     CamelContext context;

@@ -20,18 +20,16 @@ public class PokemonStockDaoImpl implements PokemonStockDao{
 
     @Override
     @Transactional
-    public Collection<Pokemon> getStock() {
+    public Collection<Pokemon> getStock(){
         return em.createQuery("SELECT poke FROM Pokemon poke", Pokemon.class).getResultList();
     }
 
     @Override
     @Transactional
-    public Collection<Pokemon> getStockPokemonByPrice(int price) {
-
-            return em.createQuery("SELECT poke FROM Pokemon poke WHERE poke.prix <= :price", Pokemon.class)
-                    .setParameter("price", price)
-                    .getResultList();
-
+    public Collection<Pokemon> getStockPokemonByPrice(int price){
+        return em.createQuery("SELECT poke FROM Pokemon poke WHERE poke.prix <= :price", Pokemon.class)
+                .setParameter("price", price)
+                .getResultList();
     }
 
     @Override
@@ -57,7 +55,7 @@ public class PokemonStockDaoImpl implements PokemonStockDao{
     }
 
     @Override
-    public Pokemon getRandomPokemon() {
+    public Pokemon getRandomPokemon(){
         Collection<Pokemon> allAvailablePokemon = this.getStock();
         List<Pokemon> availablePokemonList = List.copyOf(allAvailablePokemon);
         int randomIndex = new Random().nextInt(availablePokemonList.size());

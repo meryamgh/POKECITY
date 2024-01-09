@@ -1,7 +1,9 @@
 package fr.pantheonsorbonne.ufr27.miage.ressources;
 
 
+import fr.pantheonsorbonne.ufr27.miage.exception.DresseurBannedException;
 import fr.pantheonsorbonne.ufr27.miage.exception.NotAvailablePokemonException;
+import fr.pantheonsorbonne.ufr27.miage.exception.PokemonNotFoundException;
 import fr.pantheonsorbonne.ufr27.miage.services.FightService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -22,7 +24,7 @@ public class FightRessource {
     public Response fightAgainstPokemon(@PathParam("id") int idPokemon){
         try{
             this.service.fight(idPokemon);
-        } catch (NotAvailablePokemonException e){
+        } catch (NotAvailablePokemonException | DresseurBannedException | PokemonNotFoundException e){
             return Response.status(Response.Status.FORBIDDEN)
                     .entity(e.getMessage())
                     .type(MediaType.APPLICATION_JSON)

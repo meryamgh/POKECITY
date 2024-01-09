@@ -1,9 +1,10 @@
 package fr.pantheonsorbonne.ufr27.miage.services;
 
-import fr.pantheonsorbonne.ufr27.miage.camel.gateways.StoreGateway;
-import fr.pantheonsorbonne.ufr27.miage.dao.DresseurDao;
+import fr.pantheonsorbonne.ufr27.miage.camel.gateways.FightGateway;
 import fr.pantheonsorbonne.ufr27.miage.dao.PokemonDao;
+import fr.pantheonsorbonne.ufr27.miage.exception.DresseurBannedException;
 import fr.pantheonsorbonne.ufr27.miage.exception.NotAvailablePokemonException;
+import fr.pantheonsorbonne.ufr27.miage.exception.PokemonNotFoundException;
 import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -16,21 +17,18 @@ public class FightServiceImpl implements FightService{
     PokemonDao pokemonDao;
 
     @Inject
-    DresseurDao dresseurDao;
+    DresseurService dresseurService;
 
     @ConfigProperty(name = "fr.pantheonsorbonne.ufr27.miage.dresseurId")
     int idDresseur;
 
     @Inject
-    StoreGateway gateway;
+    FightGateway gateway;
 
     @Override
-    public void fight(int idPokemon) throws NotAvailablePokemonException {
-        this.dresseurDao.isDresseurPokemon(idDresseur,idPokemon);
+    public void fight(int idPokemon) throws NotAvailablePokemonException, DresseurBannedException, PokemonNotFoundException {
         Pokemon pokemon = this.pokemonDao.getPokemonById(idPokemon);
-        if(!pokemon.getLocalisation().equals("mairie")){
-            throw new NotAvailablePokemonException("Pokemon with ID "+idPokemon+" is not available because is in the "+pokemon.getLocalisation());
-        }
+        this.dresseurService.checkAvailaibilityToPlay(idDresseur,pokemon);
         int id = pokemon.getIdPokemon();
         String name = pokemon.getName();
         int score = pokemon.getPokeScore();

@@ -1,6 +1,7 @@
 package fr.pantheonsorbonne.ufr27.miage.services;
 
 import fr.pantheonsorbonne.ufr27.miage.dao.PokemonDao;
+import fr.pantheonsorbonne.ufr27.miage.exception.PokemonNotFoundException;
 import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -15,7 +16,7 @@ public class PokemonServiceImpl implements PokemonService{
     PokemonDao pokemonDao;
 
     @Override
-    public void updatePokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon) {
+    public void updatePokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon) throws PokemonNotFoundException {
         int id = pokemon.idPokemon();
         pokemonDao.getPokemonById(id);
         int newScore = pokemon.pokeScore();

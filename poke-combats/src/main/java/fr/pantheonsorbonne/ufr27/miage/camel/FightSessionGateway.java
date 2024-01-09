@@ -1,6 +1,7 @@
 package fr.pantheonsorbonne.ufr27.miage.camel;
 
 import fr.pantheonsorbonne.ufr27.miage.dto.FightSession;
+import fr.pantheonsorbonne.ufr27.miage.dto.Fighters;
 import fr.pantheonsorbonne.ufr27.miage.dto.Pokemon;
 import fr.pantheonsorbonne.ufr27.miage.models.FightingSession;
 import fr.pantheonsorbonne.ufr27.miage.services.FightSessionService;
@@ -18,20 +19,45 @@ public class FightSessionGateway {
     @Inject
     FightSessionService fightSessionService;
 
-    public void playBattle(List<Pokemon> pokemons, int idDresseur, Exchange exchange){
+//    public void playBattle(List<Pokemon> pokemons, int idDresseur, Exchange exchange){
+//
+//        Pokemon ourPokemon;
+//        Pokemon PNJ;
+//        if(pokemons.get(0).isAdopted()){
+//            ourPokemon = pokemons.get(0);
+//            PNJ = pokemons.get(1);
+//        }
+//        else{
+//            ourPokemon = pokemons.get(1);
+//            PNJ = pokemons.get(0);
+//        }
+//
+//         FightingSession fightingSession = fightSessionService.play(PNJ, ourPokemon, idDresseur);
+//
+//        Collection<Pokemon> pokemonsAfterFight = new ArrayList<>();
+//
+//        exchange.getMessage().setBody(pokemonsAfterFight);
+//        if(fightingSession.isWinner()){
+//            pokemonsAfterFight.add(ourPokemon);
+//            exchange.getIn().setHeader("amountWin",fightingSession.getReward());
+//
+//            exchange.getIn().setHeader("isWinner",fightingSession.isWinner());
+//        }else{
+//            Pokemon newPoke = new Pokemon(ourPokemon.idPokemon(),0,ourPokemon.prix(),ourPokemon.type(),ourPokemon.isAdopted(),ourPokemon.name());
+//             pokemonsAfterFight.add(newPoke);
+//             exchange.getIn().setHeader("isWinner",fightingSession.isWinner());
+//        }
+//        pokemonsAfterFight.add(PNJ);
+//
+//    }
 
-        Pokemon ourPokemon;
-        Pokemon PNJ;
-        if(pokemons.get(0).isAdopted()){
-            ourPokemon = pokemons.get(0);
-            PNJ = pokemons.get(1);
-        }
-        else{
-            ourPokemon = pokemons.get(1);
-            PNJ = pokemons.get(0);
-        }
 
-         FightingSession fightingSession = fightSessionService.play(PNJ, ourPokemon, idDresseur);
+    public void playBattle(Fighters fighters, int idDresseur, Exchange exchange){
+
+        Pokemon ourPokemon = fighters.ourPokemon();
+        Pokemon PNJ = fighters.oponnent();
+
+        FightingSession fightingSession = fightSessionService.play(PNJ, ourPokemon, idDresseur);
 
         Collection<Pokemon> pokemonsAfterFight = new ArrayList<>();
 
@@ -43,8 +69,8 @@ public class FightSessionGateway {
             exchange.getIn().setHeader("isWinner",fightingSession.isWinner());
         }else{
             Pokemon newPoke = new Pokemon(ourPokemon.idPokemon(),0,ourPokemon.prix(),ourPokemon.type(),ourPokemon.isAdopted(),ourPokemon.name());
-             pokemonsAfterFight.add(newPoke);
-             exchange.getIn().setHeader("isWinner",fightingSession.isWinner());
+            pokemonsAfterFight.add(newPoke);
+            exchange.getIn().setHeader("isWinner",fightingSession.isWinner());
         }
         pokemonsAfterFight.add(PNJ);
 

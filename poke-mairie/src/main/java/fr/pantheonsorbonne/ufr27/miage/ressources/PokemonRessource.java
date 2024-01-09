@@ -1,6 +1,8 @@
 package fr.pantheonsorbonne.ufr27.miage.ressources;
 
+import fr.pantheonsorbonne.ufr27.miage.exception.DresseurBannedException;
 import fr.pantheonsorbonne.ufr27.miage.exception.NotAvailablePokemonException;
+import fr.pantheonsorbonne.ufr27.miage.exception.PokemonNotFoundException;
 import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
 import fr.pantheonsorbonne.ufr27.miage.services.PokemonService;
 import fr.pantheonsorbonne.ufr27.miage.services.SchoolService;
@@ -23,7 +25,7 @@ public class PokemonRessource {
     @Path("/pokemon/{id}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public Pokemon getPokemonById(@PathParam("id") int id) {
+    public Pokemon getPokemonById(@PathParam("id") int id) throws PokemonNotFoundException {
         return this.schoolService.getPokemon(id);
     }
 
@@ -36,7 +38,7 @@ public class PokemonRessource {
         ){
         try{
             schoolService.sendPokemonToSchool(idPokemon);
-        } catch (NotAvailablePokemonException e){
+        } catch (NotAvailablePokemonException | PokemonNotFoundException | DresseurBannedException e){
             return Response.status(Response.Status.FORBIDDEN)
                     .entity(e.getMessage())
                     .type(MediaType.APPLICATION_JSON)

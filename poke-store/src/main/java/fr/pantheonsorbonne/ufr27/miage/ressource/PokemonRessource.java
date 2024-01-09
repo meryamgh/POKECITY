@@ -32,13 +32,9 @@ public class PokemonRessource {
     @Path("pokemon/{price}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getSotredPokemonsByPriceLimit(@PathParam("price") int price) throws PokemonNotFoundException {
-        Collection<Pokemon> pokemons =  service.getPokemonByPrice(price);
-         if (pokemons.isEmpty()) {
-            throw new PokemonNotFoundException();
-        } else {
-            return Response.ok(pokemons).build();
-        }
+    public Collection<Pokemon> getSotredPokemonsByPriceLimit(@PathParam("price") int price) {
+            return service.getPokemonByPrice(price);
     }
+
 
 }

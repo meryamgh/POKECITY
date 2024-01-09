@@ -17,12 +17,6 @@ public class SchoolTicketDaoImpl implements SchoolTicketDao{
 
     @Override
     @Transactional
-    public SchoolTicket getSchoolTicketById(int idSchoolTicket){
-        return em.find(SchoolTicket.class, idSchoolTicket);
-    }
-
-    @Override
-    @Transactional
     public void createSchoolTicket(int idPokemon, int idSession, int cost, int idDresseur)
     {
         SchoolTicket s = new SchoolTicket();

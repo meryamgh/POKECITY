@@ -19,7 +19,7 @@ public class InventoryPokemonServiceImpl implements InventoryPokemonService{
     }
 
     @Override
-    public Collection<Pokemon> getPokemonByPrice(int price) {
+    public Collection<Pokemon> getPokemonByPrice(int price){
         return stockDao.getStockPokemonByPrice(price);
     }
 
