@@ -50,5 +50,10 @@ public class PokemonServiceImpl implements PokemonService{
         this.pokemonDao.addNewPokemon(p);
     }
 
+    @Override
+    public Pokemon getPokemon(int id) throws PokemonNotFoundException {
+        return pokemonDao.getPokemonById(id);
+    }
+
 
 }

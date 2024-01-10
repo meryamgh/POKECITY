@@ -8,7 +8,7 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 public class CamelRoutes extends RouteBuilder {
 
     @Inject
-    SoignerPokemonGateway soignerPokemonGateway;
+    TreatGateway soignerPokemonGateway;
 
     @ConfigProperty(name = "fr.pantheonsorbonne.ufr27.miage.jmsPrefix")
     String jmsPrefix;

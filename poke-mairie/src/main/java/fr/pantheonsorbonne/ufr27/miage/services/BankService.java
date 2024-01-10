@@ -5,7 +5,7 @@ import fr.pantheonsorbonne.ufr27.miage.model.BankAccount;
 
 public interface BankService {
 
-    boolean checkBalance(int amount,int idDresseur) throws NotEnoughMoneyException;
+    boolean checkBalance(int amount,int idDresseur);
 
     BankAccount getCardBank(int idDresseur);
 

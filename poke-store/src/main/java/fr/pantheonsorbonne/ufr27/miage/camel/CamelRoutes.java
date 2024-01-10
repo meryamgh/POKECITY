@@ -13,7 +13,7 @@ public class CamelRoutes extends RouteBuilder {
     String jmsPrefix;
 
     @Inject
-    PurchasePokemonGateway pokemonGateway;
+    PokemonGateway pokemonGateway;
 
     @Inject
     CamelContext camelContext;

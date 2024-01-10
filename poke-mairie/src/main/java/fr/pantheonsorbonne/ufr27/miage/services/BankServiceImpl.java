@@ -14,10 +14,8 @@ public class BankServiceImpl implements BankService{
 
 
     @Override
-    public boolean checkBalance(int amount,int idDresseur) throws NotEnoughMoneyException {
-
+    public boolean checkBalance(int amount,int idDresseur)  {
         return this.bankDao.debitBank(amount, idDresseur);
-
     }
 
     @Override

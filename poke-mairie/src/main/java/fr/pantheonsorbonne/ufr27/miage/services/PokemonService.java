@@ -18,4 +18,6 @@ public interface PokemonService {
 
     void addNewPokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon);
 
+    Pokemon getPokemon(int id) throws PokemonNotFoundException;
+
 }

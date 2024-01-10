@@ -7,6 +7,4 @@ import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
 
 public interface SchoolService {
     void sendPokemonToSchool(int pokemon) throws NotAvailablePokemonException, PokemonNotFoundException, DresseurBannedException;
-
-    Pokemon getPokemon(int id) throws PokemonNotFoundException;
 }

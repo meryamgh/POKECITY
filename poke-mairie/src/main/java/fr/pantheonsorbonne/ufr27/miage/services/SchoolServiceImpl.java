@@ -19,9 +19,6 @@ public class SchoolServiceImpl implements SchoolService{
     PokemonDao pokemonDao;
 
     @Inject
-    DresseurDao dresseurDao;
-
-    @Inject
     DresseurService dresseurService;
 
     @ConfigProperty(name = "fr.pantheonsorbonne.ufr27.miage.dresseurId")
@@ -40,10 +37,7 @@ public class SchoolServiceImpl implements SchoolService{
         gateway.sendToSchool(pokemonDTO);
     }
 
-    @Override
-    public Pokemon getPokemon(int id) throws PokemonNotFoundException {
-        return pokemonDao.getPokemonById(id);
-    }
+
 
 
 }

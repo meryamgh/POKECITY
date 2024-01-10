@@ -33,7 +33,6 @@ public class FightSessionDaoImpl implements FightSessionDao{
         battle.setReward(amountWin);
         battle.setWinner(isWinner);
         battle.setFightDate(new Date());
-     //   battle.setTimeFight(new Time(0,0,40));
         em.persist(battle);
         return battle;
     }

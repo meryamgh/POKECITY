@@ -1,7 +1,5 @@
 package fr.pantheonsorbonne.ufr27.miage.services;
 
-import fr.pantheonsorbonne.ufr27.miage.camel.RedirectToMairieGateway;
-import fr.pantheonsorbonne.ufr27.miage.camel.SoignerPokemonGateway;
 import fr.pantheonsorbonne.ufr27.miage.dao.TreatmentDAO;
 import fr.pantheonsorbonne.ufr27.miage.dto.Pokemon;
 import fr.pantheonsorbonne.ufr27.miage.model.TreatmentSession;
@@ -16,12 +14,6 @@ public class SoinServiceImpl implements SoinService{
     @Inject
     TreatmentDAO treatmentDAO;
 
-    @Inject
-    SoignerPokemonGateway pokemonGateway;
-
-    @Inject
-    RedirectToMairieGateway redirectToMairieGateway;
-
     @Override
     public Pokemon soignerPokemon(Pokemon pokemon, int idDDresseur) {
         int pokeScore = pokemon.pokeScore();
@@ -33,20 +25,10 @@ public class SoinServiceImpl implements SoinService{
     }
 
     @Override
-    public void redirectToMairie(Pokemon pokemon) {
-        redirectToMairieGateway.redirectToMairie(pokemon);
-    }
-
-    @Override
     public int getPriceTreatment(Pokemon pokemon) {
         int intialPrice = pokemon.prix();
         System.out.println("initialPrice : " + intialPrice);
         return intialPrice / 2;
-    }
-
-    @Override
-    public void priseEnCharge(Pokemon pokemon){
-        pokemonGateway.checkBankAccount(pokemon, this.getPriceTreatment(pokemon));
     }
 
 

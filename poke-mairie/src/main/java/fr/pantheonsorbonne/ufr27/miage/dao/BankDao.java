@@ -7,7 +7,7 @@ public interface BankDao {
 
     BankAccount getBankAccountDresseur(int idDresseur);
 
-    boolean debitBank(int amount, int idDresseur) throws NotEnoughMoneyException;
+    boolean debitBank(int amount, int idDresseur);
 
     void creditBank(int amount, int idDresseur);
 

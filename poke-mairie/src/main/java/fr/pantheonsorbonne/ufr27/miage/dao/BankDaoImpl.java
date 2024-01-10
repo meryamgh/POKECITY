@@ -1,6 +1,5 @@
 package fr.pantheonsorbonne.ufr27.miage.dao;
 
-import fr.pantheonsorbonne.ufr27.miage.exception.NotEnoughMoneyException;
 import fr.pantheonsorbonne.ufr27.miage.model.BankAccount;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
@@ -23,14 +22,13 @@ public class BankDaoImpl implements BankDao{
 
     @Override
     @Transactional
-    public boolean debitBank(int amount, int idDresseur) throws NotEnoughMoneyException {
+    public boolean debitBank(int amount, int idDresseur) {
         BankAccount balance = this.getBankAccountDresseur(idDresseur);
         if(balance.getBalance()>=amount){
             balance.setBalance(balance.getBalance() - amount);
             return true;
-        }else{
-            throw new NotEnoughMoneyException(amount);
         }
+        return false;
     }
 
     @Override
