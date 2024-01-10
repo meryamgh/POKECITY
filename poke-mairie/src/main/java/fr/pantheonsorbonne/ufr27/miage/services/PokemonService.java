@@ -16,4 +16,6 @@ public interface PokemonService {
 
     Collection<Pokemon> getPokemonByLocalisation(String localisation);
 
+    void addNewPokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon);
+
 }

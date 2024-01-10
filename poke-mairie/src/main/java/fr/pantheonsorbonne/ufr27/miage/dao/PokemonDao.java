@@ -19,4 +19,6 @@ public interface PokemonDao {
 
     Collection<Pokemon> getPokemonByLocation(String localisation);
 
+    void addNewPokemon(Pokemon pokemon);
+
 }

@@ -17,10 +17,12 @@ public class FightGateway {
     @Inject
     InventoryPokemonService inventoryPokemonService;
 
-    public Fighters getRandomPokemonForFight(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemonDresseur, Exchange exchange) throws PokemonNotFoundException {
+    public Collection<fr.pantheonsorbonne.ufr27.miage.dto.Pokemon> getRandomPokemonForFight(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemonDresseur, Exchange exchange) throws PokemonNotFoundException {
         Pokemon randomPokemon = this.inventoryPokemonService.getRandomPokemonFighting();
-        fr.pantheonsorbonne.ufr27.miage.dto.Pokemon opponentPokemon = new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(randomPokemon.getIdPokemon(),randomPokemon.getPrix(),randomPokemon.getPrix(),randomPokemon.getType(),false, randomPokemon.getName());
-        return new Fighters(opponentPokemon,pokemonDresseur);
+        Collection<fr.pantheonsorbonne.ufr27.miage.dto.Pokemon> pokemonFights = new ArrayList<>();
+        pokemonFights.add(pokemonDresseur);
+        pokemonFights.add( new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(randomPokemon.getIdPokemon(),randomPokemon.getPrix(),randomPokemon.getPrix(),randomPokemon.getType(),false, randomPokemon.getName()));
+        return pokemonFights;
     }
 
     public void stockPokemonToStore(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon){

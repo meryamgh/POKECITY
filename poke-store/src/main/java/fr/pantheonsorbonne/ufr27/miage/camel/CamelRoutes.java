@@ -29,14 +29,14 @@ public class CamelRoutes extends RouteBuilder {
         from("direct:bankRoute")
                 .marshal().json()
                 .to("sjms2:queue:"+ jmsPrefix + "pokemonBuyCheckPrice?exchangePattern=InOut")
-                .unmarshal().json(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon.class)
                 .choice()
-                .when(simple("${headers.responseHaveEnoughMoney}"))
+                .when(simple("${headers.success}"))
+                .unmarshal().json(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon.class)
                 .bean(pokemonGateway,"getPokemon(${body}, ${headers.idDresseur})")
                 .marshal().json()
                 .to("sjms2:queue:"+ jmsPrefix + "pokemonBuy")
                 .otherwise()
-                .bean(pokemonGateway,"notEnoughTogetPokemon")
+                .bean(pokemonGateway,"enableToGetPokemon")
                 .marshal().json();
 
 
@@ -50,11 +50,12 @@ public class CamelRoutes extends RouteBuilder {
                 .log("recu dans le store pour etre ajouter dans ma bdd ${body}")
                 .bean(fightGateway, "stockPokemonToStore(${body})");
 
-
-
-
-
         from("sjms2:topic:M1.dresseurBanned")
                 .log("DRESSEUR WITH ID ${headers.idDresseur} IS BANNED");
+
+        from("scheduler://pokemonProduction?delay=30000")
+                .bean(pokemonGateway, "createProduct()")
+                .log("Product created : ${body}")
+                .to("sjms2:queue:M1.newPokemon");
     }
 }

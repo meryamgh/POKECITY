@@ -41,6 +41,10 @@ public class PokemonGateway {
         exchange.getIn().setHeader("isLastPokemon",this.dresseurService.isDresseurOutOfPokemons(idDresseur));
     }
 
+    public void addNewPokemonFromStore(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon newPokemon){
+        this.pokeService.addNewPokemon(newPokemon);
+    }
+
 
 
 }

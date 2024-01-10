@@ -14,4 +14,6 @@ public interface InventoryPokemonService {
 
     void addPokemonToStore(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon);
 
+    fr.pantheonsorbonne.ufr27.miage.dto.Pokemon addNewPokemonToStore();
+
 }

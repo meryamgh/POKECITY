@@ -19,7 +19,7 @@ public class BankGateway {
 
     public void checkBalance(@Header("price") int money, @Header("idDresseur") int idDresseur, Exchange exchange) {
         boolean haveEnoughMoney = bankService.checkBalance(money, idDresseur);
-        exchange.getIn().setHeader("responseHaveEnoughMoney", haveEnoughMoney);
+        exchange.getIn().setHeader("success", haveEnoughMoney);
     }
 
     public void addAmountWinToBankAccount(int amount, int idDresseur){

@@ -7,11 +7,14 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 import java.util.Collection;
+import java.util.Random;
 
 @ApplicationScoped
 public class InventoryPokemonServiceImpl implements InventoryPokemonService{
     @Inject
     PokemonStockDao stockDao;
+
+    private static int idGenerate= 15;
 
     @Override
     public Collection<Pokemon> getAllPokemon() {
@@ -38,6 +41,15 @@ public class InventoryPokemonServiceImpl implements InventoryPokemonService{
     @Override
     public void addPokemonToStore(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon) {
         this.stockDao.addPokemonToStore(pokemon);
+    }
+
+    @Override
+    public fr.pantheonsorbonne.ufr27.miage.dto.Pokemon addNewPokemonToStore() {
+        Random rand = new Random();
+        int randomNumber = rand.nextInt(100 - 20 + 1) + 20;
+        fr.pantheonsorbonne.ufr27.miage.dto.Pokemon p = new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(idGenerate++,randomNumber,randomNumber,"plante",false,"test");
+        this.stockDao.addPokemonToStore(p);
+        return p;
     }
 
 

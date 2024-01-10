@@ -38,5 +38,18 @@ public class PokemonServiceImpl implements PokemonService{
         return this.pokemonDao.getPokemonByLocation(localisation);
     }
 
+    @Override
+    public void addNewPokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon) {
+        Pokemon p =new Pokemon();
+        p.setType(pokemon.type());
+        p.setIdPokemon(pokemon.idPokemon());
+        p.setName(pokemon.name());
+        p.setAdopted(false);
+        p.setPokeScore(pokemon.pokeScore());
+        p.setLocalisation("store");
+
+        this.pokemonDao.addNewPokemon(p);
+    }
+
 
 }

@@ -2,12 +2,14 @@ package fr.pantheonsorbonne.ufr27.miage.camel;
 
 import fr.pantheonsorbonne.ufr27.miage.exception.PokemonNotFoundException;
 import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
+import fr.pantheonsorbonne.ufr27.miage.services.InventoryPokemonService;
 import fr.pantheonsorbonne.ufr27.miage.services.ReceiptService;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.apache.camel.CamelContext;
 import org.apache.camel.ProducerTemplate;
 import jakarta.inject.Inject;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 
 @ApplicationScoped
@@ -18,6 +20,11 @@ public class PurchasePokemonGateway {
 
     @Inject
     ReceiptService storeService;
+
+    @Inject
+    InventoryPokemonService pokemonService;
+
+    private static final Logger LOGGER = Logger.getLogger("logger");
 
 
     public void checkBankCardDresseur(Pokemon pokemonToBuy) {
@@ -32,8 +39,12 @@ public class PurchasePokemonGateway {
         this.storeService.pokemonSalled(pokemonSalled, idDresseur);
     }
 
-    public void notEnoughTogetPokemon() {
-        System.out.println("PAS ASSEZ D4ARGNET");
+    public void enableToGetPokemon() {
+        LOGGER.info("Can not get pokemon");
+    }
+
+    public fr.pantheonsorbonne.ufr27.miage.dto.Pokemon createProduct(){
+        return this.pokemonService.addNewPokemonToStore();
     }
 
 }

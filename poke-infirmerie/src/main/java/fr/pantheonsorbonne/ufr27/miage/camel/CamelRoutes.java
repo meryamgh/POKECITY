@@ -19,7 +19,7 @@ public class CamelRoutes extends RouteBuilder {
 
         from("sjms2:queue:" + jmsPrefix + "pokeInfirmerie")
                 .choice()
-                .when(simple("${headers.responseHaveEnoughMoney}"))
+                .when(simple("${headers.success}"))
                 .delay(30000)
                 .bean(soignerPokemonGateway, "soigner(${body}, ${headers.idDresseur})");
 

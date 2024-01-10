@@ -63,10 +63,17 @@ public class PokemonDaoImpl implements PokemonDao{
     }
 
     @Override
+    @Transactional
     public Collection<Pokemon> getPokemonByLocation(String localisation) {
         return em.createQuery("SELECT p FROM Pokemon p WHERE p.localisation = :location", Pokemon.class)
                 .setParameter("location", localisation)
                 .getResultList();
+    }
+
+    @Override
+    @Transactional
+    public void addNewPokemon(Pokemon pokemon) {
+        this.em.merge(pokemon);
     }
 
 

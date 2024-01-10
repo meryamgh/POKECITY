@@ -53,27 +53,19 @@ public class FightSessionGateway {
 
 
     public void playBattle(Fighters fighters, int idDresseur, Exchange exchange){
-
         Pokemon ourPokemon = fighters.ourPokemon();
         Pokemon PNJ = fighters.oponnent();
-
         FightingSession fightingSession = fightSessionService.play(PNJ, ourPokemon, idDresseur);
-
         Collection<Pokemon> pokemonsAfterFight = new ArrayList<>();
-
-        exchange.getMessage().setBody(pokemonsAfterFight);
         if(fightingSession.isWinner()){
             pokemonsAfterFight.add(ourPokemon);
             exchange.getIn().setHeader("amountWin",fightingSession.getReward());
-
-            exchange.getIn().setHeader("isWinner",fightingSession.isWinner());
         }else{
             Pokemon newPoke = new Pokemon(ourPokemon.idPokemon(),0,ourPokemon.prix(),ourPokemon.type(),ourPokemon.isAdopted(),ourPokemon.name());
             pokemonsAfterFight.add(newPoke);
-            exchange.getIn().setHeader("isWinner",fightingSession.isWinner());
         }
+        exchange.getIn().setHeader("isWinner",fightingSession.isWinner());
         pokemonsAfterFight.add(PNJ);
-
+        exchange.getMessage().setBody(pokemonsAfterFight);
     }
-
 }
