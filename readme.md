@@ -34,6 +34,11 @@ Chaque combat est associé à une somme à gagner (pokescore fixé)
 
 ![POKECITY](https://github.com/meryamgh/POKECITY/assets/113670988/fe44d815-a9b2-4b57-b880-b765f2aff621)
 
+![Fight](https://github.com/meryamgh/POKECITY/assets/113671198/63db64ff-b06b-4de8-b59a-f83a40803d55)
+![Buy a Pokemon](https://github.com/meryamgh/POKECITY/assets/113671198/17519768-0bc6-4ff1-b55a-587de70d18bb)
+![send_Pokemon_School](https://github.com/meryamgh/POKECITY/assets/113671198/48e78faa-5a70-4ce0-af42-d5135ec59ba7)
+
+
 ### Exigences
 
 - Un dresseur doit avoir un pokémon (un parmi les nuls = 50 pokescores) et un pokescore = 50 au début du jeu.
