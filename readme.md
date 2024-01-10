@@ -34,7 +34,7 @@ Chaque combat est associé à une somme à gagner (pokescore fixé)
 
 ![POKECITY](https://github.com/meryamgh/POKECITY/assets/113670988/fe44d815-a9b2-4b57-b880-b765f2aff621)
 
-[![Fight](https://github.com/meryamgh/POKECITY/assets/113671198/63db64ff-b06b-4de8-b59a-f83a40803d55)](https://www.websequencediagrams.com/cgi-bin/cdraw?lz=dGl0bGUgRmlnaHQKYWN0b3IgRHJlc3NldXIKCgACCC0-TWFpcmllOiBmaWdodCB3aXRoIHBva2Vtb24geAoAFwYgLT4gU3RvcmU6IEZpbmQgYSBQTkogdG8ALgYKABYFABsJIDogZGVsZXRlIFBOSgAUCC0-IABEBzoAEgUATgpDb21iYXQgAHgIOiB4IHZzADYFABMHABMRaW5nCmFsdCB4IChkAIFJB3MncwCBLAlpcyB3aW5uZXIpADkJAHIMABYGAGMFKyBhbW91bnQgd2luAIFfC0JhbmsgOiBjcmVkaXQgYW1vABsHABMFAIE9DQplbHMAgWIFAGsKAIErCwBhEgCBbA5JbmZpcm1lAIIPBkdldFRyZWF0bWVudCBwcmljZQoAFQsAgjMNABkFIHQAJggAgScTaGVjayBlbm91Z2ggbW9uZXkAgisFAAQNAIFHBgCBZAlkZWJpdCBiYW5rAIFTFACBHRcAfgUgdGhpAIJzCgCBKA0AGhUAhFUHAIFFGQCCTgZubwCBIQ8AhH8KAIQ_CQCEXwcAhSUIZnJvbSAAhAkIAIQJB2RlAIUyESA6IGFkZACGAQkAhC4LdG8gc3RvcmUAhSAUAIRsBU5vIG1vcgBoCmluAFITAIVeCUJBTiBEUkVTU0VVUgplbmQKZW5kAAMFAIB_ElBOSiByZXR1cm4AhjoSYWRkAIZmCACBDhAAh0YIIDoKCg&s=default)
+![Fight (1)](https://github.com/meryamgh/POKECITY/assets/113671198/210c447a-5aa3-408c-b2cf-c502614a3ef4)
 
 ![Buy a Pokemon](https://github.com/meryamgh/POKECITY/assets/113671198/17519768-0bc6-4ff1-b55a-587de70d18bb)
 ![send_Pokemon_School](https://github.com/meryamgh/POKECITY/assets/113671198/48e78faa-5a70-4ce0-af42-d5135ec59ba7)
