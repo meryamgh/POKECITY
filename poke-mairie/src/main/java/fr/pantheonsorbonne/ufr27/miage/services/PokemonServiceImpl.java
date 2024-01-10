@@ -47,7 +47,6 @@ public class PokemonServiceImpl implements PokemonService{
         p.setAdopted(false);
         p.setPokeScore(pokemon.pokeScore());
         p.setLocalisation("store");
-
         this.pokemonDao.addNewPokemon(p);
     }
 

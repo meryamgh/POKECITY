@@ -6,14 +6,13 @@ import fr.pantheonsorbonne.ufr27.miage.camel.gateways.PokemonGateway;
 import fr.pantheonsorbonne.ufr27.miage.dto.Fighters;
 import fr.pantheonsorbonne.ufr27.miage.dto.Pokemon;
 import fr.pantheonsorbonne.ufr27.miage.exception.DresseurBannedException;
+import fr.pantheonsorbonne.ufr27.miage.exception.NotEnoughMoneyException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
-
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -46,7 +45,11 @@ public class CamelRoutes extends RouteBuilder {
                 .setHeader("success", simple("false"))
                 .setBody(simple("No seat is available"));
 
-        //this.camelContext.setTracing(true);
+        onException(NotEnoughMoneyException.class)
+                .handled(true)
+                .setHeader("success", simple("false"))
+                .setBody(simple("Not enough money"));
+
         from("sjms2:queue:" + jmsPrefix + "bankRoute")
                 .setHeader("idDresseur", constant(idDresseur))
                 .bean(bank, "checkBalance(${headers.price}, ${headers.idDresseur})")
@@ -97,7 +100,8 @@ public class CamelRoutes extends RouteBuilder {
 
         from("sjms2:queue:M1.newPokemon")
                 .bean(pokemonGateway, "addNewPokemonFromStore")
-                .to("sjms2:topic:pokemonAddInOurCity")
+                .setBody(simple("Welcome to the new Pokemon named ${body.name()} in our city !"))
+                .to("sjms2:topic:M1.pokemonAddInOurCity")
         ;
 
 
@@ -157,6 +161,7 @@ public class CamelRoutes extends RouteBuilder {
                 .when(simple("${headers.isLastPokemon}"))
                 .log("plus de pokemon ${body}")
                 .bean(dresseurGateway, "bannedDresseur(${headers.idDresseur})")
+                .setBody(simple("DRESSEUR WITH ID ${headers.idDresseur} IS BANNED"))
                 .to("sjms2:topic:M1.dresseurBanned")
                 .endChoice()
                 .otherwise()
@@ -168,7 +173,7 @@ public class CamelRoutes extends RouteBuilder {
 
     private static class FighterProcessor implements Processor {
         @Override
-        public void process (Exchange exchange) throws Exception {
+        public void process (Exchange exchange) {
             List<Pokemon> pokemons = (List<Pokemon>) exchange.getMessage().getBody();
             Pokemon ourPokemon;
             Pokemon PNJ;

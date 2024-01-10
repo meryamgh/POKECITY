@@ -1,5 +1,6 @@
 package fr.pantheonsorbonne.ufr27.miage.camel.gateways;
 
+import fr.pantheonsorbonne.ufr27.miage.exception.NotEnoughMoneyException;
 import fr.pantheonsorbonne.ufr27.miage.services.BankService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -17,7 +18,7 @@ public class BankGateway {
 
 
 
-    public void checkBalance(@Header("price") int money, @Header("idDresseur") int idDresseur, Exchange exchange) {
+    public void checkBalance(@Header("price") int money, @Header("idDresseur") int idDresseur, Exchange exchange) throws NotEnoughMoneyException {
         boolean haveEnoughMoney = bankService.checkBalance(money, idDresseur);
         exchange.getIn().setHeader("success", haveEnoughMoney);
     }

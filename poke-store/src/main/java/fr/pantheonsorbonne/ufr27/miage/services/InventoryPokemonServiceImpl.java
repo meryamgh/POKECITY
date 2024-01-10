@@ -1,6 +1,8 @@
 package fr.pantheonsorbonne.ufr27.miage.services;
 
+import com.github.javafaker.Faker;
 import fr.pantheonsorbonne.ufr27.miage.dao.PokemonStockDao;
+import fr.pantheonsorbonne.ufr27.miage.dto.PokemonType;
 import fr.pantheonsorbonne.ufr27.miage.exception.PokemonNotFoundException;
 import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -14,7 +16,11 @@ public class InventoryPokemonServiceImpl implements InventoryPokemonService{
     @Inject
     PokemonStockDao stockDao;
 
-    private static int idGenerate= 15;
+    private static final Faker faker = new Faker();
+
+    private static final Random random = new Random();
+
+    private static int idGenerate= 100;
 
     @Override
     public Collection<Pokemon> getAllPokemon() {
@@ -43,11 +49,18 @@ public class InventoryPokemonServiceImpl implements InventoryPokemonService{
         this.stockDao.addPokemonToStore(pokemon);
     }
 
+    public static PokemonType generateRandomPokemonType() {
+        PokemonType[] allTypes = PokemonType.values();
+        int randomIndex = random.nextInt(allTypes.length);
+        return allTypes[randomIndex];
+    }
+
     @Override
     public fr.pantheonsorbonne.ufr27.miage.dto.Pokemon addNewPokemonToStore() {
-        Random rand = new Random();
-        int randomNumber = rand.nextInt(100 - 20 + 1) + 20;
-        fr.pantheonsorbonne.ufr27.miage.dto.Pokemon p = new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(idGenerate++,randomNumber,randomNumber,"plante",false,"test");
+        String name = faker.pokemon().name();
+        int randomNumber = random.nextInt(100 - 20 + 1) + 20;
+        String type = generateRandomPokemonType().toString();
+        fr.pantheonsorbonne.ufr27.miage.dto.Pokemon p = new fr.pantheonsorbonne.ufr27.miage.dto.Pokemon(idGenerate++,randomNumber,randomNumber,type,false,name);
         this.stockDao.addPokemonToStore(p);
         return p;
     }

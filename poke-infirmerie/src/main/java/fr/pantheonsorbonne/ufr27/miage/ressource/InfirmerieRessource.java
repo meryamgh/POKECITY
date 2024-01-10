@@ -24,7 +24,6 @@ public class InfirmerieRessource {
     public Response treatPokemon(@PathParam("idPokemon") int idPokemon) {
         fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon = new Pokemon(idPokemon, 0, 70,"feu",true,"test");
         service.priseEnCharge(pokemon);
-        System.out.println("haveEnoughMoney" + pokemon.prix());
         return Response.ok().build();
     }
 

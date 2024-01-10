@@ -6,7 +6,6 @@ public enum PokemonType {
 
     EAU,
 
-
     PLANTE,
 
 

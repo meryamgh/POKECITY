@@ -20,15 +20,7 @@ public class SchoolSessionServiceImpl implements SchoolSessionService{
 
     @Override
     public SchoolSession findRightSession(int pokescore) {
-        int idRightSession;
-        if (pokescore < 70) {
-            idRightSession = 1;
-        } else if (pokescore < 110) {
-            idRightSession = 2;
-        } else {
-            idRightSession = 3;
-        }
-
+        int idRightSession = (pokescore < 70) ? 1 : (pokescore < 110) ? 2 : 3;
         return schoolSessionDao.getSchoolSessionById(idRightSession);
     }
 
