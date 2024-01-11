@@ -1,4 +1,4 @@
-package fr.pantheonsorbonne.ufr27.miage.service;
+package fr.pantheonsorbonne.ufr27.miage.services;
 
 import fr.pantheonsorbonne.ufr27.miage.model.SchoolSession;
 

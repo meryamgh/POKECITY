@@ -1,4 +1,4 @@
-package fr.pantheonsorbonne.ufr27.miage.ressources;
+package fr.pantheonsorbonne.ufr27.miage.ressource;
 
 import fr.pantheonsorbonne.ufr27.miage.model.BankAccount;
 import fr.pantheonsorbonne.ufr27.miage.services.BankService;

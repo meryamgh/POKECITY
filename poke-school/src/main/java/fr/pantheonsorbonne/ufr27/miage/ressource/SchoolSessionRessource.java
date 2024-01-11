@@ -1,7 +1,7 @@
-package fr.pantheonsorbonne.ufr27.miage.ressources;
+package fr.pantheonsorbonne.ufr27.miage.ressource;
 
 import fr.pantheonsorbonne.ufr27.miage.model.SchoolSession;
-import fr.pantheonsorbonne.ufr27.miage.service.SchoolSessionService;
+import fr.pantheonsorbonne.ufr27.miage.services.SchoolSessionService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;

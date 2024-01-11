@@ -31,7 +31,6 @@ public class SoinServiceImpl implements SoinService{
         return intialPrice / 2;
     }
 
-
     @Override
     public Collection<TreatmentSession> getAllTreatmentSessionsDresseur(int idDresseur){
         return this.treatmentDAO.getAllTreatmentSessionsByDresseuer(idDresseur);

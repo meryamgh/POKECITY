@@ -1,8 +1,8 @@
 package fr.pantheonsorbonne.ufr27.miage.camel;
 
 import fr.pantheonsorbonne.ufr27.miage.dto.Pokemon;
-import fr.pantheonsorbonne.ufr27.miage.service.RegistrationService;
-import fr.pantheonsorbonne.ufr27.miage.service.SchoolSessionService;
+import fr.pantheonsorbonne.ufr27.miage.services.RegistrationService;
+import fr.pantheonsorbonne.ufr27.miage.services.SchoolSessionService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.apache.camel.Exchange;
