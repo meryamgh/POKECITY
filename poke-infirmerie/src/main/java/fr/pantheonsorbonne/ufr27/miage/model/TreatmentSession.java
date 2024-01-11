@@ -1,6 +1,7 @@
 package fr.pantheonsorbonne.ufr27.miage.model;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -34,6 +35,7 @@ public class TreatmentSession {
     @Column(name = "idDresseur", nullable = false, length = 45)
     private int idDresseur;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSX")
     @Column(name = "treatmentDate", nullable = false, length = 45)
     private Date treatmentDate;
 
