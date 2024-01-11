@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
@@ -32,6 +33,7 @@ public class TestSoinServiceImpl {
         miago = new Pokemon(3, 50, 70, "feu", true, "miago");
         List<TreatmentSession> treatmentSessionList = Arrays.asList(new TreatmentSession());
         lenient().when(treatmentDAO.getAllTreatmentSessionsByDresseuer(eq(1))).thenReturn(treatmentSessionList);
+        lenient().when(treatmentDAO.getAllTreatmentSessions()).thenReturn(treatmentSessionList);
     }
 
     @Test
@@ -45,13 +47,17 @@ public class TestSoinServiceImpl {
     @Test
     public void testGetAllTreamentSessionsDresseur() {
         int idDresseur = 1;
-        soinService.getAllTreatmentSessionsDresseur(idDresseur);
+        Collection<TreatmentSession> treatmentSessionList = soinService.getAllTreatmentSessionsDresseur(idDresseur);
         verify(treatmentDAO, times(1)).getAllTreatmentSessionsByDresseuer(eq(idDresseur));
+
+        assertEquals(1, treatmentSessionList.size());
     }
 
     @Test
     public void testGetAllTreatmentSessions() {
-        soinService.getAllTreatmentSessions();
+        Collection<TreatmentSession> treatmentSessionList = soinService.getAllTreatmentSessions();
         verify(treatmentDAO, times(1)).getAllTreatmentSessions();
+
+        assertEquals(1, treatmentSessionList.size());
     }
 }

@@ -1,11 +1,9 @@
 package fr.pantheonsorbonne.ufr27.miage.ressource;
 
-import fr.pantheonsorbonne.ufr27.miage.dto.Dresseur;
 import fr.pantheonsorbonne.ufr27.miage.dto.Pokemon;
 import fr.pantheonsorbonne.ufr27.miage.model.TreatmentSession;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.persistence.Column;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 
@@ -21,20 +19,17 @@ public class DBPokemon {
 
     @Transactional
     public void truncateAllTables() {
-        // Disable referential integrity for MySQL
+
         em.createNativeQuery("SET FOREIGN_KEY_CHECKS=0;").executeUpdate();
 
-        // Query to find all tables
         List<String> tableNames = em.createNativeQuery(
                 "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES " +
                         "WHERE TABLE_SCHEMA='PUBLIC'").getResultList();
 
-        // Truncate each table
         for (String tableName : tableNames) {
             em.createNativeQuery("TRUNCATE TABLE " + tableName).executeUpdate();
         }
 
-        // Re-enable referential integrity for MySQL
         em.createNativeQuery("SET FOREIGN_KEY_CHECKS=1;").executeUpdate();
     }
 
