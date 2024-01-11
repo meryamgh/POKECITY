@@ -1,5 +1,6 @@
 package fr.pantheonsorbonne.ufr27.miage.ressource;
 
+import fr.pantheonsorbonne.ufr27.miage.exception.PokemonNotFoundException;
 import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
 import fr.pantheonsorbonne.ufr27.miage.services.InventoryPokemonService;
 import jakarta.inject.Inject;
@@ -18,15 +19,21 @@ public class PokemonRessource {
     @Path("pokemon")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public Collection<Pokemon> getAllStoredPokemons() {
-        return service.getAllPokemon();
+    public Collection<Pokemon> getAllStoredPokemons() throws PokemonNotFoundException {
+        Collection<Pokemon> pokemons =  service.getAllPokemon();
+        if (pokemons.isEmpty()) {
+            throw new PokemonNotFoundException();
+        } else {
+            return pokemons;
+        }
     }
 
     @Path("pokemon/{price}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public Collection<Pokemon> getSotredPokemonsByPriceLimit(@PathParam("price") int price) {
-        return service.getPokemonByPrice(price);
+            return service.getPokemonByPrice(price);
     }
+
 
 }

@@ -1,7 +1,13 @@
-REPLACE INTO `Pokemon` (`idPokemon`, `name`, `type`, `prix`)
+REPLACE INTO `Pokemon` (`idPokemon`, `prix` ,`name`, `type`)
 VALUES
-    (1, 'ghulamo', 'feu', 200),
-    (2, 'nabilo', 'plante', 80),
-    (3, 'lilio', 'eau', 90),
-    (4, 'naloufio', 'eau', 95),
-    (5, 'paudo', 'feu', 70);
+      (2, 80 ,'nabilo', 'PLANTE'),
+    (3, 90, 'lilio', 'EAU'),
+    (4, 95,'naloufio', 'EAU'),
+    (5, 70,'paudo', 'FEU'),
+    (6, 50,'machoc', 'PLANTE'),
+    (7, 100,'ghulamo', 'FEU'),
+    (8, 90,'ounissio', 'EAU'),
+    (9, 110,'chenno', 'PLANTE'),
+    (10, 110,'olivio', 'PLANTE'),
+    (11, 110,'chiriaco', 'EAU'),
+    (12, 110,'clavelo', 'FEU');

@@ -14,6 +14,12 @@ public interface DresseurDao {
 
     Collection<Pokemon> getAllPokemons(int idDresseur);
 
-    boolean isDresseurPokemon(int idDresseur, int idPokemon) throws NotAvailablePokemonException;
+    boolean isDresseurPokemon(int idDresseur, int idPokemon);
+
+    int getNumberPokemon(int idDresseur);
+
+    void setDresseurBannedStatus(int idDresseur);
+
+    void deletePokemon(Pokemon pokemon, int idDreseur);
 
 }

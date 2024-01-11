@@ -8,7 +8,7 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 public class CamelRoutes extends RouteBuilder {
 
     @Inject
-    SoignerPokemonGateway soignerPokemonGateway;
+    TreatGateway soignerPokemonGateway;
 
     @ConfigProperty(name = "fr.pantheonsorbonne.ufr27.miage.jmsPrefix")
     String jmsPrefix;
@@ -19,10 +19,22 @@ public class CamelRoutes extends RouteBuilder {
 
         from("sjms2:queue:" + jmsPrefix + "pokeInfirmerie")
                 .choice()
-                .when(simple("${headers.responseHaveEnoughMoney}"))
+                .when(simple("${headers.success}"))
                 .delay(30000)
-                .bean(soignerPokemonGateway, "soigner(${body})");
+                .bean(soignerPokemonGateway, "soigner(${body}, ${headers.idDresseur})");
 
+        from("sjms2:queue:M1.soin")
+                .log("pokemon recu à l'infirmerie ${body}")
+                .setBody(simple("${body}"))
+                .log("pokemon recu à l'infirmerie ${body}")
+                .bean(soignerPokemonGateway, "getPriceTreatment")
+        ;
+
+        from("sjms2:topic:M1.dresseurBanned")
+                .log("${body}");
+
+        from("sjms2:topic:M1.pokemonAddInOurCity")
+                .log("${body}");
 
     }
 }

@@ -9,7 +9,7 @@ public interface ReceiptService {
     void buyPokemon(int idPokemon) throws PokemonNotFoundException ;
 
 
-
+    Collection<ReceiptPokemon> getAllReceiptsByDresseur(int idDresseur);
 
     void createReceiptPokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon idPokemon, int idDresseur);
 

@@ -15,11 +15,10 @@ public class BankRessource {
 
     @Inject
     BankService service;
-    @Path("bank/{id}")
+    @Path("{id}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public BankAccount getDresseurBankaccount (@PathParam("id") int idDresseur){
-        System.out.println("okok");
         return this.service.getCardBank(idDresseur);
     }
 }

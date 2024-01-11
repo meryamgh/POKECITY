@@ -3,6 +3,8 @@ package fr.pantheonsorbonne.ufr27.miage.model;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 
 @Entity
 public class TreatmentSession {
@@ -18,6 +20,31 @@ public class TreatmentSession {
     @Column(name = "priceTreatment", nullable = false, length = 45)
     private int priceTreatment;
 
+    @Column(name = "idPokemon", nullable = false, length = 45)
+    private int idPokemon;
+
+    public int getIdDresseur() {
+        return idDresseur;
+    }
+
+    public void setIdDresseur(int idDresseur) {
+        this.idDresseur = idDresseur;
+    }
+
+    @Column(name = "idDresseur", nullable = false, length = 45)
+    private int idDresseur;
+
+    @Column(name = "treatmentDate", nullable = false, length = 45)
+    private Date treatmentDate;
+
+    public Date getTreatmentDate() {
+        return treatmentDate;
+    }
+
+    public void setTreatmentDate(Date datePurchase) {
+        this.treatmentDate = datePurchase;
+    }
+
     public int getIdPokemon() {
         return idPokemon;
     }
@@ -25,9 +52,6 @@ public class TreatmentSession {
     public void setIdPokemon(int idPokemon) {
         this.idPokemon = idPokemon;
     }
-
-    @Column(name = "idPokemon", nullable = false, length = 45)
-    private int idPokemon;
 
     public int getIdTreatment() {
         return idTreatment;

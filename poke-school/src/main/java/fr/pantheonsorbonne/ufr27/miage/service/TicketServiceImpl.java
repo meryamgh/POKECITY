@@ -16,4 +16,12 @@ public class TicketServiceImpl implements TicketService{
     public Collection<SchoolTicket> getAllTickets() {
        return schoolTicketDao.getSchoolTickets();
     }
+
+    @Override
+    public Collection<SchoolTicket> getAllTicketsByDresseur(int idDresseur) {
+        return schoolTicketDao.getSchoolTicketsByDresseur(idDresseur);
+    }
+
+
+
 }

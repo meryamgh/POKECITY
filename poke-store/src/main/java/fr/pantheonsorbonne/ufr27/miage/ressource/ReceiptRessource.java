@@ -21,7 +21,7 @@ public class ReceiptRessource {
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public Response buyPokemon(@PathParam("idPokemon") int pokemon)   {
+    public Response buyPokemon(@PathParam("idPokemon") int pokemon) {
         try {
             service.buyPokemon(pokemon);
         } catch (PokemonNotFoundException e){
@@ -38,5 +38,12 @@ public class ReceiptRessource {
     @Produces({MediaType.APPLICATION_JSON})
     public Collection<ReceiptPokemon> getAllReceiptPokemon(){
         return this.service.getAllReceipts();
+    }
+
+    @Path("receipts/{idDresseur}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public Collection<ReceiptPokemon> getAllReceiptPokemon(@PathParam("idDresseur") int idDresseur){
+        return this.service.getAllReceiptsByDresseur(idDresseur);
     }
 }

@@ -1,4 +1,4 @@
-package fr.pantheonsorbonne.ufr27.miage.camel;
+package fr.pantheonsorbonne.ufr27.miage.camel.gateways;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -12,8 +12,6 @@ public class SchoolGateway {
 
     @Inject
     CamelContext context;
-
-
 
 
     public void sendToSchool(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon){

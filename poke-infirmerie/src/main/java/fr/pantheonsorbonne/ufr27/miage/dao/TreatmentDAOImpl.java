@@ -9,6 +9,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import java.sql.Time;
 import java.util.Collection;
+import java.util.Date;
 
 
 @ApplicationScoped
@@ -17,16 +18,15 @@ public class TreatmentDAOImpl implements TreatmentDAO {
     @Inject
     EntityManager em;
 
-    @Inject
-    SoinService service;
-
     @Override
     @Transactional
-    public void insertTreatmentSession(Pokemon pokemon) {
+    public void insertTreatmentSession(Pokemon pokemon, int treatPrice, int idDresseur) {
         TreatmentSession receipt = new TreatmentSession();
         receipt.setIdPokemon(pokemon.idPokemon());
         receipt.setTimeTreatment(3);
-        receipt.setPriceTreatment(service.getPriceTreatment(pokemon));
+        receipt.setPriceTreatment(treatPrice);
+        receipt.setIdDresseur(idDresseur);
+        receipt.setTreatmentDate(new Date());
         em.persist(receipt);
         em.flush();
 
@@ -40,5 +40,14 @@ public class TreatmentDAOImpl implements TreatmentDAO {
     @Override
     public String getTimeTreatmentAsString(Time timeTreatment) {
         return timeTreatment.toString();
+    }
+
+
+
+    @Override
+    public Collection<TreatmentSession> getAllTreatmentSessionsByDresseuer(int idDresseur){
+        return em.createQuery("SELECT session FROM TreatmentSession session WHERE session.idDresseur = :idDresseur", TreatmentSession.class)
+                .setParameter("idDresseur", idDresseur)
+                .getResultList();
     }
 }

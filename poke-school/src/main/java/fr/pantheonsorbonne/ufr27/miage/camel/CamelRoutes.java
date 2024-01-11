@@ -12,7 +12,7 @@ public class CamelRoutes extends RouteBuilder {
     SchoolGateway gateway;
 
     @Override
-    public void configure() throws Exception {
+    public void configure() {
 
 
         from("sjms2:queue:M1.PokemonToSchool?exchangePattern=InOut")
@@ -20,15 +20,20 @@ public class CamelRoutes extends RouteBuilder {
                 .unmarshal().json(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon.class)
                 .bean(gateway, "getPriceRightSession(${body})")
                 .marshal().json()
-
         ;
 
         from("sjms2:queue:M1.BankResponse?exchangePattern=InOut")
                 .unmarshal().json(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon.class)
                 .delay(30000)
-                .bean(gateway, "improvePokemon(${body})")
+                .bean(gateway, "improvePokemon(${body}, ${headers.idDresseur})")
         ;
 
+
+        from("sjms2:topic:M1.dresseurBanned")
+                .log("${body}");
+
+        from("sjms2:topic:M1.pokemonAddInOurCity")
+                .log("${body}");
 
     }
 }

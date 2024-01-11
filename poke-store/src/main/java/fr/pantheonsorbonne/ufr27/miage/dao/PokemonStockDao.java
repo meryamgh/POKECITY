@@ -14,4 +14,9 @@ public interface PokemonStockDao {
     Pokemon getPokemonById(int idPokemon) throws PokemonNotFoundException  ;
 
     void deletePokemon(int idPokemon)throws PokemonNotFoundException  ;
+
+    Pokemon getRandomPokemon() throws PokemonNotFoundException;
+
+    void addPokemonToStore(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon);
+
 }

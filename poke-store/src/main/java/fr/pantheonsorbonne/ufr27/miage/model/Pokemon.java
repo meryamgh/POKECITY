@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 public class Pokemon {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idPokemon", nullable = false)
     private int idPokemon;
 
@@ -18,6 +17,7 @@ public class Pokemon {
 
     @Column(name = "prix", nullable = false, length = 45)
     private int prix;
+
 
     public int getIdPokemon() {
         return idPokemon;
@@ -50,4 +50,5 @@ public class Pokemon {
     public void setName(String name) {
         this.name = name;
     }
+
 }

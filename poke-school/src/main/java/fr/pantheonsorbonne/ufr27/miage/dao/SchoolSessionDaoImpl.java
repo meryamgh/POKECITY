@@ -25,14 +25,4 @@ public class SchoolSessionDaoImpl implements SchoolSessionDao{
         return em.find(SchoolSession.class, id);
     }
 
-    @Override
-    @Transactional
-    public int getSchoolSessionGainById(int id) {
-        return em.createQuery(
-                        "SELECT s.pokescoreGain FROM SchoolSession s WHERE s.idSchoolSession = :id",
-                        int.class
-                )
-                .setParameter("id", id)
-                .getSingleResult();
-    }
 }

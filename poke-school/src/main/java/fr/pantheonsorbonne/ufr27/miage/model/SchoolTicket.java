@@ -2,6 +2,8 @@ package fr.pantheonsorbonne.ufr27.miage.model;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Entity
 public class SchoolTicket {
 
@@ -15,6 +17,39 @@ public class SchoolTicket {
 
     @Column(name = "schoolSession_idSchoolSession", nullable = false)
     private int schoolSessionId;
+
+    @Column(name = "schoolSessionDate", nullable = false, length = 45)
+    private Date schoolSessionDate;
+
+    public Date getSchoolSessionDate() {
+        return schoolSessionDate;
+    }
+
+    public void setSchoolSessionDate(Date datePurchase) {
+        this.schoolSessionDate = datePurchase;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
+    public int getIdDresseur() {
+        return idDresseur;
+    }
+
+    public void setIdDresseur(int idDresseur) {
+        this.idDresseur = idDresseur;
+    }
+
+    @Column(name = "cost", nullable = false)
+    private int cost;
+
+    @Column(name = "idDresseur", nullable = false)
+    private int idDresseur;
 
     public int getIdSchoolTicket() {
         return idSchoolTicket;

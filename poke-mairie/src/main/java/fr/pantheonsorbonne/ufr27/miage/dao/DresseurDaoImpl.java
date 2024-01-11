@@ -1,14 +1,12 @@
 package fr.pantheonsorbonne.ufr27.miage.dao;
 
 
-import fr.pantheonsorbonne.ufr27.miage.exception.NotAvailablePokemonException;
 import fr.pantheonsorbonne.ufr27.miage.model.Dresseur;
 import fr.pantheonsorbonne.ufr27.miage.model.Pokemon;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
-
 import java.util.Collection;
 
 @ApplicationScoped
@@ -21,7 +19,7 @@ public class DresseurDaoImpl implements DresseurDao{
     public void addPokemonToPokedex(Pokemon idPokemon, int idDresseur) {
         Dresseur dresseur = this.getDresseur(idDresseur);
         dresseur.getPokedex().add(idPokemon);
-
+        this.em.merge(dresseur);
     }
 
     @Override
@@ -41,15 +39,36 @@ public class DresseurDaoImpl implements DresseurDao{
 
     @Override
     @Transactional
-    public boolean isDresseurPokemon(int idDresseur, int idPokemon)throws NotAvailablePokemonException   {
+    public boolean isDresseurPokemon(int idDresseur, int idPokemon)   {
         Collection<Pokemon> allDresseurPokemons = this.getAllPokemons(idDresseur);
-
-        boolean pokemonExists = allDresseurPokemons.stream()
+        return allDresseurPokemons.stream()
                 .anyMatch(pokemon -> pokemon.getIdPokemon() == idPokemon);
-        if (!pokemonExists) {
-            throw new NotAvailablePokemonException("The pokemon with ID " + idPokemon + " is not available for this dresseur.");
-        }
-        return true;
+    }
+
+    @Override
+    @Transactional
+    public int getNumberPokemon(int idDresseur) {
+        Long count = em.createQuery("SELECT COUNT(p) FROM Pokedex p WHERE p.dresseur.idDresseur = :id", Long.class)
+                .setParameter("id", idDresseur)
+                .getSingleResult();
+        return count.intValue();
+    }
+
+    @Override
+    @Transactional
+    public void setDresseurBannedStatus(int idDresseur) {
+        em.createQuery("UPDATE Dresseur d SET d.bannedStatus = true WHERE d.idDresseur = :id")
+                .setParameter("id", idDresseur)
+                .executeUpdate();
+    }
+
+    @Override
+    @Transactional
+    public void deletePokemon(Pokemon pokemon, int idDresseur) {
+        this.em.createQuery("DELETE FROM Pokedex WHERE pokemon.idPokemon = : idPokemon")
+                .setParameter("idPokemon", pokemon.getIdPokemon())
+                .executeUpdate();
 
     }
+
 }

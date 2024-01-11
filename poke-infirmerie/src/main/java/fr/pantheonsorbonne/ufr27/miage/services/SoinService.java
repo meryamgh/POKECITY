@@ -1,14 +1,17 @@
 package fr.pantheonsorbonne.ufr27.miage.services;
 
+import fr.pantheonsorbonne.ufr27.miage.dto.Pokemon;
+import fr.pantheonsorbonne.ufr27.miage.model.TreatmentSession;
+
+import java.util.Collection;
+
 public interface SoinService {
 
-    void checkEnoughMoney(int idPokemon, int price, int pokescore, int pricetreatment);
+    fr.pantheonsorbonne.ufr27.miage.dto.Pokemon soignerPokemon(Pokemon pokemon, int idDresseur);
 
-    fr.pantheonsorbonne.ufr27.miage.dto.Pokemon soignerPokemon(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon);
+     int getPriceTreatment(Pokemon pokemon);
+    Collection<TreatmentSession> getAllTreatmentSessionsDresseur(int idDresseur);
 
-    void redirectToMairie(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon);
-
-     int getPriceTreatment(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon);
-     void priseEnCharge(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon pokemon);
+    Collection<TreatmentSession> getAllTreatmentSessions();
 
 }
