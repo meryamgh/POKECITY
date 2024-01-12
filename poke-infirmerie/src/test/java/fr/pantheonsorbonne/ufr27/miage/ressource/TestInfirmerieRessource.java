@@ -46,9 +46,6 @@ public class TestInfirmerieRessource {
                 .extract()
                 .response();
 
-        String responseBody = response.getBody().asString();
-        System.out.println("Response Body: " + responseBody);
-
         TreatmentSession[] listResponse = response.as(TreatmentSession[].class);
          assertEquals(1, listResponse.length);
     }

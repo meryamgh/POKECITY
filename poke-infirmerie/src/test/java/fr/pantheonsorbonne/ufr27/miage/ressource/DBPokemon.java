@@ -19,13 +19,6 @@ public class DBPokemon {
 
     @Transactional
     public void truncateAllTables() {
-
-        em.createNativeQuery("SET FOREIGN_KEY_CHECKS=0;").executeUpdate();
-
-        List<String> tableNames = em.createNativeQuery(
-                "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES " +
-                        "WHERE TABLE_SCHEMA='PUBLIC'").getResultList();
-
         em.createNativeQuery("SET FOREIGN_KEY_CHECKS=1;").executeUpdate();
         em.createNativeQuery("TRUNCATE TABLE TreatmentSession").executeUpdate();
     }
