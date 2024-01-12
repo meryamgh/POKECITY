@@ -64,7 +64,9 @@ Le pokestore reçoit une notification lorsque :
 
 -Lorsqu'un pokemon est crée par le store la mairie doit etre avertit et doit également le stocker dans sa base de donnée.
 
+-Les Pokemons sont crées toutes les 70secondes dans le store.
 
+-Dés lors qu'un Pokemon est crée dans le store il passe par la mairie pour être inscrit dans le registre des Pokemons.
 
 
 ![](send_Pokemon_School)
