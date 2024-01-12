@@ -9,39 +9,35 @@ public class ReceiptPokemon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idReceipt", nullable = false)
-    private Integer idReceipt;
+    private int idReceipt;
 
     @Column(name = "cost", nullable = false, length = 45)
-    private Integer cost;
+    private int cost;
 
-    @Column(name = "datePurchase", nullable = false, length = 45)
-    private Date datePurchase;
+    @Column(name = "idDresseur", nullable = false, length = 45)
+    private int dresseur;
 
+    @Column(name = "idPokemon", nullable = false, length = 45)
+    private int pokemon;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idDresseur")
-    private Dresseur dresseur;
-
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idPokemon")
-    private Pokemon pokemon;
-
-    public Integer getIdReceipt() {
+    public int getIdReceipt() {
         return idReceipt;
     }
 
-    public void setIdReceipt(Integer idReceipt) {
+    public void setIdReceipt(int idReceipt) {
         this.idReceipt = idReceipt;
     }
 
-    public Integer getCost() {
+    public int getCost() {
         return cost;
     }
 
-    public void setCost(Integer cost) {
+    public void setCost(int cost) {
         this.cost = cost;
     }
+
+    @Column(name = "datePurchase", nullable = false, length = 45)
+    private Date datePurchase;
 
     public Date getDatePurchase() {
         return datePurchase;
@@ -51,19 +47,19 @@ public class ReceiptPokemon {
         this.datePurchase = datePurchase;
     }
 
-    public Dresseur getDresseur() {
-        return dresseur;
-    }
-
-    public void setDresseur(Dresseur dresseur) {
+    public void setDresseur(int dresseur) {
         this.dresseur = dresseur;
     }
 
-    public Pokemon getPokemon() {
+    public int getDresseur(){
+        return this.dresseur;
+    }
+
+    public int getPokemon() {
         return pokemon;
     }
 
-    public void setPokemon(Pokemon pokemon) {
+    public void setPokemon(int pokemon) {
         this.pokemon = pokemon;
     }
 

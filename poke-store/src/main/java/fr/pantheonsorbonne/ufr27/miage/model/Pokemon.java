@@ -6,9 +6,8 @@ import jakarta.persistence.*;
 public class Pokemon {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idPokemon", nullable = false)
-    private Integer idPokemon;
+    private int idPokemon;
 
     @Column(name = "name", nullable = false, length = 45)
     private String name;
@@ -16,16 +15,15 @@ public class Pokemon {
     @Column(name = "type", nullable = false, length = 45)
     private String type;
 
-
-
     @Column(name = "prix", nullable = false, length = 45)
-    private Integer prix;
+    private int prix;
 
-    public Integer getIdPokemon() {
+
+    public int getIdPokemon() {
         return idPokemon;
     }
 
-    public void setIdPokemon(Integer idPokemon) {
+    public void setIdPokemon(int idPokemon) {
         this.idPokemon = idPokemon;
     }
 
@@ -37,11 +35,11 @@ public class Pokemon {
         this.type = type;
     }
 
-    public Integer getPrix() {
+    public int getPrix() {
         return prix;
     }
 
-    public void setPrix(Integer prix) {
+    public void setPrix(int prix) {
         this.prix = prix;
     }
 
@@ -52,4 +50,5 @@ public class Pokemon {
     public void setName(String name) {
         this.name = name;
     }
+
 }
