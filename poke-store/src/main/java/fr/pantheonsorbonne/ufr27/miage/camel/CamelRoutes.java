@@ -49,7 +49,7 @@ public class CamelRoutes extends RouteBuilder {
         from("sjms2:topic:"+ jmsPrefix + ".dresseurBanned")
                 .log("${body}");
 
-        from("scheduler://pokemonProduction?delay=30000")
+        from("scheduler://pokemonProduction?delay=70000")
                 .bean(pokemonGateway, "createProduct()")
                 .log("Product created : ${body}")
                 .to("sjms2:queue:"+ jmsPrefix +".newPokemon");
