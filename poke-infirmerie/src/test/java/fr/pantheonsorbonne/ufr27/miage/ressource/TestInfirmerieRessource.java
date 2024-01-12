@@ -32,7 +32,6 @@ public class TestInfirmerieRessource {
     @Transactional
     public void setup() {
         pokemon.truncateAllTables();
-        pokemon.truncateTreatmentSession();
         testData = pokemon.createData();
     }
 

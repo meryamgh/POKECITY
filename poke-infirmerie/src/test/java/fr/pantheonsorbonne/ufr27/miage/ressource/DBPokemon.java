@@ -26,16 +26,10 @@ public class DBPokemon {
                 "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES " +
                         "WHERE TABLE_SCHEMA='PUBLIC'").getResultList();
 
-        for (String tableName : tableNames) {
-            em.createNativeQuery("TRUNCATE TABLE " + tableName).executeUpdate();
-        }
-
         em.createNativeQuery("SET FOREIGN_KEY_CHECKS=1;").executeUpdate();
-    }
-    @Transactional
-    public void truncateTreatmentSession() {
         em.createNativeQuery("TRUNCATE TABLE TreatmentSession").executeUpdate();
     }
+
     @Transactional
     public TestData createData() {
         List<Pokemon> listePokemon = new ArrayList<>();
