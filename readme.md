@@ -65,7 +65,7 @@ Le pokestore reçoit une notification lorsque :
 -Lorsqu'un pokemon est crée par le store la mairie doit etre avertit et doit également le stocker dans sa base de donnée.
 
 
-![](seqDiagram.png)
+
 
 ![](send_Pokemon_School)
 
