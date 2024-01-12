@@ -16,9 +16,6 @@ public class SoinServiceImpl implements SoinService{
 
     @Override
     public Pokemon soignerPokemon(Pokemon pokemon, int idDDresseur) {
-        int pokeScore = pokemon.pokeScore();
-        pokeScore = pokemon.prix();
-        System.out.println("pokescore" + pokeScore);
         System.out.println("prix" + pokemon.prix());
         treatmentDAO.insertTreatmentSession(pokemon, getPriceTreatment(pokemon), idDDresseur);
         return new Pokemon(pokemon.idPokemon(),pokemon.prix(),pokemon.prix(),pokemon.type(), pokemon.isAdopted(),pokemon.name());

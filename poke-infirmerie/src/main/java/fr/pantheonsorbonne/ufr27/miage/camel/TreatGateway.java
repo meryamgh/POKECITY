@@ -18,7 +18,6 @@ public class TreatGateway {
     }
 
     public void getPriceTreatment(Pokemon pokemon, Exchange exchange){
-        System.out.println(this.service.getPriceTreatment(pokemon));
         exchange.getIn().setHeader("price",this.service.getPriceTreatment(pokemon));
 
     }

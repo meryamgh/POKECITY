@@ -16,9 +16,6 @@ public class CamelRoutes extends RouteBuilder {
     PokemonGateway pokemonGateway;
 
     @Inject
-    CamelContext camelContext;
-
-    @Inject
     FightGateway fightGateway;
 
     @Override
@@ -39,25 +36,25 @@ public class CamelRoutes extends RouteBuilder {
                 .marshal().json();
 
 
-        from("sjms2:queue:M1.getPokemonForFight?exchangePattern=InOut")
+        from("sjms2:queue:"+ jmsPrefix + ".getPokemonForFight?exchangePattern=InOut")
                 .unmarshal().json(fr.pantheonsorbonne.ufr27.miage.dto.Pokemon.class)
                 .log("${body}")
                 .bean(fightGateway,"getRandomPokemonForFight(${body})")
                 ;
 
-        from("sjms2:queue:M1.returnPNJ")
+        from("sjms2:queue:"+ jmsPrefix + ".returnPNJ")
                 .log("recu dans le store pour etre ajouter dans ma bdd ${body}")
                 .bean(fightGateway, "stockPokemonToStore(${body})");
 
-        from("sjms2:topic:M1.dresseurBanned")
+        from("sjms2:topic:"+ jmsPrefix + ".dresseurBanned")
                 .log("${body}");
 
         from("scheduler://pokemonProduction?delay=30000")
                 .bean(pokemonGateway, "createProduct()")
                 .log("Product created : ${body}")
-                .to("sjms2:queue:M1.newPokemon");
+                .to("sjms2:queue:"+ jmsPrefix +".newPokemon");
 
-        from("sjms2:topic:M1.pokemonAddInOurCity")
+        from("sjms2:topic:"+ jmsPrefix + ".pokemonAddInOurCity")
                 .log("${body}");
     }
 }

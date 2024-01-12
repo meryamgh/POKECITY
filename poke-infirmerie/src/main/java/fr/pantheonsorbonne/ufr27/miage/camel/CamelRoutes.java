@@ -23,17 +23,17 @@ public class CamelRoutes extends RouteBuilder {
                 .delay(30000)
                 .bean(soignerPokemonGateway, "soigner(${body}, ${headers.idDresseur})");
 
-        from("sjms2:queue:M1.soin")
+        from("sjms2:queue:"+ jmsPrefix +".soin")
                 .log("pokemon recu à l'infirmerie ${body}")
                 .setBody(simple("${body}"))
                 .log("pokemon recu à l'infirmerie ${body}")
                 .bean(soignerPokemonGateway, "getPriceTreatment")
         ;
 
-        from("sjms2:topic:M1.dresseurBanned")
+        from("sjms2:topic:"+ jmsPrefix +".dresseurBanned")
                 .log("${body}");
 
-        from("sjms2:topic:M1.pokemonAddInOurCity")
+        from("sjms2:topic:"+ jmsPrefix +".pokemonAddInOurCity")
                 .log("${body}");
 
     }

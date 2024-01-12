@@ -112,47 +112,43 @@ public class GameServiceImpl implements GameService {
         int typeAdvantage = 0;
 
         if (ourType.isStrongAgainst(opponentType)) {
-            typeAdvantage += 10;
+            typeAdvantage += 20;
         } else if (ourType.isWeakAgainst(opponentType)) {
-            typeAdvantage -= 10;
+            typeAdvantage -= 20;
         }
 
         return typeAdvantage;
     }
 
+
     @Override
     public int calculateScoreAdvantage(int ecart) {
-        int scoreAdvantage = 0;
-
-        if (ecart < 0) {
-            scoreAdvantage -= calculateScorePenalty(ecart);
-        } else if (ecart > 0) {
-            scoreAdvantage += calculateScoreBonus(ecart);
-        }
-
-        return scoreAdvantage;
+        return (ecart > 0) ? calculateScoreBonus(ecart) :
+                (ecart < 0) ? calculateScorePenalty(ecart) : 0;
     }
+
 
     @Override
     public int calculateScorePenalty(int ecart) {
         if (ecart >= -100) {
-            return Math.min(-20, -5 * (ecart / 10));
+            return Math.min(-30, -5 * (ecart / 10));
         } else {
-            return -20;
+            return -30;
         }
     }
 
     @Override
     public int calculateScoreBonus(int ecart) {
         if (ecart <= 100) {
-            return Math.min(20, 5 * (ecart / 10));
+            return Math.min(30, 5 * (ecart / 10));
         } else {
-            return 20;
+            return 30;
         }
     }
 
     @Override
     public boolean percentGiven(int percent) {
+        System.out.println("chance to win "+percent);
         Random rand = new Random();
         int number = rand.nextInt(100);
         return number < percent;
