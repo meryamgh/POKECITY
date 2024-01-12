@@ -32,7 +32,10 @@ public class DBPokemon {
 
         em.createNativeQuery("SET FOREIGN_KEY_CHECKS=1;").executeUpdate();
     }
-
+    @Transactional
+    public void truncateTreatmentSession() {
+        em.createNativeQuery("TRUNCATE TABLE TreatmentSession").executeUpdate();
+    }
     @Transactional
     public TestData createData() {
         List<Pokemon> listePokemon = new ArrayList<>();

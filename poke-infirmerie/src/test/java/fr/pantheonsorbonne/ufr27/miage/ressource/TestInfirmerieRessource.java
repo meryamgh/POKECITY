@@ -9,6 +9,7 @@ import io.quarkus.test.junit.QuarkusTest;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
+import org.codehaus.groovy.transform.trait.Traits;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,10 +32,12 @@ public class TestInfirmerieRessource {
     @Transactional
     public void setup() {
         pokemon.truncateAllTables();
+        pokemon.truncateTreatmentSession();
         testData = pokemon.createData();
     }
 
     @Test
+    @Transactional
     public void testInfirmerieRessource() {
         Response response = given()
                 .when()
@@ -52,6 +55,7 @@ public class TestInfirmerieRessource {
     }
 
     @Test
+    @Transactional
     public void testGetAllTreatmentsByIdDresseur() {
     Response response = given()
      .when()
