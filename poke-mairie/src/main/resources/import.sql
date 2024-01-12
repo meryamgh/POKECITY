@@ -21,4 +21,4 @@ VALUES
 REPLACE INTO `Dresseur_Pokemon` (`Dresseur_idDresseur`, `pokedex_idPokemon`) VALUES ('1', '1');
 REPLACE INTO `BankAccount` (`balance`, `dresseur_idDresseur`, `idBankAccount`) VALUES
                                                                                   (200, 2, 11122334),
-                                                                                  (100, 1, 12345678);
+                                                                                  (100000, 1, 12345678);
