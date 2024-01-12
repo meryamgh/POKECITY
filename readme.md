@@ -1,6 +1,6 @@
 ## Objectifs du système à modéliser
 
-On propose de modéliser un système de gestion (master) du pokecity pouvant supporter plusieurs pokemons (pokemon) et dresseurs (dresseur). Le système master gère le pokestore, la pokebank, le pokeschool, la mairie, l'infirmerie (avec plusieurs ambulances), les différents dresseurs se combattant entre eux, l'inscription des pokemons dans le pokeschool, acheter / revendre / échanger un pokemon dans le pokestore, la gestion des pokescores dans la pokebank, l'enregistrement des inscriptions au pokeschool se fait à la mairie avec le nombre de pokémons pour chaque dresseur.
+On propose de modéliser un système de gestion (master) du pokecity pouvant supporter plusieurs pokemons (pokemon) et dresseurs (dresseur). Le système master gère le pokestore, la pokebank, le pokeschool, la mairie, l'infirmerie, les différents dresseurs se combattant entre eux, l'inscription des pokemons dans le pokeschool, acheter / revendre / échanger un pokemon dans le pokestore, la gestion des pokescores dans la pokebank, l'enregistrement des inscriptions au pokeschool se fait à la mairie avec le nombre de pokémons pour chaque dresseur.
 
 Chaque dresseur possède un pokémon avec 20 pokescores au départ, les pokemons et les pokescores peuvent évoluer en gagnant les combats.
 Le pokescore diminue avec les achats et perte d'un combat. Le nombre de pokemons peut augmenter avec l'achat d'autres pokemons dans le pokestore.
@@ -40,46 +40,44 @@ Chaque combat est associé à une somme à gagner (pokescore fixé)
 
 ### Exigences
 
-- Un dresseur doit avoir un pokémon (un parmi les nuls = 50 pokescores) et un pokescore = 50 au début du jeu.
-- Les combats doivent se faire seulement à un contre un (dresseur et pokémon).
-- Un pokémon ne peut pas participer à un combat s’il est au pokeschool (participe à une session)
-- Une session = 2 combats du dresseur
-- Pokestore : 3 catégories : pokémon 50, 70 et 100.
-- Pokeschool : 3 sessions : 
-  si pokémon entre 50 et 70 : +10, pokescore de mon pokémon + 5
-  si pokémon entre 70 et 100 : +15, pokescore de mon pokémon + 10
-  si pokémon +100 : +30, pokescore de mon pokémon + 25
-- La fin d’un combat : perdant = 0 pokescore et gagnant : pokéscore de départ + prime (va au dresseur)
-- Prime des combats : Moyenne entre pokescore des 2 pokémons
-- Si le dresseur a un seul pokémon il ne peut pas l’inscrire à la pokeschool
-- Si le pokémon est à la pokeschool et que son dresseur est éliminé du jeu, le pokémon est ajouté au pokestore.
-- La seule manière de gagner du pokescore pour un pokémon est d’aller à la pokeschool.
-- Le pokémon perdant passe obligatoirement par l’infirmerie 
-- L’infirmerie consulte le pokescore du dresseur à partir de la pokeBank 
-- Si le dresseur a un pokescore suffisant pour soigner son pokémon, le pokémon est soigné et revient à son score de départ 
-- Si le dresseur ne peut pas soigner son pokémon, son pokémon  est déclaré KO à la mairie et la mairie le remet au pokeStore. 
-- Si le dresseur ne peut pas soigner son pokemon  et que c’est son dernier pokémon  mais qu’il a un pokescore suffisant pour acheter un autre pokemon, il doit en acheter un et n’est pas éliminé du jeu 
-- Si le dresseur ne peut pas soigner son pokemon  et que c’est son dernier pokémon  et  qu’il n’a pas  un pokescore suffisant pour acheter un autre pokemon, la mairie reçoit une notification et elimine le dresseur du jeu 
-- Au pokestore il est possible d’acheter des pokémons. 
-- La mairie peut rajouter des pokémons au pokestore
-- La pokeBank a le pokescore du dresseur qui joue 
-- Lorsque que la mairie élimine le joueur, elle l’efface de sa liste et le notifie 
+Un Pokemon ne doit pas pouvoir effectuer des actions simultanément (combat, soin et école).
+
+Le dresseur doit pouvoir acheter des Pokemon, les soigner, combattres et aller a l'école.
+
+Il y a 3 catégories de Pokemon (plante, feu et eau).
+
+Un dresseur doit avoir un pokémon ayant un pokescore = 50 au début du jeu.
+
+Les combats doivent se faire entre un pokemon du dresseur contre un pokemon prélever du store (PNJ).
+
+Pokeschool : 3 sessions : si pokémon entre 50 et 70 : +10, pokescore de mon pokémon + 5 si pokémon entre 70 et 100 : +15, pokescore de mon pokémon + 10 si pokémon +100 : +30, pokescore de mon pokémon + 25
+
+La fin d’un combat : si le dresseur gagne il remporte une somme de pokescore qui dans son compte en banque qui est égale au pokescore de son adversaire.
+
+Le pokémon perdant et appartenant au dresseur passe obligatoirement par l’infirmerie.
+
+Si le dresseur a un pokescore suffisant pour soigner son pokémon, le pokémon est soigné et revient à son score de départ.
+
+Si le dresseur ne peut pas soigner son pokémon, son pokémon est déclaré KO à la mairie et la mairie le remet au pokeStore.
+
+Si le dresseur ne peut pas soigner son pokemon et que c’est son dernier pokémon est éliminé du jeu.
+
+La marie se charge de toutes les opérations lié à la banque.
+
+La mairie doit éliminer le joueur si il ne lui reste plus aucun Pokemon.
+
+La mairie doit envoyer un message à tout les systèmes que le dresseur X à était éliminer.
+
+La mairie peut rajouter des pokémons au pokestore.
+
+Lorsqu'un Pokemon du pokestore est envoyer au combat il doit être supprimer de la base de donnée le temps du combat.
+
+Le pokestore doit pouvoir fabriqué des pokemon toutes les 30secondes.
+
+Lorsqu'un pokemon est crée par le store la mairie doit etre avertit et doit également le stocker dans sa base de donnée.
 
 
 ![](seqDiagram.png)
 
 ![](send_Pokemon_School)
 
-## Exigences fonctionnelles
-
-* le vendor NE DOIT proposer que les concerts pour lesquels il a un quota disponible, transmis par le master.
-* le vendor DOIT pouvoir effectuer les opérations de booking et ticketing
-* le master DOIT permettre à l'artiste d'annuler son concert.
-* le master DOIT informer le vendor en cas d'annulation de concert
-* le vendor DOIT informer les clients de l'annulation du concert par mail
-* le master DOIT proposer un service de validation de la clé du ticket, pour les contrôles aux entées.
-
-## Exigences non fonctionnelles
-
-* le booking et le ticketing, bien qu'étant des opérations synchrones, DOIVENT être fiables et donc utiliser le messaging
-* Lors de l'annulation de tickets, le master DOIT informer tous les vendors de l'annulation, de façon fiable.
