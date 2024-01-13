@@ -60,14 +60,13 @@ Le pokestore reçoit une notification lorsque :
 
 -Lorsqu'un Pokemon du pokestore est envoyer au combat il doit être supprimer de la base de donnée le temps du combat.
 
--Le pokestore doit pouvoir fabriqué des pokemon toutes les 30secondes.
+-Le pokestore doit pouvoir fabriqué des pokemon toutes les 70secondes.
 
 -Lorsqu'un pokemon est crée par le store la mairie doit etre avertit et doit également le stocker dans sa base de donnée.
 
--Les Pokemons sont crées toutes les 70secondes dans le store.
+-Un pokemon ne peut pas être à la fois au store, au combat, à l'infirmerie ou à l'école.
 
--Dés lors qu'un Pokemon est crée dans le store il passe par la mairie pour être inscrit dans le registre des Pokemons.
-
+-Le temps d'un combat, une session infirmerie et une session école est de 30secondes. Tant que le temps ne c'est pas affectuer il reste dans la session et ne peux pas effectuer 2 sessions au même moment.
 
 ![](send_Pokemon_School)
 
