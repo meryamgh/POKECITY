@@ -24,7 +24,6 @@ public class PokemonGateway {
 
 
     public void affectPokemonToDresseur(Pokemon pokemon, int idDresseur) throws PokemonNotFoundException {
-        System.out.println("ticet dans gatewat "+pokemon);
         this.dresseurService.affectPokemonToDresseur(pokemon.idPokemon(), idDresseur);
 
     }

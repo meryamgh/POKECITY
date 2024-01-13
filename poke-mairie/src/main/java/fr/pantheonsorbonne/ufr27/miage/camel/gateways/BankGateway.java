@@ -6,6 +6,8 @@ import jakarta.inject.Inject;
 import org.apache.camel.Exchange;
 import org.apache.camel.Header;
 
+import java.util.logging.Logger;
+
 
 @ApplicationScoped
 public class BankGateway {
@@ -14,6 +16,7 @@ public class BankGateway {
     @Inject
     BankService bankService;
 
+    private static final Logger LOGGER = Logger.getLogger("logger");
 
 
 
@@ -24,7 +27,7 @@ public class BankGateway {
 
     public void addAmountWinToBankAccount(int amount, int idDresseur){
         this.bankService.creditBankAccount(amount,idDresseur);
-        System.out.println("dresseur vainqueur donc ajout d'argent");
+        LOGGER.info("dresseur vainqueur donc ajout d'argent");
     }
 
 

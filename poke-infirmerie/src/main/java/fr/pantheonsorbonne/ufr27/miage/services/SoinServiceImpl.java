@@ -7,16 +7,19 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 import java.util.Collection;
+import java.util.logging.Logger;
 
 @ApplicationScoped
 public class SoinServiceImpl implements SoinService{
 
     @Inject
-    TreatmentDAO treatmentDAO;
+    TreatmentDAO treatmentDAO;;
+
+    private static final Logger LOGGER = Logger.getLogger("logger");
+
 
     @Override
     public Pokemon soignerPokemon(Pokemon pokemon, int idDDresseur) {
-        System.out.println("prix" + pokemon.prix());
         treatmentDAO.insertTreatmentSession(pokemon, getPriceTreatment(pokemon), idDDresseur);
         return new Pokemon(pokemon.idPokemon(),pokemon.prix(),pokemon.prix(),pokemon.type(), pokemon.isAdopted(),pokemon.name());
     }
@@ -24,7 +27,7 @@ public class SoinServiceImpl implements SoinService{
     @Override
     public int getPriceTreatment(Pokemon pokemon) {
         int intialPrice = pokemon.prix();
-        System.out.println("initialPrice : " + intialPrice);
+        LOGGER.info("price : "+pokemon.prix());
         return intialPrice / 2;
     }
 

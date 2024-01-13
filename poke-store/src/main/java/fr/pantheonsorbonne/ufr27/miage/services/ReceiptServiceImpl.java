@@ -1,7 +1,6 @@
 package fr.pantheonsorbonne.ufr27.miage.services;
 
-import fr.pantheonsorbonne.ufr27.miage.camel.BankGateway;
-import fr.pantheonsorbonne.ufr27.miage.camel.PokemonGateway;
+import fr.pantheonsorbonne.ufr27.miage.camel.gateways.BankGateway;
 import fr.pantheonsorbonne.ufr27.miage.dao.PokemonStockDao;
 import fr.pantheonsorbonne.ufr27.miage.dao.ReceiptPokemonDao;
 import fr.pantheonsorbonne.ufr27.miage.exception.PokemonNotFoundException;
