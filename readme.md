@@ -68,5 +68,21 @@ Le pokestore reçoit une notification lorsque :
 
 -Le temps d'un combat, une session infirmerie et une session école est de 30secondes. Tant que le temps ne c'est pas affectuer il reste dans la session et ne peux pas effectuer 2 sessions au même moment.
 
+-La durée d'une session combat, d'une session école et d'une session soin est de 30 seondes.
+
+-La mairie et le point de départ des sessions lister en haut.
+
+-La mairie doit envoyer les pokemon dans les sessions et doit attendre une réponse le temps que la session se termine.
+
+-Le temps d'expiration d'un evennement est de 5 secondes (si au bout de 5 secondes l'evennement n'est pas reçu il expire).
+
+-Les evennements sont : dresseur éliminer et création d'un nouveau pokemon.
+
+-Les evennements sont envoyés à tout les systèmes de la ville par la mairie.
+
+-Un pokemon n'est jamais mort il fini par être recyclé au store ou soigné donc score ne peux jamais être = 0.
+
+-Les actions sur les pokemon après un combat doivent se faire paralèllement.
+
 ![](send_Pokemon_School)
 
