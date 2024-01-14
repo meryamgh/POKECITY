@@ -1,6 +1,5 @@
 package fr.pantheonsorbonne.ufr27.miage.camel;
 
-import fr.pantheonsorbonne.ufr27.miage.dto.FightSession;
 import fr.pantheonsorbonne.ufr27.miage.dto.Fighters;
 import fr.pantheonsorbonne.ufr27.miage.dto.Pokemon;
 import fr.pantheonsorbonne.ufr27.miage.models.FightingSession;
@@ -8,10 +7,8 @@ import fr.pantheonsorbonne.ufr27.miage.services.FightSessionService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.apache.camel.Exchange;
-
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 @ApplicationScoped
 public class FightSessionGateway {

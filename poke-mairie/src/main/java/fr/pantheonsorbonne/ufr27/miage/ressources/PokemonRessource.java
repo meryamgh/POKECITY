@@ -1,4 +1,4 @@
-package fr.pantheonsorbonne.ufr27.miage.ressource;
+package fr.pantheonsorbonne.ufr27.miage.ressources;
 
 
 import fr.pantheonsorbonne.ufr27.miage.exception.PokemonNotFoundException;

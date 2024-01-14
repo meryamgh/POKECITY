@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 public class SoinServiceImpl implements SoinService{
 
     @Inject
-    TreatmentDAO treatmentDAO;;
+    TreatmentDAO treatmentDAO;
 
     private static final Logger LOGGER = Logger.getLogger("logger");
 
@@ -27,7 +27,7 @@ public class SoinServiceImpl implements SoinService{
     @Override
     public int getPriceTreatment(Pokemon pokemon) {
         int intialPrice = pokemon.prix();
-        LOGGER.info("price : "+pokemon.prix());
+        LOGGER.info("price : "+pokemon.prix()/2);
         return intialPrice / 2;
     }
 

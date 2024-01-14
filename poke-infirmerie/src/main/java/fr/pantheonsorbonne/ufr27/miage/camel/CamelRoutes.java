@@ -26,7 +26,6 @@ public class CamelRoutes extends RouteBuilder {
         from("sjms2:queue:"+ jmsPrefix +".soin")
                 .log("pokemon recu à l'infirmerie ${body}")
                 .setBody(simple("${body}"))
-                .log("pokemon recu à l'infirmerie ${body}")
                 .bean(soignerPokemonGateway, "getPriceTreatment")
         ;
 

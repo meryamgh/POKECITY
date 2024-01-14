@@ -1,6 +1,5 @@
 package fr.pantheonsorbonne.ufr27.miage.ressources;
 
-import fr.pantheonsorbonne.ufr27.miage.exception.FightSessionNotFoundException;
 import fr.pantheonsorbonne.ufr27.miage.models.FightingSession;
 import fr.pantheonsorbonne.ufr27.miage.services.FightSessionService;
 import jakarta.inject.Inject;

@@ -1,6 +1,7 @@
-package fr.pantheonsorbonne.ufr27.miage.camel.gateways;
+package fr.pantheonsorbonne.ufr27.miage.camel;
 
-import fr.pantheonsorbonne.ufr27.miage.camel.PokemonGateway;
+import fr.pantheonsorbonne.ufr27.miage.camel.gateways.PokemonGateway;
+import fr.pantheonsorbonne.ufr27.miage.camel.gateways.FightGateway;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.apache.camel.builder.RouteBuilder;
